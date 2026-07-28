@@ -1,0 +1,39 @@
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-head">
+    <span>Contenido</span>
+    <button id="closeSidebar" class="icon-button" aria-label="Cerrar menú">×</button>
+  </div>
+
+  {% macro nav_items(items, level=0) %}
+    {% for item in items %}
+      {% set children = item.get("children", []) %}
+      {% set active = current_path == item.get("route") or current_slug|default("") == item.get("doc_slug") %}
+      {% if children %}
+        <details class="nav-group level-{{ level }}" open>
+          <summary>
+            <span class="nav-icon">{{ item.icon }}</span>
+            <span class="nav-title">{{ item.title }}</span>
+          </summary>
+          <div class="nav-items">
+            {% if item.route %}
+              <a class="nav-link nav-index {% if active %}active{% endif %}" href="{{ item.route }}">
+                <span class="nav-icon">•</span>
+                <span>Índice</span>
+              </a>
+            {% endif %}
+            {{ nav_items(children, level + 1) }}
+          </div>
+        </details>
+      {% else %}
+        <a class="nav-link level-{{ level }} {% if active %}active{% endif %}" href="{{ item.route }}">
+          <span class="nav-icon">{{ item.icon }}</span>
+          <span>{{ item.title }}</span>
+        </a>
+      {% endif %}
+    {% endfor %}
+  {% endmacro %}
+
+  <nav class="side-nav" aria-label="Navegación principal">
+    {{ nav_items(navigation) }}
+  </nav>
+</aside>

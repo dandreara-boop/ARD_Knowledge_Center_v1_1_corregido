@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="mobile-bar"><button id="openSidebar" class="icon-button">☰</button><span>Documento Maestro</span></div>
+<div class="app-shell">
+  {% include "sidebar.html" %}
+  <main class="dashboard">
+    <section class="cover">
+      <div class="cover-copy">
+        <span class="eyebrow">Knowledge Center</span>
+        <h1>{{ project.name }}</h1>
+        <p class="cover-subtitle">{{ project.subtitle }}</p>
+        <p>{{ project.description }}</p>
+        <div class="cover-meta">
+          <span>Versión actual <strong>{{ project.version }}</strong></span>
+          <span>Estado del proyecto <strong>{{ project.status }}</strong></span>
+        </div>
+      </div>
+      <div class="project-state-card">
+        <span class="card-kicker">Estado general del proyecto</span>
+        <h2>Avance documental</h2>
+        <div class="progress-list">
+          {% for item in progress_items %}
+          <div class="progress-row">
+            <div class="progress-label">
+              <span>{{ item.name }}</span>
+              <strong>{{ item.progress }}%</strong>
+            </div>
+            <div class="progress-track"><span style="width: {{ item.progress }}%"></span></div>
+            <code>{{ item.visual }}</code>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <section class="quick-grid">
+      <a class="quick-card" href="/doc/general/vision">
+        <span class="card-kicker">Lineamientos</span>
+        <h2>Lineamientos Generales</h2>
+      </a>
+      <a class="quick-card" href="/doc/general/modelo_conceptual">
+        <span class="card-kicker">Arquitectura</span>
+        <h2>Modelo Conceptual</h2>
+      </a>
+      <a class="quick-card" href="/doc/wireframes/documento_maestro">
+        <span class="card-kicker">Pantallas</span>
+        <h2>Wireframes</h2>
+      </a>
+      <a class="quick-card" href="/doc/referencias/decisiones_agrupadas">
+        <span class="card-kicker">Gobierno</span>
+        <h2>Registro de Decisiones</h2>
+      </a>
+    </section>
+
+    <section class="map-section" aria-labelledby="map-title">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">Estructura documental</span>
+          <h2 id="map-title">Módulos preparados</h2>
+        </div>
+      </div>
+      <div class="module-directory">
+        <a href="/modulos/recepcion">Recepción</a>
+        <a href="/modulos/venta">Venta</a>
+        <a href="/modulos/caja">Caja</a>
+        <a href="/modulos/cambios">Cambios</a>
+        <a href="/modulos/anulacion">Anulación</a>
+        <a href="/modulos/administracion">Administración</a>
+        <a href="/modulos/logistica">Logística</a>
+        <a href="/modulos/venta-web">Venta Web</a>
+      </div>
+    </section>
+  </main>
+</div>
+{% endblock %}

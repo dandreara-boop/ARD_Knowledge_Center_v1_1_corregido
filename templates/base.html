@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}ARD Suite Knowledge Center{% endblock %}</title>
+  <link rel="stylesheet" href="/static/css/app.css">
+  <script defer src="/static/js/app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <button id="toggleSidebar" class="icon-button topbar-menu" aria-label="Contraer menú">☰</button>
+    <a class="brand" href="/">
+      <span class="brand-mark">A</span>
+      <span>
+        <strong>ARD Suite</strong>
+        <small>{{ project.version if project else "Knowledge Center" }}</small>
+      </span>
+    </a>
+    <form class="top-search" action="/buscar" role="search">
+      <span class="search-icon">⌕</span>
+      <input name="q" placeholder="Buscar en el Knowledge Center">
+    </form>
+    <nav class="top-actions">
+      <span class="project-name">ARD Knowledge Center</span>
+      <span class="user-pill">{{ current_user or "Usuario" }}</span>
+      <a class="logout-link" href="/logout">Cerrar sesión</a>
+    </nav>
+  </header>
+  {% block body %}{% endblock %}
+  <footer class="site-footer">
+    <strong>ARD Suite</strong>
+    <span>Knowledge Center</span>
+    <span>{{ project.version if project else "v1.1" }}</span>
+    <span>2026</span>
+  </footer>
+</body>
+</html>

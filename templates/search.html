@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="mobile-bar"><button id="openSidebar" class="icon-button">☰</button><span>Buscar</span></div>
+<div class="app-shell">
+  {% include "sidebar.html" %}
+  <main class="document-wrap">
+    <section class="document">
+      <h1>Buscar en el proyecto</h1>
+      <form class="search-page" action="/buscar">
+        <input name="q" value="{{ q }}" placeholder="Producto, stock, sincronización, promoción...">
+        <button>Buscar</button>
+      </form>
+      {% if q %}
+        <p class="result-count">{{ results|length }} resultado(s)</p>
+        {% for result in results %}
+          <a class="search-result" href="/doc/{{ result.slug }}">
+            <strong>{{ result.title }}</strong>
+            <span>{{ result.snippet }}...</span>
+          </a>
+        {% else %}
+          <div class="empty-state">No se encontraron coincidencias.</div>
+        {% endfor %}
+      {% endif %}
+    </section>
+  </main>
+</div>
+{% endblock %}
