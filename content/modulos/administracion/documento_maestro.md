@@ -1,30 +1,110 @@
 # Módulo Administración
 
-## Objetivos
+## Estado
 
-Administración concentra la configuración, control y seguimiento de la operación completa de ARD Suite.
+**APROBADO PARA DESARROLLO.**
+
+Administración concentra la configuración, control y seguimiento de la operación completa de ARD Suite. Su pantalla inicial funciona como un centro de navegación orientado por frecuencia de uso: prioriza las consultas y controles diarios, y deja la configuración en segundo plano.
 
 {{include:modulos/administracion/resumen}}
 
 ## Panel principal
 
-El panel principal debe permitir lectura rápida del estado operativo: ventas, stock, caja, excepciones, remitos, transferencias y alertas.
+El panel principal no abre directamente en Usuarios y Permisos. Debe mostrar primero los accesos administrativos más consultados y solamente indicadores accionables.
+
+### Accesos frecuentes
+
+- Informes de ventas.
+- Informe de stock.
+- Remitos de Entrada.
+
+### Control diario
+
+- Arqueos y cierres.
+- Correcciones de caja.
+- Centro de excepciones.
+- Transferencias.
+- Estado de sincronización.
+
+### Gestión comercial
+
+- Productos.
+- Precios.
+- Motor de Promociones.
+- Clientes.
+- Proveedores.
+
+### Configuración
+
+- Usuarios.
+- Tipos de usuario y permisos.
+- Sucursales y cajas.
+- Medios de pago.
+- Políticas comerciales.
+- Tolerancias y límites.
+- Configuración general.
+
+## Indicadores de portada
+
+La portada administrativa debe mostrar únicamente indicadores que permitan actuar:
+
+- Pendientes de revisión.
+- Cierres con diferencia.
+- Remitos incompletos.
+- Errores de sincronización.
+- Sucursales con datos atrasados.
+- Excepciones pendientes.
+
+No se deben usar gráficos decorativos como contenido principal. Los gráficos pueden existir en informes puntuales, pero siempre como apoyo secundario frente a tablas filtrables y datos accionables.
 
 ## Operación diaria
 
-La operación diaria administra productos, precios, proveedores, clientes, usuarios, políticas globales, campañas, auditoría y centro de control.
+Administración consulta ventas, stock, caja, remitos, transferencias, promociones, clientes, proveedores, excepciones y sincronización. La operación diaria debe estar separada de la configuración para evitar que tareas poco frecuentes ocupen la portada.
 
-## Informes
+## Informes administrativos
 
-Los informes deben cubrir ventas, stock, caja, movimientos, promociones, clientes, proveedores, remitos y excepciones.
+Los informes administrativos se consultan desde la aplicación web de Administración alojada en la nube, contra una base central consolidada alimentada por sincronización desde las sucursales.
+
+Ver también:
+
+- Administración — Informes administrativos desde la nube.
+- Arquitectura Distribuida — Sincronización.
+- DEC-123.
+
+## Informe de ventas
+
+Debe permitir filtrar por fecha desde y hasta, sucursal, cajero, vendedor, producto, categoría, proveedor, medio de pago, condición comercial, promoción y estado de la venta.
+
+Resultados mínimos:
+
+- Cantidad de ventas.
+- Cantidad de unidades.
+- Importe bruto.
+- Descuentos.
+- Importe final.
+- Ventas anuladas.
+- Cambios.
+- Créditos emitidos.
+- Créditos utilizados.
+- Totales por medio de pago.
+
+La vista principal prioriza tablas filtrables y acceso al remito de venta completo. Los gráficos son opcionales y secundarios.
+
+## Informe de stock
+
+Debe cubrir stock por sucursal, stock web, stock consolidado, stock negativo, mercadería pendiente de recepción, mercadería en tránsito, productos sin movimiento, productos con stock bajo, último movimiento y consulta por producto con atributos operativos.
+
+El informe debe indicar la vigencia de los datos de cada sucursal y advertir cuando exista información pendiente o atrasada.
 
 ## Stock
 
-Administración consulta stock local, stock web, movimientos y diferencias operativas.
+Administración consulta stock local, stock web, movimientos y diferencias operativas. Los ajustes manuales e inventarios no pertenecen al alcance del módulo Logística.
 
 ## Productos
 
 Administra catálogo, precios, atributos designados, canales, estado y reglas comerciales asociadas.
+
+La participación en liquidaciones, campañas o promociones no se guarda como opción permanente del producto. El alcance se define dentro de cada promoción.
 
 ## Remitos
 
@@ -32,7 +112,7 @@ Administra Remitos de Entrada y Remitos de Venta, con su estado, participantes, 
 
 ## Transferencias
 
-Las transferencias conectan sucursales, depósito y stock web. El detalle conceptual se integra con Logística.
+Las transferencias conectan sucursales, depósito y stock web. El detalle de confirmación en destino y reposición posterior se integra con Logística.
 
 ## Clientes
 
@@ -40,11 +120,17 @@ Administra clientes identificados, historial, créditos comerciales asociados y 
 
 ## Proveedores
 
-Administra proveedores asociados a productos y Remitos de Entrada.
+Administra proveedores asociados a productos, reglas comerciales y Remitos de Entrada.
 
-## Promociones
+## Motor de Promociones
 
-Define campañas, promociones, condiciones comerciales, vigencias y reglas del motor comercial.
+Define campañas, promociones, condiciones comerciales, vigencias, reglas de inclusión y exclusión, suspensión temporal de otras promociones y simulación previa.
+
+Ver también:
+
+- Administración — Motor de Promociones.
+- Venta en Salón — Motor Comercial.
+- DEC-124 a DEC-128.
 
 ## Caja
 
@@ -52,23 +138,30 @@ Consulta turnos, arqueos, cierres, diferencias, movimientos manuales y correccio
 
 ## Centro de excepciones
 
-Agrupa operaciones que requieren revisión administrativa: ventas anuladas, correcciones, stock negativo, errores de sincronización, créditos, arqueos, transferencias y alertas.
+Agrupa operaciones que requieren revisión administrativa sin interrumpir al cajero o vendedor: ventas anuladas, correcciones, stock negativo, errores de sincronización, créditos, arqueos, transferencias y alertas.
 
-## Usuarios
+Ver también:
 
-Administra usuarios locales y centrales, estado, rol y permisos.
+- Administración — Centro de Excepciones.
+- DEC-119.
+- DEC-120.
 
-## Permisos
+## Usuarios y permisos
 
-Los permisos son configurables y deben validarse en backend.
+Administra usuarios, tipos de usuario, permisos configurables, alcances, excepciones individuales y autorizaciones puntuales. Toda acción sensible debe validarse obligatoriamente en backend.
+
+Ver también:
+
+- Usuarios y Permisos.
+- DEC-117.
 
 ## Seguridad
 
-Toda acción sensible conserva auditoría. Las autorizaciones y excepciones deben quedar vinculadas al usuario que las ejecuta o aprueba.
+Toda acción sensible conserva auditoría. Las autorizaciones y excepciones deben quedar vinculadas al usuario que las ejecuta, solicita o aprueba.
 
 ## Configuración
 
-Administración define políticas globales: promociones, condición comercial por medio de pago, cambios, Crédito Comercial, tolerancias de caja, vigencias y permisos.
+Administración define políticas globales: promociones, condición comercial por medio de pago, cambios, Crédito Comercial, tolerancias de caja, límites, sucursales, cajas, usuarios y permisos.
 
 ## Casos especiales
 
@@ -76,11 +169,10 @@ Administración define políticas globales: promociones, condición comercial po
 - Operaciones sincronizadas con error.
 - Stock negativo generado por venta local.
 - Crédito Comercial vencido o parcialmente utilizado.
-- Usuarios con permisos individuales.
+- Usuarios con permisos individuales concedidos o denegados.
+- Promociones suspendidas por otra promoción.
+- Sucursales con datos atrasados en informes consolidados.
 
-## Próximos desarrollos
+## Próximo módulo
 
-- Detallar pantallas administrativas.
-- Definir reportes mínimos por rol.
-- Consolidar reglas de permisos y autorizaciones.
-- Preparar indicadores del centro de excepciones.
+Con Administración aprobada para desarrollo y Logística funcionalmente definida, el siguiente análisis corresponde a Sincronización.

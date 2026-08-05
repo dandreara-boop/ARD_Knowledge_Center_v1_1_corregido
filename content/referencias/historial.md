@@ -1,5 +1,17 @@
 # Historial de versiones
 
+## Versión 1.4 — Administración y Logística definidas
+
+- Se marcó Administración como **APROBADO PARA DESARROLLO**.
+- Se documentó Administración Central en la nube e informes consolidados con vigencia de sincronización.
+- Se completó Usuarios y Permisos con tipos configurables, alcances, excepciones individuales y autorizaciones puntuales.
+- Se actualizó el Centro de Excepciones con categorías, estados, datos conservados y regla de no reemplazo del origen.
+- Se creó el submódulo Motor de Promociones con reglas de alcance, exclusiones, suspensión y simulación previa.
+- Se marcó Logística como **DEFINIDO FUNCIONALMENTE** y se limitó su alcance.
+- Se documentó distribución inicial integrada con recepción, confirmación en destino, diferencias sin bloqueo y reposición entre locales.
+- Se incorporaron DEC-112 a DEC-128 y DEC-136 a DEC-142 sin completar numeración faltante.
+- Se dejó Sincronización como próximo módulo a definir.
+
 ## Versión 1.3 — Documento Maestro de Arquitectura Funcional
 
 - Se convirtió el Knowledge Center en Documento Maestro de Arquitectura Funcional.

@@ -92,3 +92,37 @@ Este registro reúne las decisiones aprobadas y vigentes. Los detalles de aplica
 | DEC-085 | El próximo turno hereda el efectivo físico real confirmado. |
 | DEC-086 | El fondo heredado puede corregirse al abrir el turno dejando motivo. |
 | DEC-087 | Todo ingreso o egreso ajeno a una venta se registra como movimiento explícito de caja. |
+
+## Administración, informes, permisos y promociones
+
+| Código | Decisión |
+|---|---|
+| DEC-112 | Administración funciona como centro de navegación. |
+| DEC-113 | La configuración se separa de la operación diaria. |
+| DEC-114 | La portada prioriza accesos por frecuencia de uso. |
+| DEC-115 | Informes de ventas, informe de stock y Remitos de Entrada son accesos administrativos principales. |
+| DEC-116 | Las configuraciones permanecen en segundo plano. |
+| DEC-117 | El panel administrativo se ajusta a permisos efectivos. |
+| DEC-118 | Los informes se orientan a consulta operativa. |
+| DEC-119 | Las excepciones se concentran en un centro único. |
+| DEC-120 | La excepción no altera ni reemplaza el registro de origen. |
+| DEC-121 | La configuración queda separada de la operación. |
+| DEC-122 | La portada usa indicadores administrativos accionables. |
+| DEC-123 | Administración central será accesible desde la nube. |
+| DEC-124 | Las promociones definen su alcance dentro de cada promoción. |
+| DEC-125 | Las exclusiones pueden definirse por conjuntos o códigos. |
+| DEC-126 | Una promoción puede suspender temporalmente promociones existentes. |
+| DEC-127 | Ante inclusión y exclusión simultánea, prevalece la exclusión. |
+| DEC-128 | Las promociones pueden simularse antes de activarse. |
+
+## Logística
+
+| Código | Decisión |
+|---|---|
+| DEC-136 | La distribución inicial permanece integrada con la recepción. |
+| DEC-137 | La confirmación y etiquetado se realizan en destino. |
+| DEC-138 | La interfaz oculta la complejidad interna de movimientos. |
+| DEC-139 | La reposición queda accesible al personal de ventas autorizado. |
+| DEC-140 | Todo traslado entre locales requiere solicitud previa. |
+| DEC-141 | Las diferencias recibidas se registran sin bloquear toda la recepción. |
+| DEC-142 | El alcance de Logística queda limitado funcionalmente. |

@@ -2,17 +2,15 @@
 
 ## Estado
 
-**Pendiente de desarrollo detallado.**
+**APROBADO PARA DESARROLLO.**
 
-## Responsabilidades previstas
+## Responsabilidades definidas
 
-- Productos.
-- Proveedores.
-- Clientes.
-- Usuarios.
-- Políticas globales.
-- Centro de Control.
-- Excepciones.
-- Precios.
-- Campañas.
-- Auditoría.
+- Panel principal orientado por frecuencia de uso.
+- Informes administrativos desde la nube.
+- Ventas, stock, caja, arqueos, cierres, remitos, transferencias y excepciones.
+- Usuarios, tipos de usuario, permisos configurables y autorizaciones.
+- Centro de Excepciones.
+- Motor de Promociones.
+- Productos, precios, clientes y proveedores.
+- Políticas comerciales, tolerancias, límites y configuración general.

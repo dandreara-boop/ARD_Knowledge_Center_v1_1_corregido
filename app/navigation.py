@@ -3,8 +3,8 @@ from __future__ import annotations
 PROJECT_INFO = {
     "name": "ARD Suite",
     "subtitle": "Documento Maestro de Arquitectura Funcional",
-    "version": "v1.1",
-    "status": "Preparado para crecimiento documental",
+    "version": "v1.4",
+    "status": "Administración aprobada; Logística definida; Sincronización próxima",
     "description": (
         "Centro documental para lineamientos, modulos funcionales, modelo de datos, "
         "wireframes, decisiones e historial del proyecto."
@@ -15,7 +15,9 @@ PROJECT_PROGRESS = [
     {"name": "Recepción de Mercadería", "progress": 100, "visual": "██████████ 100%"},
     {"name": "Venta en Salón", "progress": 90, "visual": "█████████░ 90%"},
     {"name": "Caja", "progress": 80, "visual": "████████░░ 80%"},
-    {"name": "Administración", "progress": 60, "visual": "██████░░░░ 60%"},
+    {"name": "Administración", "progress": 100, "visual": "APROBADO PARA DESARROLLO"},
+    {"name": "Logística", "progress": 100, "visual": "DEFINIDO FUNCIONALMENTE"},
+    {"name": "Sincronización", "progress": 0, "visual": "PRÓXIMO MÓDULO A DEFINIR"},
     {"name": "Venta Web", "progress": 20, "visual": "██░░░░░░░░ 20%"},
     {"name": "IA", "progress": 10, "visual": "█░░░░░░░░░ 10%"},
 ]
@@ -182,8 +184,10 @@ NAVIGATION = [
         "children": [
             {"title": "Administración", "icon": "▤", "route": "/doc/modulos/administracion/documento_maestro", "doc_slug": "modulos/administracion/documento_maestro", "order": 10},
             {"title": "Ficha del módulo", "icon": "•", "route": "/doc/modulos/administracion/resumen", "doc_slug": "modulos/administracion/resumen", "order": 20},
-            {"title": "Usuarios y Permisos", "icon": "•", "route": "/doc/modulos/usuarios_permisos/documento_maestro", "doc_slug": "modulos/usuarios_permisos/documento_maestro", "order": 30},
-            {"title": "Centro de Excepciones", "icon": "•", "route": "/doc/modulos/centro_excepciones/documento_maestro", "doc_slug": "modulos/centro_excepciones/documento_maestro", "order": 40},
+            {"title": "Informes desde la nube", "icon": "•", "route": "/doc/modulos/administracion/informes_nube", "doc_slug": "modulos/administracion/informes_nube", "order": 30},
+            {"title": "Usuarios y Permisos", "icon": "•", "route": "/doc/modulos/usuarios_permisos/documento_maestro", "doc_slug": "modulos/usuarios_permisos/documento_maestro", "order": 40},
+            {"title": "Centro de Excepciones", "icon": "•", "route": "/doc/modulos/centro_excepciones/documento_maestro", "doc_slug": "modulos/centro_excepciones/documento_maestro", "order": 50},
+            {"title": "Motor de Promociones", "icon": "•", "route": "/doc/modulos/administracion/motor_promociones", "doc_slug": "modulos/administracion/motor_promociones", "order": 60},
         ],
     },
     {

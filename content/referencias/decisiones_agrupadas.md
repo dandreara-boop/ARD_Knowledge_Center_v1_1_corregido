@@ -79,6 +79,23 @@ Cada decisión indica código, título, descripción, fecha y versión documenta
 | ADM-001 | Configuración global | Administración define políticas globales del sistema. | 2026-07-27 | 1.3 |
 | ADM-002 | Centro de excepciones | Las operaciones que requieren revisión se agrupan en un centro específico. | 2026-07-27 | 1.3 |
 | ADM-003 | Seguridad backend | Toda acción sensible se valida en backend. | 2026-07-27 | 1.3 |
+| DEC-112 | Centro de navegación administrativo | Administración funciona como centro de navegación, no como acceso directo a configuración. | 2026-08-05 | 1.4 |
+| DEC-113 | Configuración separada | La configuración administrativa queda separada de la operación diaria. | 2026-08-05 | 1.4 |
+| DEC-114 | Prioridad por frecuencia | La portada prioriza visualmente las operaciones consultadas con mayor frecuencia. | 2026-08-05 | 1.4 |
+| DEC-115 | Accesos principales | Informes de ventas, informe de stock y Remitos de Entrada son accesos administrativos principales. | 2026-08-05 | 1.4 |
+| DEC-116 | Configuraciones en segundo plano | Usuarios, permisos, sucursales, cajas, medios de pago y políticas quedan en configuración. | 2026-08-05 | 1.4 |
+| DEC-117 | Panel por permisos efectivos | El panel administrativo se muestra según permisos efectivos del usuario. | 2026-08-05 | 1.4 |
+| DEC-118 | Informes operativos | Los informes se orientan a consulta operativa, con tablas filtrables y trazabilidad. | 2026-08-05 | 1.4 |
+| DEC-119 | Centro único de excepciones | Las situaciones revisables se concentran en un Centro de Excepciones administrativo. | 2026-08-05 | 1.4 |
+| DEC-120 | Excepción sin reemplazo | La excepción no borra ni reemplaza el registro que la originó. | 2026-08-05 | 1.4 |
+| DEC-121 | Configuración separada de operación | La configuración no debe mezclarse con las acciones operativas diarias. | 2026-08-05 | 1.4 |
+| DEC-122 | Indicadores accionables | La portada administrativa muestra indicadores accionables, no gráficos decorativos. | 2026-08-05 | 1.4 |
+| DEC-123 | Administración central en la nube | Administración será web, accesible desde la nube para usuarios autorizados. | 2026-08-05 | 1.4 |
+| DEC-124 | Alcance por promoción | Las promociones definen su alcance dentro de cada promoción, no en la ficha del producto. | 2026-08-05 | 1.4 |
+| DEC-125 | Exclusiones por conjuntos o códigos | El motor permite exclusiones por proveedores, categorías, códigos, productos, sucursales y canales. | 2026-08-05 | 1.4 |
+| DEC-126 | Suspensión temporal | Una promoción puede suspender temporalmente otras promociones existentes. | 2026-08-05 | 1.4 |
+| DEC-127 | Prevalece la exclusión | Si un artículo queda incluido y excluido, prevalece la exclusión. | 2026-08-05 | 1.4 |
+| DEC-128 | Simulación previa | Administración puede simular una promoción antes de activarla. | 2026-08-05 | 1.4 |
 
 ## Web
 
@@ -97,6 +114,13 @@ Cada decisión indica código, título, descripción, fecha y versión documenta
 | Código | Título | Descripción | Fecha | Versión |
 |---|---|---|---|---|
 | LOG-001 | Transferencias auditables | Las transferencias entre destinos deben conservar estado y trazabilidad. | 2026-07-27 | 1.3 |
+| DEC-136 | Distribución integrada | La distribución inicial permanece integrada con la recepción. | 2026-08-05 | 1.4 |
+| DEC-137 | Confirmación en destino | Cada local confirma recepción, etiquetado y habilitación para venta. | 2026-08-05 | 1.4 |
+| DEC-138 | Complejidad oculta | La interfaz del operario oculta la complejidad interna de movimientos. | 2026-08-05 | 1.4 |
+| DEC-139 | Reposición accesible | La reposición entre locales es accesible al personal de ventas autorizado. | 2026-08-05 | 1.4 |
+| DEC-140 | Solicitud previa | Todo traslado entre locales se inicia con una solicitud previa. | 2026-08-05 | 1.4 |
+| DEC-141 | Diferencias sin bloqueo | Una diferencia recibida se registra sin bloquear toda la recepción. | 2026-08-05 | 1.4 |
+| DEC-142 | Alcance limitado | Logística se limita a confirmación en destino, reposición, tránsito, diferencias, permisos y auditoría. | 2026-08-05 | 1.4 |
 
 ## Cambios y Créditos Comerciales
 

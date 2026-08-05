@@ -4,40 +4,73 @@
 
 Agrupar operaciones que requieren revisión, corrección, seguimiento o decisión administrativa.
 
-## Ventas anuladas
+El Centro de Excepciones concentra situaciones que requieren revisión administrativa sin interrumpir al cajero o vendedor.
 
-Muestra operaciones anuladas con motivo, usuario, fecha, medios afectados, stock revertido y auditoría.
+## Categorías
 
-## Correcciones
+### Caja
 
-Incluye correcciones de medios de pago, fondos iniciales, valores reconocidos, ajustes y modificaciones autorizadas.
+- Cierres con diferencia.
+- Fondos iniciales corregidos.
+- Cambios de medio de pago.
+- Ventas anuladas.
+- Movimientos de caja atípicos.
+- Arqueos pendientes de revisión.
 
-## Stock negativo
+### Stock
 
-Agrupa ventas locales que generaron stock negativo y deben revisarse en Administración.
+- Ventas con stock negativo.
+- Ajustes manuales.
+- Diferencias de recepción.
+- Mercadería pendiente.
+- Transferencias con diferencia.
 
-## Errores de sincronización
+### Sincronización
 
-Agrupa operaciones en estado ERROR_REINTENTABLE o REQUIERE_REVISION dentro de la cola de sincronización.
+- Operaciones pendientes demasiado tiempo.
+- Errores repetidos.
+- Conflictos.
+- Sucursales sin actualizar.
 
-## Créditos
+### Créditos comerciales
 
-Permite revisar Créditos Comerciales emitidos, parcialmente utilizados, vencidos, anulados o asociados a clientes.
+- Créditos anulados.
+- Modificaciones manuales.
+- Uso sospechoso.
+- Créditos vencidos.
 
-## Arqueos
+## Estados
 
-Agrupa arqueos con diferencia, revisiones guiadas, cierres con diferencia y correcciones originadas en caja.
+- PENDIENTE.
+- EN_REVISION.
+- RESUELTA.
+- OBSERVADA.
+- DESCARTADA.
 
-## Transferencias
+## Datos conservados
 
-Agrupa transferencias demoradas, incompletas, con diferencias o pendientes de confirmación.
+Cada excepción debe conservar:
 
-## Alertas
-
-Incluye alertas operativas y administrativas configurables por la empresa.
+- Origen.
+- Fecha y hora.
+- Sucursal.
+- Usuario.
+- Importe o cantidad.
+- Gravedad.
+- Historial.
+- Responsable de revisión.
+- Resolución.
 
 ## Reglas
 
 - Una excepción no borra la operación original.
+- Una excepción no reemplaza el registro que la originó.
 - Toda resolución queda auditada.
 - Las excepciones deben poder filtrarse por módulo, sucursal, fecha, usuario y estado.
+
+Ver también:
+
+- Administración — Panel principal.
+- Usuarios y Permisos.
+- DEC-119.
+- DEC-120.

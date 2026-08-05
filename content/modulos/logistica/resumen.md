@@ -1,17 +1,17 @@
-# Módulo 5 — Logística
+# Módulo 4 — Logística
 
 ## Estado
 
-**Definición conceptual.**
+**DEFINIDO FUNCIONALMENTE.**
 
 ## Alcance
 
-- Transferencias entre sucursales.
-- Transferencias hacia stock web.
-- Recepción en destino.
-- Inventarios.
-- Ajustes.
-- Mercadería en tránsito.
+- Confirmación en destino de mercadería distribuida durante la recepción.
+- Reposición posterior entre locales.
+- Mercadería pendiente o en tránsito.
+- Diferencias de recepción.
+- Permisos relacionados.
+- Historial y auditoría.
 
 ## Ciclo de transferencia
 
