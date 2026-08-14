@@ -1,5 +1,17 @@
 # Historial de versiones
 
+## Versión 1.5 — Sincronización aprobada funcionalmente
+
+- Se creó el módulo Sincronización como capítulo documental independiente.
+- Se documentó la arquitectura local por sucursal con base compartida, API local, servicio de sincronización y red interna LAN.
+- Se separó funcionalmente red interna e Internet para garantizar operación local offline.
+- Se definieron Base Central, Administración Central, Administración Local, cola persistente, idempotencia, orden, dependencias y dirección de sincronización.
+- Se documentaron usuarios offline, transparencia para ventas, desconexiones prolongadas y panel administrativo de sincronización.
+- Se incorporaron paquetes manuales de contingencia sin crear un sistema paralelo.
+- Se dejó asentada la independencia respecto de DigitalOcean y las etapas de infraestructura.
+- Se incorporó el bloque de decisiones de Sincronización en el registro agrupado.
+- Se actualizó el mapa de avance: Administración aprobada para desarrollo, Logística definida funcionalmente, Sincronización aprobada funcionalmente para desarrollo y Modelo de Datos como próximo módulo.
+
 ## Versión 1.4 — Administración y Logística definidas
 
 - Se marcó Administración como **APROBADO PARA DESARROLLO**.

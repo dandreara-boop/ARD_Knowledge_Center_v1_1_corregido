@@ -7,18 +7,21 @@ Cada sucursal debe poder vender aunque Internet sea lento o esté interrumpido.
 ## Estructura
 
 ```text
-                    BASE CENTRAL EN LA NUBE
+                    SERVIDOR CENTRAL ARD SUITE
                               │
                ┌──────────────┴──────────────┐
                │                             │
-       BASE LOCAL SUCURSAL 1         BASE LOCAL SUCURSAL 2
+       SERVIDOR LOCAL SUCURSAL 1    SERVIDOR LOCAL SUCURSAL 2
+       Base + API + sincronizacion  Base + API + sincronizacion
                │                             │
-             CAJA                          CAJA
+            LAN local                     LAN local
 ```
 
 ## Regla principal
 
-> Toda venta presencial se registra primero en la base local y luego se sincroniza con la nube.
+> Toda operación presencial se registra primero en la base local de la sucursal y luego se sincroniza con la Central.
+
+No existe una base independiente por cada puesto de trabajo. Cada sucursal utiliza una única base local compartida por LAN.
 
 ## Base central
 
@@ -56,6 +59,8 @@ Contiene lo necesario para operar:
 
 La sucursal continúa vendiendo. Las operaciones quedan pendientes y se envían cuando regresa la conexión.
 
+La caída de Internet no impide la operación local mientras la red interna, el servidor local y la base local funcionen. El detalle funcional completo se encuentra en [Módulo Sincronización](/doc/modulos/sincronizacion/documento_maestro).
+
 ## Autoridad de los datos
 
 | Información | Autoridad principal |
@@ -67,3 +72,7 @@ La sucursal continúa vendiendo. Las operaciones quedan pendientes y se envían 
 | Stock operativo del local | Sucursal local |
 | Historial consolidado | Central |
 | Stock web | Central |
+
+## Independencia de infraestructura
+
+La Central ARD Suite no queda acoplada a un proveedor específico. Puede alojarse inicialmente en DigitalOcean, migrarse luego a un servidor propio y complementarse en producción madura con respaldo externo o cloud sin rediseñar funcionalmente las sucursales.

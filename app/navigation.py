@@ -3,8 +3,8 @@ from __future__ import annotations
 PROJECT_INFO = {
     "name": "ARD Suite",
     "subtitle": "Documento Maestro de Arquitectura Funcional",
-    "version": "v1.4",
-    "status": "Administración aprobada; Logística definida; Sincronización próxima",
+    "version": "v1.5",
+    "status": "Administración aprobada; Logística definida; Sincronización aprobada; Modelo de Datos próximo",
     "description": (
         "Centro documental para lineamientos, modulos funcionales, modelo de datos, "
         "wireframes, decisiones e historial del proyecto."
@@ -17,7 +17,7 @@ PROJECT_PROGRESS = [
     {"name": "Caja", "progress": 80, "visual": "████████░░ 80%"},
     {"name": "Administración", "progress": 100, "visual": "APROBADO PARA DESARROLLO"},
     {"name": "Logística", "progress": 100, "visual": "DEFINIDO FUNCIONALMENTE"},
-    {"name": "Sincronización", "progress": 0, "visual": "PRÓXIMO MÓDULO A DEFINIR"},
+    {"name": "Sincronización", "progress": 100, "visual": "APROBADO FUNCIONALMENTE PARA DESARROLLO"},
     {"name": "Venta Web", "progress": 20, "visual": "██░░░░░░░░ 20%"},
     {"name": "IA", "progress": 10, "visual": "█░░░░░░░░░ 10%"},
 ]
@@ -71,9 +71,15 @@ MODULE_INDEXES = {
         "description": "Índice documental del módulo logístico.",
         "doc_slug": "modulos/logistica/documento_maestro",
     },
+    "sincronizacion": {
+        "title": "Sincronización",
+        "module": "Módulo 5",
+        "description": "Índice documental del módulo de sincronización distribuida.",
+        "doc_slug": "modulos/sincronizacion/documento_maestro",
+    },
     "venta-web": {
         "title": "Venta Web",
-        "module": "Módulo 5",
+        "module": "Módulo 6",
         "description": "Índice documental del canal de venta web.",
         "doc_slug": "modulos/venta_web/documento_maestro",
     },
@@ -202,9 +208,18 @@ NAVIGATION = [
     },
     {
         "title": "Módulo 5",
-        "icon": "○",
+        "icon": "~",
         "route": None,
         "order": 80,
+        "children": [
+            {"title": "Sincronización", "icon": "⇆", "route": "/doc/modulos/sincronizacion/documento_maestro", "doc_slug": "modulos/sincronizacion/documento_maestro", "order": 10},
+        ],
+    },
+    {
+        "title": "Módulo 6",
+        "icon": "○",
+        "route": None,
+        "order": 85,
         "children": [
             {"title": "Venta Web", "icon": "▥", "route": "/doc/modulos/venta_web/documento_maestro", "doc_slug": "modulos/venta_web/documento_maestro", "order": 10},
             {"title": "Ficha del módulo", "icon": "•", "route": "/doc/modulos/inteligencia_comercial/resumen", "doc_slug": "modulos/inteligencia_comercial/resumen", "order": 20},

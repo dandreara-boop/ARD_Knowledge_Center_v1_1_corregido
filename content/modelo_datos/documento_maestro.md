@@ -4,6 +4,8 @@
 
 Documentar entidades funcionales sin programar tablas físicas. Cada entidad se relaciona con el módulo correspondiente.
 
+Estado actual: **próximo módulo** luego del cierre funcional de Sincronización.
+
 {{include:general/modelo_conceptual}}
 
 ## Entidades por módulo
@@ -41,6 +43,8 @@ Documentar entidades funcionales sin programar tablas físicas. Cada entidad se 
 | Usuario | Usuarios / Administración | Persona con acceso al sistema. |
 | Permiso | Usuarios / Administración | Acción permitida por rol o usuario. |
 | Excepción | Administración | Evento operativo que requiere revisión. |
+| Evento de sincronización | Sincronización | Cambio local o central transmitido mediante protocolo idempotente. |
+| Paquete de contingencia | Sincronización | Archivo excepcional para intercambio manual de actualizaciones o eventos pendientes. |
 
 ## Modelos específicos existentes
 

@@ -122,6 +122,33 @@ Cada decisión indica código, título, descripción, fecha y versión documenta
 | DEC-141 | Diferencias sin bloqueo | Una diferencia recibida se registra sin bloquear toda la recepción. | 2026-08-05 | 1.4 |
 | DEC-142 | Alcance limitado | Logística se limita a confirmación en destino, reposición, tránsito, diferencias, permisos y auditoría. | 2026-08-05 | 1.4 |
 
+## Sincronización
+
+| Código | Título | Descripción | Fecha | Versión |
+|---|---|---|---|---|
+| DEC-143 | Operación local prioritaria | Toda operación presencial se confirma primero en la base local y no depende de Internet. | 2026-08-13 | 1.5 |
+| DEC-144 | Eventos persistentes | Los cambios se transmitirán mediante una cola local persistente. | 2026-08-13 | 1.5 |
+| DEC-145 | Idempotencia global | Los eventos podrán reenviarse sin duplicar efectos. | 2026-08-13 | 1.5 |
+| DEC-146 | Autoridad por dato | Cada grupo de información tendrá una fuente principal. | 2026-08-13 | 1.5 |
+| DEC-147 | Versionado central | Productos, precios, promociones, permisos y configuraciones tendrán versiones controladas. | 2026-08-13 | 1.5 |
+| DEC-148 | Historial comercial inalterable | Las ventas finalizadas conservarán las reglas y precios utilizados originalmente. | 2026-08-13 | 1.5 |
+| DEC-149 | Errores aislados | Un evento problemático no impedirá sincronizar otros eventos independientes. | 2026-08-13 | 1.5 |
+| DEC-150 | Vigencia visible | Administración conocerá la fecha y hora de última sincronización de cada sucursal. | 2026-08-13 | 1.5 |
+| DEC-151 | Base local compartida | Todos los equipos de cada local utilizan una única base local compartida mediante LAN. | 2026-08-13 | 1.5 |
+| DEC-152 | Servidor local de sucursal | Cada local dispone de servicios locales para base, API y sincronización. | 2026-08-13 | 1.5 |
+| DEC-153 | Administración Local | Los usuarios autorizados podrán consultar información local aun sin Internet. | 2026-08-13 | 1.5 |
+| DEC-154 | Paquetes de actualización offline | La Central podrá producir archivos firmados y versionados para actualizar una sucursal desconectada. | 2026-08-13 | 1.5 |
+| DEC-155 | Exportación manual de eventos | Una sucursal podrá exportar los eventos pendientes para incorporarlos manualmente a Central. | 2026-08-13 | 1.5 |
+| DEC-156 | Protocolo único | Online y archivos utilizan los mismos eventos e identificadores. | 2026-08-13 | 1.5 |
+| DEC-157 | Actualización única por sucursal | Un paquete se aplica una sola vez en el servidor local y beneficia a todos los puestos. | 2026-08-13 | 1.5 |
+| DEC-158 | Archivo bajo demanda | Los archivos manuales serán exclusivamente un mecanismo de contingencia solicitado por un usuario autorizado. | 2026-08-13 | 1.5 |
+| DEC-159 | Independencia de proveedor | ARD Suite deberá poder migrar su Central entre cloud y servidor propio sin alterar funcionalmente las sucursales. | 2026-08-13 | 1.5 |
+| DEC-160 | Usuarios offline | Los usuarios previamente autorizados pueden seguir operando con los últimos permisos locales. | 2026-08-13 | 1.5 |
+| DEC-161 | Transparencia para ventas | El operario de ventas no recibe alertas de Internet mientras la operación local esté disponible. | 2026-08-13 | 1.5 |
+| DEC-162 | Desconexiones largas | Horas o días sin conexión no modifican la operación normal del local. | 2026-08-13 | 1.5 |
+| DEC-163 | Sincronización continua | Los eventos se intentan enviar apenas se crean y se reintentan automáticamente. | 2026-08-13 | 1.5 |
+| DEC-164 | Panel administrativo | Administración puede consultar estado, pendientes, errores y versiones de cada sucursal. | 2026-08-13 | 1.5 |
+
 ## Cambios y Créditos Comerciales
 
 | Código | Título | Descripción | Fecha | Versión |

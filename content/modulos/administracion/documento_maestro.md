@@ -67,9 +67,13 @@ Los informes administrativos se consultan desde la aplicación web de Administra
 
 Ver también:
 
-- Administración — Informes administrativos desde la nube.
-- Arquitectura Distribuida — Sincronización.
-- DEC-123.
+- [Administración — Informes administrativos desde la nube](/doc/modulos/administracion/informes_nube).
+- [Arquitectura Distribuida](/doc/general/arquitectura_distribuida).
+- [Módulo Sincronización](/doc/modulos/sincronizacion/documento_maestro).
+
+## Administración Local
+
+Administración Local permite consultar información propia de una sucursal aunque no haya Internet, usando la base local compartida de esa sucursal. No reemplaza a Administración Central: funciona como consulta operativa local para usuarios autorizados.
 
 ## Informe de ventas
 
@@ -175,4 +179,4 @@ Administración define políticas globales: promociones, condición comercial po
 
 ## Próximo módulo
 
-Con Administración aprobada para desarrollo y Logística funcionalmente definida, el siguiente análisis corresponde a Sincronización.
+Con Administración aprobada para desarrollo, Logística funcionalmente definida y Sincronización aprobada funcionalmente para desarrollo, el siguiente análisis corresponde al Modelo de Datos.
