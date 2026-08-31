@@ -41,9 +41,16 @@ Agregar al Remito de Entrada
         ↓
 Cargar cantidades y atributos
         ↓
+Resolver variante internamente
+        ↓
 Distribuir entre destinos
         ↓
 Etiquetar en cada local
         ↓
 Confirmar ingreso de stock
 ```
+
+## Referencias relacionadas
+
+- [Gestión de Variantes](/doc/general/gestion_variantes).
+- [Principios de Arquitectura](/doc/general/principios_arquitectura).

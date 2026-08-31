@@ -16,6 +16,12 @@ Cada decisión indica código, título, descripción, fecha y versión documenta
 | DEC-044 | Historial consolidado | La nube conserva el historial consolidado. | 2026-07-27 | 1.1 |
 | DEC-045 | Autoridad de datos | Cada tipo de dato tiene una autoridad definida. | 2026-07-27 | 1.1 |
 | DEC-046 | Venta sin Internet | La falta de Internet no impide vender. | 2026-07-27 | 1.1 |
+| DEC-168 | Abstracción operativa | El usuario trabaja con conceptos del negocio y no con identificadores internos. | 2026-08-31 | 1.7 |
+| DEC-169 | Frontend sin reglas de negocio | El Frontend traduce la interacción del usuario al formato requerido por la API sin implementar reglas de negocio. | 2026-08-31 | 1.7 |
+| DEC-170 | Backend como autoridad de negocio | El Backend concentra lógica, validaciones, permisos, auditoría, stock y consistencia. | 2026-08-31 | 1.7 |
+| DEC-171 | Reutilización de reglas | Toda regla importante existe una única vez y es reutilizada por todas las interfaces. | 2026-08-31 | 1.7 |
+| DEC-172 | Motor de Reglas único | El Motor de Reglas es el único lugar donde se implementan las decisiones importantes del negocio. | 2026-08-31 | 1.7 |
+| DEC-173 | Responsabilidad por capa | Services coordinan procesos, Policies toman decisiones y Rules realizan validaciones específicas. | 2026-08-31 | 1.7 |
 
 ## Recepción
 
@@ -31,6 +37,9 @@ Cada decisión indica código, título, descripción, fecha y versión documenta
 | DEC-036 | Conteo por atributos | El conteo se registra por combinación de atributos. | 2026-07-27 | 1.0 |
 | DEC-037 | Asignación por destino | La asignación vincula cantidad recibida y destino. | 2026-07-27 | 1.0 |
 | DEC-038 | Movimientos auditables | Finalizar el remito genera movimientos auditables. | 2026-07-27 | 1.0 |
+| DEC-165 | Variantes bajo demanda | Las variantes se crean únicamente cuando existe una necesidad real. | 2026-08-26 | 1.6 |
+| DEC-166 | Servicio interno de variantes | Recepción, Importaciones, Procesos Administrativos y API usan un servicio interno que busca o crea variantes automáticamente. | 2026-08-26 | 1.6 |
+| DEC-167 | Familias como plantillas | Las Familias de Atributos son plantillas reutilizables y no generan variantes, stock ni códigos. | 2026-08-26 | 1.6 |
 
 ## Venta
 

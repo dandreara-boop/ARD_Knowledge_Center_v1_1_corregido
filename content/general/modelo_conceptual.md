@@ -7,9 +7,11 @@
 - Destino.
 - Producto.
 - Atributo.
+- Familia de atributos.
 - Valor de atributo.
 - Curva.
 - Variante.
+- Servicio Interno de Generación de Variantes.
 - Proveedor.
 - Cliente.
 - Remito de Entrada.
@@ -26,7 +28,34 @@ El producto representa la identidad comercial.
 
 Los atributos representan características como talle, color, estampa o número.
 
-El stock pertenece a una identificación operativa del producto y a un destino.
+La variante representa una presentación concreta del artículo determinada por una combinación de atributos.
+
+El stock pertenece a una variante operativa y a un destino.
+
+## Gestión de variantes
+
+Las variantes no se generan obligatoriamente al crear un producto.
+
+El flujo vigente es:
+
+```text
+Artículo
+        ↓
+Recepción de Mercadería
+        ↓
+Servicio Interno de Generación de Variantes
+        ↓
+Stock
+```
+
+El Servicio Interno de Generación de Variantes es un componente reutilizable utilizado por Recepción, Importaciones, Procesos Administrativos y API.
+
+El operario trabaja con mercadería y atributos recibidos; el sistema busca o crea internamente la variante correspondiente.
+
+Ver también:
+
+- [Gestión de Variantes](/doc/general/gestion_variantes).
+- [Principios de Arquitectura](/doc/general/principios_arquitectura).
 
 ## Ejemplo
 

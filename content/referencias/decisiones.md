@@ -24,6 +24,20 @@ Este registro reúne las decisiones aprobadas y vigentes. Los detalles de aplica
 | DEC-037 | La asignación vincula cantidad recibida y destino. |
 | DEC-038 | Finalizar el remito genera movimientos auditables. |
 | DEC-039 | Los prototipos aprobados forman parte del Knowledge Center. |
+| DEC-165 | Las variantes se crean únicamente cuando existe una necesidad real. |
+| DEC-166 | El Servicio Interno de Generación de Variantes resuelve variantes para Recepción, Importaciones, Procesos Administrativos y API. |
+| DEC-167 | Las Familias de Atributos son plantillas reutilizables y no generan variantes, stock ni códigos. |
+
+## Arquitectura operativa y reglas
+
+| Código | Decisión |
+|---|---|
+| DEC-168 | El usuario trabaja con conceptos del negocio y no con identificadores internos. |
+| DEC-169 | El Frontend traduce la interacción del usuario al formato requerido por la API sin implementar reglas de negocio. |
+| DEC-170 | El Backend concentra la lógica del negocio, validaciones, auditoría, stock y consistencia. |
+| DEC-171 | Toda regla importante debe existir una única vez y ser reutilizada por todas las interfaces. |
+| DEC-172 | El Motor de Reglas es el único lugar donde se implementan las decisiones importantes del negocio. |
+| DEC-173 | Services coordinan procesos, Policies toman decisiones y Rules realizan validaciones específicas. |
 
 ## Canales y arquitectura distribuida
 

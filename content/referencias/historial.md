@@ -1,5 +1,24 @@
 # Historial de versiones
 
+## Versión 1.7 — Motor de Reglas de Negocio
+
+- Se incorporó el capítulo Principios de Arquitectura.
+- Se aprobó el Principio de Abstracción Operativa.
+- Se documentó que el usuario trabaja con conceptos del negocio y no con estructuras técnicas internas.
+- Se definió la separación de responsabilidades entre Frontend, API, Services, Policies, Rules, Repositories y MariaDB.
+- Se estableció que el Motor de Reglas es el único lugar donde se implementan las decisiones importantes del negocio.
+- Se actualizó el estado del proyecto marcando Sprint 4 como finalizado.
+- Se agregaron referencias cruzadas desde Visión, Modelo Conceptual, Gestión de Variantes y Recepción.
+
+## Versión 1.6 — Variantes bajo demanda
+
+- Se incorporó el capítulo Gestión de Variantes.
+- Se documentó que las variantes se crean únicamente cuando existe una necesidad real.
+- Se definió el Servicio Interno de Generación de Variantes como componente reutilizable para Recepción, Importaciones, Procesos Administrativos y API.
+- Se incorporaron Familias de Atributos como plantillas reutilizables sin generación automática de variantes, stock ni códigos.
+- Se actualizó Recepción de Mercadería para eliminar la generación manual de variantes del flujo operativo.
+- Se agregaron referencias cruzadas desde Modelo Conceptual, Recepción y Administración.
+
 ## Versión 1.5 — Sincronización aprobada funcionalmente
 
 - Se creó el módulo Sincronización como capítulo documental independiente.

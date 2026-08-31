@@ -12,6 +12,7 @@ Construir una plataforma comercial integral para una empresa textil con locales 
 - La velocidad del operador tiene prioridad.
 - Las políticas las define la empresa; el operador ejecuta.
 - Toda decisión automática debe ser explicable.
+- El usuario nunca debe realizar tareas técnicas que puedan ser resueltas automáticamente por el sistema.
 - El historial nunca debe perderse.
 - La venta local debe continuar aunque no exista Internet.
 - La IA vende en la web y sugiere acciones administrativas dentro de reglas claras.
@@ -24,3 +25,7 @@ Construir una plataforma comercial integral para una empresa textil con locales 
 4. Integración con Tiendanube.
 5. Inteligencia comercial.
 6. Plataforma web propia.
+
+## Referencias relacionadas
+
+- [Principios de Arquitectura](/doc/general/principios_arquitectura).

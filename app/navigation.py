@@ -3,8 +3,8 @@ from __future__ import annotations
 PROJECT_INFO = {
     "name": "ARD Suite",
     "subtitle": "Documento Maestro de Arquitectura Funcional",
-    "version": "v1.5",
-    "status": "Administración aprobada; Logística definida; Sincronización aprobada; Modelo de Datos próximo",
+    "version": "v1.7",
+    "status": "Sprint 1, Sprint 2, Sprint 3 y Sprint 4 finalizados",
     "description": (
         "Centro documental para lineamientos, modulos funcionales, modelo de datos, "
         "wireframes, decisiones e historial del proyecto."
@@ -12,6 +12,10 @@ PROJECT_INFO = {
 }
 
 PROJECT_PROGRESS = [
+    {"name": "Sprint 1 — Infraestructura Base", "progress": 100, "visual": "✓ Finalizado"},
+    {"name": "Sprint 2 — Catálogo Comercial", "progress": 100, "visual": "✓ Finalizado"},
+    {"name": "Sprint 3 — Servicio Interno de Generación de Variantes", "progress": 100, "visual": "✓ Finalizado"},
+    {"name": "Sprint 4 — Motor de Reglas de Negocio", "progress": 100, "visual": "✓ Finalizado"},
     {"name": "Recepción de Mercadería", "progress": 100, "visual": "██████████ 100%"},
     {"name": "Venta en Salón", "progress": 90, "visual": "█████████░ 90%"},
     {"name": "Caja", "progress": 80, "visual": "████████░░ 80%"},
@@ -122,6 +126,10 @@ NAVIGATION = [
         "route": "/doc/general/modelo_conceptual",
         "doc_slug": "general/modelo_conceptual",
         "order": 30,
+        "children": [
+            {"title": "Gestión de Variantes", "icon": "•", "route": "/doc/general/gestion_variantes", "doc_slug": "general/gestion_variantes", "order": 10},
+            {"title": "Principios de Arquitectura", "icon": "•", "route": "/doc/general/principios_arquitectura", "doc_slug": "general/principios_arquitectura", "order": 20},
+        ],
     },
     {
         "title": "Módulo 1",

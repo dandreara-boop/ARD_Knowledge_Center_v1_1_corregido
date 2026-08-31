@@ -17,9 +17,11 @@ Estado actual: **próximo módulo** luego del cierre funcional de Sincronizació
 | Destino | Recepción / Logística | Local, depósito, stock web u otro punto operativo. |
 | Producto | Recepción / Administración | Identidad comercial del artículo. |
 | Atributo | Recepción / Administración | Característica configurable del producto. |
+| Familia de atributos | Administración | Plantilla reutilizable de atributos para configurar artículos. |
 | Valor de atributo | Recepción | Valor específico dentro de un atributo. |
 | Curva | Recepción / Administración | Conjunto versionable de talles o valores. |
-| Variante | Recepción / Venta | Combinación operativa de atributos según canal o proceso. |
+| Variante | Recepción / Venta | Presentación concreta del artículo resuelta cuando existe necesidad real. |
+| Servicio Interno de Generación de Variantes | Recepción / Administración / API | Componente reutilizable que busca o crea variantes automáticamente. |
 | Proveedor | Recepción / Administración | Origen comercial de mercadería. |
 | Cliente | Venta / Cambios / Administración | Persona asociada a venta, crédito o historial. |
 | Remito de Entrada | Recepción | Documento de ingreso de mercadería. |

@@ -38,6 +38,20 @@ Administración trabaja en paralelo asignando código y valor de venta.
 
 La pantalla de depósito muestra solamente los atributos definidos en Administración.
 
+El operario indica únicamente los atributos que llegaron realmente y sus cantidades. No genera variantes manualmente.
+
+```text
+Seleccionar producto
+  ↓
+Indicar atributos recibidos
+  ↓
+Ingresar cantidades
+  ↓
+Confirmar
+```
+
+Al confirmar, el sistema busca la variante correspondiente, la reutiliza si existe o la crea automáticamente si todavía no existe. También genera el código de barras y registra el movimiento de stock.
+
 ## 5. Distribución
 
 Se trabaja con cantidades, nunca con porcentajes.

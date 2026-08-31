@@ -10,6 +10,27 @@
 - Estado.
 - Canales.
 - Atributos designados.
+- Familia de atributos sugerida.
+
+### Familia de atributos
+
+- Nombre.
+- Atributos incluidos.
+- Estado.
+
+### Variante
+
+- Producto.
+- Valores de atributos.
+- Código de barras.
+- Estado.
+
+### Servicio Interno de Generación de Variantes
+
+- Producto.
+- Valores de atributos recibidos.
+- Origen del proceso.
+- Variante encontrada o creada.
 
 ### Remito de Entrada
 
@@ -33,6 +54,7 @@
 - Producto.
 - Valores de atributos.
 - Cantidad.
+- Variante resuelta internamente.
 
 ### Asignación inicial
 
@@ -42,6 +64,7 @@
 
 ### Movimiento de stock
 
+- Variante.
 - Origen.
 - Destino.
 - Cantidad.

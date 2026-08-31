@@ -108,7 +108,15 @@ Administración consulta stock local, stock web, movimientos y diferencias opera
 
 Administra catálogo, precios, atributos designados, canales, estado y reglas comerciales asociadas.
 
+Dentro del Catálogo Comercial, el Artículo/Producto conserva la identidad comercial principal.
+
+Las Familias de Atributos funcionan como plantillas reutilizables para configurar artículos nuevos con mayor velocidad. No generan variantes, stock ni códigos por sí mismas.
+
+La creación de variantes no es una tarea normal del operario ni una obligación al crear un artículo. Las variantes se crean únicamente cuando existe una necesidad real, mediante el Servicio Interno de Generación de Variantes.
+
 La participación en liquidaciones, campañas o promociones no se guarda como opción permanente del producto. El alcance se define dentro de cada promoción.
+
+Ver también: [Gestión de Variantes](/doc/general/gestion_variantes).
 
 ## Remitos
 

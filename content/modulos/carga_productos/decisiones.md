@@ -8,3 +8,5 @@
 - **DEC-032:** un remito admite productos existentes y nuevos.
 - **DEC-033:** depósito muestra únicamente los atributos definidos.
 - **DEC-034:** la distribución utiliza cantidades, no porcentajes.
+- **DEC-165:** las variantes se crean únicamente cuando existe una necesidad real.
+- **DEC-166:** recepción utiliza internamente el Servicio de Generación de Variantes; el operario no genera variantes manualmente.

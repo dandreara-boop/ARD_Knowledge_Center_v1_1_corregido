@@ -22,7 +22,11 @@ El Remito de Entrada puede contener productos existentes y productos nuevos. Fun
 
 ## Carga de atributos
 
-Los atributos visibles en depósito dependen de lo designado desde Administración. La carga se registra por combinación de atributos y cantidad.
+Los atributos visibles en depósito dependen de lo designado desde Administración. La carga se registra únicamente con los atributos que llegaron realmente y sus cantidades.
+
+Durante la confirmación, el sistema busca la variante correspondiente, la utiliza si ya existe o la crea automáticamente si todavía no existe. También genera el código de barras correspondiente y registra el movimiento de stock.
+
+No debe existir un botón operativo denominado **Generar Variantes**. La generación queda resuelta internamente por el Servicio Interno de Generación de Variantes.
 
 ## Distribución por sucursal
 
@@ -47,6 +51,9 @@ Los diagramas aprobados del módulo se conservan dentro de los wireframes relaci
 ## Reglas de negocio
 
 - Producto y atributos se mantienen separados.
+- Las variantes se crean únicamente cuando existe una necesidad real.
+- Recepción utiliza internamente el Servicio de Generación de Variantes.
+- El operario nunca trabaja directamente con variantes.
 - El código permanece visible durante los procesos operativos.
 - El remito admite productos existentes y nuevos.
 - Depósito muestra solamente los atributos definidos por Administración.
@@ -63,6 +70,12 @@ Los diagramas aprobados del módulo se conservan dentro de los wireframes relaci
 ## Decisiones relacionadas
 
 {{include:modulos/carga_productos/decisiones}}
+
+Ver también:
+
+- [Gestión de Variantes](/doc/general/gestion_variantes).
+- [Modelo Conceptual](/doc/general/modelo_conceptual).
+- [Principios de Arquitectura](/doc/general/principios_arquitectura).
 
 ## Próximos desarrollos
 
