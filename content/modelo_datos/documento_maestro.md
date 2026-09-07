@@ -4,7 +4,7 @@
 
 Documentar entidades funcionales sin programar tablas físicas. Cada entidad se relaciona con el módulo correspondiente.
 
-Estado actual: **próximo módulo** luego del cierre funcional de Sincronización.
+Estado actual: **Sprint 5 — Motor de Inventario finalizado y validado**.
 
 {{include:general/modelo_conceptual}}
 
@@ -14,7 +14,7 @@ Estado actual: **próximo módulo** luego del cierre funcional de Sincronizació
 |---|---|---|
 | Empresa | General | Organización propietaria de la operación. |
 | Sucursal | General / Venta / Caja | Punto operativo con base local, caja y stock. |
-| Destino | Recepción / Logística | Local, depósito, stock web u otro punto operativo. |
+| Destino de Inventario | Recepción / Venta / Logística / Web | Local, web, depósito u otro destino operativo de stock. |
 | Producto | Recepción / Administración | Identidad comercial del artículo. |
 | Atributo | Recepción / Administración | Característica configurable del producto. |
 | Familia de atributos | Administración | Plantilla reutilizable de atributos para configurar artículos. |
@@ -28,7 +28,9 @@ Estado actual: **próximo módulo** luego del cierre funcional de Sincronizació
 | Ítem del remito | Recepción | Producto incluido dentro de un remito. |
 | Conteo | Recepción | Cantidad recibida por combinación de atributos. |
 | Asignación inicial | Recepción / Logística | Distribución de cantidad recibida hacia destinos. |
-| Movimiento de stock | Recepción / Venta / Logística | Cambio auditable de cantidad por origen, destino y motivo. |
+| Movimiento de stock | Recepción / Venta / Logística | Libro histórico auditable de toda variación de stock. |
+| StockActual | Recepción / Venta / Logística / Web | Saldo materializado por variante, destino de inventario y estado. |
+| Evento de dominio | Venta / Inventario / Sincronización | Punto de integración preparado para desacoplar procesos derivados sin bus completo todavía. |
 | Venta | Venta | Operación comercial presencial. |
 | Renglón de venta | Venta | Línea vendida con precio, descuento y valor reconocido. |
 | Pago | Venta / Caja | Cobro por medio de pago. |
@@ -65,3 +67,7 @@ El modelo conceptual está integrado en el capítulo Cambios y Crédito Comercia
 ### Caja
 
 El modelo conceptual está integrado en WF-008 Arqueo y Cierre de Caja.
+
+### Motor de Inventario
+
+{{include:general/motor_inventario}}

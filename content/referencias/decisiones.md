@@ -39,6 +39,24 @@ Este registro reúne las decisiones aprobadas y vigentes. Los detalles de aplica
 | DEC-172 | El Motor de Reglas es el único lugar donde se implementan las decisiones importantes del negocio. |
 | DEC-173 | Services coordinan procesos, Policies toman decisiones y Rules realizan validaciones específicas. |
 
+## Inventario
+
+| Código | Decisión |
+|---|---|
+| DAT-STK-001 | Stock por variante y destino. |
+| DAT-STK-002 | Todo cambio genera movimiento. |
+| DAT-STK-003 | Historial auditable y saldo materializado. |
+| DAT-STK-004 | Movimientos tipificados. |
+| DAT-STK-005 | Documento u origen trazable. |
+| DAT-STK-006 | Stock negativo permitido en salón. |
+| DAT-STK-007 | Ajustes mediante movimientos compensatorios. |
+| DAT-STK-008 | Identificador global e idempotencia. |
+| DAT-STK-009 | La materialización de venta tiene prioridad. |
+| DAT-STK-010 | Venta y evento pendiente deben persistirse atómicamente. |
+| DAT-STK-011 | Inventario podrá procesarse fuera del camino crítico del POS. |
+| DAT-STK-012 | Procesos pesados no deben ralentizar facturación. |
+| DAT-STK-013 | StockActual se actualiza incrementalmente. |
+
 ## Canales y arquitectura distribuida
 
 | Código | Decisión |

@@ -23,6 +23,24 @@ Cada decisión indica código, título, descripción, fecha y versión documenta
 | DEC-172 | Motor de Reglas único | El Motor de Reglas es el único lugar donde se implementan las decisiones importantes del negocio. | 2026-08-31 | 1.7 |
 | DEC-173 | Responsabilidad por capa | Services coordinan procesos, Policies toman decisiones y Rules realizan validaciones específicas. | 2026-08-31 | 1.7 |
 
+## Inventario
+
+| Código | Título | Descripción | Fecha | Versión |
+|---|---|---|---|---|
+| DAT-STK-001 | Stock por variante y destino | El stock se registra por variante, destino de inventario y estado, no directamente por artículo. | 2026-09-01 | 1.8 |
+| DAT-STK-002 | Cambio con movimiento | Todo cambio de stock genera un MovimientoStock auditable. | 2026-09-01 | 1.8 |
+| DAT-STK-003 | Historial y saldo | El modelo mantiene MovimientoStock como historial y StockActual como saldo materializado. | 2026-09-01 | 1.8 |
+| DAT-STK-004 | Movimientos tipificados | Los movimientos de stock se registran con tipos preparados para recepción, venta, cambios, transferencias, ajustes y merma. | 2026-09-01 | 1.8 |
+| DAT-STK-005 | Origen trazable | Todo movimiento conserva documento u origen trazable mediante tipo de origen, id de origen y referencia. | 2026-09-01 | 1.8 |
+| DAT-STK-006 | Stock negativo en salón | La venta presencial no se bloquea por stock teórico insuficiente. | 2026-09-01 | 1.8 |
+| DAT-STK-007 | Ajustes compensatorios | Los ajustes se registran como movimientos positivos o negativos contra el stock contado. | 2026-09-01 | 1.8 |
+| DAT-STK-008 | Idempotencia global | Cada MovimientoStock posee global_id único para evitar duplicar efectos ante reintentos. | 2026-09-01 | 1.8 |
+| DAT-STK-009 | Prioridad de venta | La materialización de una venta presencial tiene prioridad sobre procesos secundarios. | 2026-09-01 | 1.8 |
+| DAT-STK-010 | Venta y evento atómicos | Venta y evento pendiente deben persistirse en la misma transacción. | 2026-09-01 | 1.8 |
+| DAT-STK-011 | Inventario diferible | Inventario podrá procesarse fuera del camino crítico del POS cuando la integridad lo permita. | 2026-09-01 | 1.8 |
+| DAT-STK-012 | Facturación rápida | Los procesos pesados no deben ralentizar la facturación. | 2026-09-01 | 1.8 |
+| DAT-STK-013 | Saldo incremental | StockActual se actualiza incrementalmente y no recalculando todo el historial por operación. | 2026-09-01 | 1.8 |
+
 ## Recepción
 
 | Código | Título | Descripción | Fecha | Versión |

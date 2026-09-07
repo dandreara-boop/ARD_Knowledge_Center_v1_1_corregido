@@ -12,6 +12,8 @@
 - Curva.
 - Variante.
 - Servicio Interno de Generación de Variantes.
+- Destino de Inventario.
+- StockActual.
 - Proveedor.
 - Cliente.
 - Remito de Entrada.
@@ -30,7 +32,11 @@ Los atributos representan características como talle, color, estampa o número.
 
 La variante representa una presentación concreta del artículo determinada por una combinación de atributos.
 
-El stock pertenece a una variante operativa y a un destino.
+El stock pertenece a una variante operativa, a un destino de inventario y a un estado.
+
+El Artículo no almacena stock directo.
+
+El stock total de un artículo se obtiene agregando variantes cuando una consulta lo requiere.
 
 ## Gestión de variantes
 
@@ -55,6 +61,7 @@ El operario trabaja con mercadería y atributos recibidos; el sistema busca o cr
 Ver también:
 
 - [Gestión de Variantes](/doc/general/gestion_variantes).
+- [Motor de Inventario](/doc/general/motor_inventario).
 - [Principios de Arquitectura](/doc/general/principios_arquitectura).
 
 ## Ejemplo

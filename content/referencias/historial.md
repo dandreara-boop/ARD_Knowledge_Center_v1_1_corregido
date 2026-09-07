@@ -1,5 +1,20 @@
 # Historial de versiones
 
+## Versión 1.8 — Motor de Inventario
+
+- Se incorporó el capítulo Motor de Inventario.
+- Se documentó que el stock se registra por Variante, Destino de Inventario y Estado.
+- Se definió el doble nivel MovimientoStock como historial auditable y StockActual como saldo materializado.
+- Se estableció que StockActual se actualiza incrementalmente.
+- Se documentaron tipos iniciales de destino, estados de stock y tipos de movimiento preparados.
+- Se dejó asentada la idempotencia mediante global_id.
+- Se documentó que el stock negativo está permitido en salón y no debe bloquear la venta presencial.
+- Se incorporó el principio de prioridad operativa para POS.
+- Se documentó que venta y evento pendiente deben persistirse atómicamente.
+- Se dejó preparado el punto de integración con eventos de dominio sin documentar un bus completo.
+- Se registró la validación de Sprint 5 con pruebas manuales, 39 tests automáticos aprobados y Alembic 20260901_0004 como HEAD.
+- Se incorporaron las decisiones DAT-STK-001 a DAT-STK-013.
+
 ## Versión 1.7 — Motor de Reglas de Negocio
 
 - Se incorporó el capítulo Principios de Arquitectura.

@@ -81,6 +81,20 @@ deben reutilizar exactamente el mismo Backend.
 
 La lógica nunca debe duplicarse entre interfaces.
 
+## Principio de Prioridad Operativa
+
+Las acciones que interactúan directamente con el cliente, especialmente cobrar y finalizar una venta, deben tener el camino de ejecución más corto posible.
+
+Todo proceso que pueda diferirse sin comprometer la integridad de los datos se realizará fuera del camino crítico del POS.
+
+La materialización de una venta presencial tiene prioridad sobre procesos secundarios.
+
+La venta futura deberá persistir venta, ítems, pagos y evento pendiente en una misma transacción rápida.
+
+Inventario, estadísticas, sincronización y otros procesos derivados podrán ejecutarse después del `COMMIT`.
+
+La creación del evento pendiente pertenece a la misma transacción que materializa la venta para impedir una venta registrada sin obligación posterior de procesamiento.
+
 ## API Interna
 
 La API trabaja con identificadores internos.
@@ -181,6 +195,7 @@ El usuario nunca necesita conocer cómo funciona internamente ese proceso.
 | Sprint 2 | Catálogo Comercial | ✓ Finalizado |
 | Sprint 3 | Servicio de Generación de Variantes | ✓ Finalizado |
 | Sprint 4 | Motor de Reglas de Negocio | ✓ Finalizado |
+| Sprint 5 | Motor de Inventario | ✓ Finalizado |
 
 ## Conclusión
 
@@ -195,4 +210,5 @@ Esta decisión busca reducir tiempos de capacitación, minimizar errores operati
 - [Visión y filosofía](/doc/general/vision).
 - [Modelo Conceptual](/doc/general/modelo_conceptual).
 - [Gestión de Variantes](/doc/general/gestion_variantes).
+- [Motor de Inventario](/doc/general/motor_inventario).
 - [Registro de Decisiones](/doc/referencias/decisiones_agrupadas).

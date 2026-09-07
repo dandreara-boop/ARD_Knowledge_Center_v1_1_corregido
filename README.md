@@ -1,4 +1,4 @@
-# ARD Suite Knowledge Center v1.4
+# ARD Suite Knowledge Center v1.8
 
 Centro de conocimiento privado para visualizar claramente el proyecto ARD Suite.
 
@@ -34,5 +34,6 @@ Cambiar en `.env`.
 - Módulo 2: Venta en Salón
 - Módulo 3: Administración
 - Módulo 4: Logística
-- Módulo 5: Venta Web
+- Módulo 5: Sincronización
+- Módulo 6: Venta Web
 - Referencias
