@@ -4,6 +4,8 @@
 
 Sprint 5 finalizado y validado.
 
+Integración de Sprint 6 implementada y validada mediante eventos `VENTA_FINALIZADA`.
+
 El Motor de Inventario define cómo ARD Suite registra, consulta y mantiene el stock operativo.
 
 ## Principio general
@@ -141,6 +143,10 @@ Si el mismo evento llega nuevamente:
 
 Esto prepara el sistema para sincronización futura y reenvíos después de fallas de conectividad.
 
+En Sprint 6, los movimientos derivados de venta usan UUID5 determinístico. La fuente conceptual `sale:{venta_global_id}:line:{detalle_id}` se transforma con el namespace fijo `8a248879-2d85-4e15-98f1-c769b5ed77cb` para obtener un UUID de 36 caracteres compatible con `movimientos_stock.global_id String(36)`.
+
+No se usa UUID4 en este caso porque rompería la idempotencia ante reintentos.
+
 ## Concurrencia
 
 La actualización del saldo debe ser segura ante operaciones simultáneas de distintas cajas contra una misma base local.
@@ -157,7 +163,7 @@ Las acciones que interactúan directamente con el cliente, especialmente cobrar 
 
 Todo proceso que pueda diferirse sin comprometer la integridad de los datos se realizará fuera del camino crítico del POS.
 
-La venta futura deberá guardar en una misma transacción rápida:
+La venta local guarda en una misma transacción rápida:
 
 - Venta.
 - Ítems.
@@ -169,6 +175,8 @@ Una vez realizado el `COMMIT`, el cajero puede continuar.
 Inventario, estadísticas, sincronización y otros procesos derivados podrán ejecutarse después.
 
 La creación del evento pendiente debe ocurrir dentro de la misma transacción que materializa la venta para impedir una venta registrada sin obligación posterior de procesamiento.
+
+Sprint 6 implementó este circuito para venta local: `Venta CERRADA` y `VENTA_FINALIZADA` se guardan atómicamente, y el inventario se descuenta luego reutilizando `InventoryService` con movimientos tipo `VENTA` de cantidad negativa.
 
 ## Eventos de dominio
 
@@ -222,6 +230,13 @@ Alembic:
 
 - `20260901_0004` es `HEAD`.
 
+Validación de Sprint 6:
+
+- Se reintentó un evento `VENTA_FINALIZADA` que había quedado en `ERROR` por longitud de `global_id`.
+- El evento pasó a `PROCESADO` después de implementar UUID5 determinístico.
+- El stock se descontó una sola vez y una nueva ejecución no reaplicó el movimiento.
+- Después de incorporar regresión para UUID5 y reintentos, 50 tests aprobaron con `python -m pytest -p no:cacheprovider`.
+
 Los datos temporales utilizados durante QA no constituyen reglas de negocio.
 
 ## Decisiones asociadas
@@ -242,9 +257,12 @@ Los datos temporales utilizados durante QA no constituyen reglas de negocio.
 | DAT-STK-012 | Los procesos pesados no deben ralentizar la facturación. |
 | DAT-STK-013 | `StockActual` se actualiza incrementalmente. |
 
+Las decisiones específicas del Sprint 6 se documentan como `DAT-SALE-001` a `DAT-SALE-011`.
+
 ## Referencias relacionadas
 
 - [Modelo Conceptual](/doc/general/modelo_conceptual).
 - [Principios de Arquitectura](/doc/general/principios_arquitectura).
 - [Modelo de Datos](/doc/modelo_datos/documento_maestro).
+- [Sprint 6 — Motor de Venta Local](/doc/modulos/venta_salon/sprint_6_motor_venta_local).
 - [Registro de Decisiones](/doc/referencias/decisiones_agrupadas).

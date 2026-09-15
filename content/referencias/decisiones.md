@@ -57,6 +57,22 @@ Este registro reúne las decisiones aprobadas y vigentes. Los detalles de aplica
 | DAT-STK-012 | Procesos pesados no deben ralentizar facturación. |
 | DAT-STK-013 | StockActual se actualiza incrementalmente. |
 
+## Venta local
+
+| Código | Decisión |
+|---|---|
+| DAT-SALE-001 | La venta local se materializa antes de ejecutar trabajos derivados. |
+| DAT-SALE-002 | Venta cerrada y evento pendiente se guardan atómicamente. |
+| DAT-SALE-003 | Inventario queda fuera del camino crítico del POS. |
+| DAT-SALE-004 | Los detalles conservan snapshot comercial histórico. |
+| DAT-SALE-005 | El outbox local persistente representa obligaciones derivadas. |
+| DAT-SALE-006 | El procesamiento de eventos es reintentable. |
+| DAT-SALE-007 | Los efectos derivados de venta son idempotentes. |
+| DAT-SALE-008 | Los movimientos derivados de venta usan UUID5 determinístico compatible con `String(36)`. |
+| DAT-SALE-009 | Los eventos con error no se pierden. |
+| DAT-SALE-010 | Los eventos procesados no vuelven a aplicar inventario. |
+| DAT-SALE-011 | El stock negativo no bloquea la venta local. |
+
 ## Canales y arquitectura distribuida
 
 | Código | Decisión |

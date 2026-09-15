@@ -1,5 +1,23 @@
 # Historial de versiones
 
+## Versión 1.9 — Motor de Venta Local
+
+- Se creó la página específica Sprint 6 — Motor de Venta Local.
+- Se documentó Sprint 6 como implementado y validado funcionalmente.
+- Se documentaron `Venta`, `DetalleVenta`, `PagoVenta` y `EventoPendiente` como outbox local.
+- Se registró el cierre transaccional de venta mediante `POST /api/ventas/{venta_id}/finalizar`.
+- Se documentó que `Venta CERRADA` y `VENTA_FINALIZADA` se guardan en la misma transacción.
+- Se dejó explícito que inventario, sincronización, estadísticas y servicios externos no están en el camino crítico del POS.
+- Se documentó el procesamiento posterior de `VENTA_FINALIZADA` reutilizando `InventoryService`.
+- Se confirmó que el stock negativo sigue permitido y no bloquea la venta local.
+- Se registró el incidente real de `global_id` de 48 caracteres y el error MariaDB `DataError 1406`.
+- Se documentó la solución final con UUID5 determinístico y namespace fijo `8a248879-2d85-4e15-98f1-c769b5ed77cb`.
+- Se documentó la prueba real de recuperación de evento `ERROR`, ausencia de doble descuento y evento `PROCESADO` no reaplicado.
+- Se registró la migración `20260908_0005_sales_engine.py` posterior a `20260901_0004`.
+- Se documentaron los endpoints y reglas implementadas del Sprint 6.
+- Se registró la validación automática: 48 tests antes de la corrección y 50 tests después de la regresión UUID5/reintentos con `python -m pytest -p no:cacheprovider`.
+- Se incorporaron las decisiones `DAT-SALE-001` a `DAT-SALE-011`.
+
 ## Versión 1.8 — Motor de Inventario
 
 - Se incorporó el capítulo Motor de Inventario.

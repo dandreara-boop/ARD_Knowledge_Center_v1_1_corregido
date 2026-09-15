@@ -1,4 +1,4 @@
-# ARD Suite Knowledge Center v1.8
+# ARD Suite Knowledge Center v1.9
 
 Centro de conocimiento privado para visualizar claramente el proyecto ARD Suite.
 
@@ -32,6 +32,7 @@ Cambiar en `.env`.
 - Lineamientos generales
 - Módulo 1: Carga de Productos
 - Módulo 2: Venta en Salón
+- Sprint 6: Motor de Venta Local
 - Módulo 3: Administración
 - Módulo 4: Logística
 - Módulo 5: Sincronización

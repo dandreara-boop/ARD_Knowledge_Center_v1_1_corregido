@@ -4,7 +4,7 @@
 
 Documentar entidades funcionales sin programar tablas físicas. Cada entidad se relaciona con el módulo correspondiente.
 
-Estado actual: **Sprint 5 — Motor de Inventario finalizado y validado**.
+Estado actual: **Sprint 6 — Motor de Venta Local implementado y validado funcionalmente**.
 
 {{include:general/modelo_conceptual}}
 
@@ -31,9 +31,10 @@ Estado actual: **Sprint 5 — Motor de Inventario finalizado y validado**.
 | Movimiento de stock | Recepción / Venta / Logística | Libro histórico auditable de toda variación de stock. |
 | StockActual | Recepción / Venta / Logística / Web | Saldo materializado por variante, destino de inventario y estado. |
 | Evento de dominio | Venta / Inventario / Sincronización | Punto de integración preparado para desacoplar procesos derivados sin bus completo todavía. |
-| Venta | Venta | Operación comercial presencial. |
-| Renglón de venta | Venta | Línea vendida con precio, descuento y valor reconocido. |
-| Pago | Venta / Caja | Cobro por medio de pago. |
+| Venta | Venta | Operación comercial presencial local con estados preparados para apertura, pago, cierre, suspensión y anulación futura. |
+| DetalleVenta | Venta | Línea vendida con snapshot comercial histórico de variante, códigos, descripción, cantidad, precio unitario e importe. |
+| PagoVenta | Venta / Caja | Pago asociado a una venta local; Sprint 6 valida suficiencia sin implementar todavía el módulo completo de caja. |
+| EventoPendiente | Venta / Inventario | Outbox local persistente para procesar efectos derivados de la venta fuera del camino crítico del POS. |
 | Caja | Caja | Unidad operativa de cobro por sucursal. |
 | Turno de caja | Caja | Apertura, operación, arqueo y cierre de un cajero. |
 | Arqueo | Caja | Control de efectivo contado contra esperado. |
@@ -59,6 +60,8 @@ Estado actual: **Sprint 5 — Motor de Inventario finalizado y validado**.
 ### Venta
 
 {{include:modulos/venta_salon/datos}}
+
+Detalle implementado del Sprint 6: [Motor de Venta Local](/doc/modulos/venta_salon/sprint_6_motor_venta_local).
 
 ### Cambios y Crédito Comercial
 

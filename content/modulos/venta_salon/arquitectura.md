@@ -5,37 +5,46 @@
 ```text
 Escaneo
   ↓
-Venta local
+Venta local cerrada
   ↓
-Stock local actualizado
+Evento pendiente VENTA_FINALIZADA
   ↓
 Comprobante
   ↓
-Cola de sincronización
+Procesamiento posterior
+  ↓
+Stock local actualizado
+  ↓
+Sincronización futura
   ↓
 Base central
   ↓
 Historial consolidado
 ```
 
+Sprint 6 implementa el cierre local y el outbox `VENTA_FINALIZADA`. El procesamiento explícito de eventos pendientes actualiza inventario después del `COMMIT`.
+
+La sincronización cloud, el worker definitivo y la publicación automática a Base Central no forman parte del alcance implementado en Sprint 6.
+
 ## Identificador global
 
 Toda venta tendrá un identificador único para evitar duplicaciones en los reintentos.
 
-## Cola de sincronización
+## Eventos pendientes
 
-Estados:
+Sprint 6 utiliza `EventoPendiente` como outbox local.
 
-- PENDIENTE.
-- ENVIANDO.
-- CONFIRMADO.
-- ERROR_REINTENTABLE.
-- REQUIERE_REVISION.
+Estados implementados:
+
+- `PENDIENTE`.
+- `PROCESANDO`.
+- `PROCESADO`.
+- `ERROR`.
 
 ## Venta con stock negativo
 
-Se registra localmente y se sincroniza.
+Se registra localmente y no bloquea al vendedor.
 
-La nube genera una excepción administrativa.
+El procesamiento posterior de inventario mantiene la consistencia mediante movimientos idempotentes.
 
 El vendedor continúa trabajando sin advertencias.

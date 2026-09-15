@@ -19,7 +19,9 @@
 - Remito de Entrada.
 - Movimiento de stock.
 - Venta.
-- Pago.
+- DetalleVenta.
+- PagoVenta.
+- EventoPendiente.
 - Caja.
 - Campaña.
 - Promoción.
@@ -58,10 +60,21 @@ El Servicio Interno de Generación de Variantes es un componente reutilizable ut
 
 El operario trabaja con mercadería y atributos recibidos; el sistema busca o crea internamente la variante correspondiente.
 
+## Venta local e inventario
+
+Sprint 6 conecta Catálogo, Variante, Venta, EventoPendiente e Inventario.
+
+La venta local se cierra en una transacción rápida que guarda `Venta CERRADA` y evento `VENTA_FINALIZADA` en el outbox local. Después del `COMMIT`, el POS puede considerar terminada la operación crítica.
+
+Los efectos derivados, incluido inventario, se procesan posteriormente mediante eventos pendientes reintentables e idempotentes.
+
+`DetalleVenta` conserva snapshot comercial para que la venta histórica no dependa de cambios posteriores en catálogo.
+
 Ver también:
 
 - [Gestión de Variantes](/doc/general/gestion_variantes).
 - [Motor de Inventario](/doc/general/motor_inventario).
+- [Sprint 6 — Motor de Venta Local](/doc/modulos/venta_salon/sprint_6_motor_venta_local).
 - [Principios de Arquitectura](/doc/general/principios_arquitectura).
 
 ## Ejemplo

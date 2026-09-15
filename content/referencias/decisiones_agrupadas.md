@@ -79,6 +79,17 @@ Cada decisión indica código, título, descripción, fecha y versión documenta
 | DEC-057 | Mezcla financiada | Una unidad parcialmente financiada pierde el beneficio de contado. | 2026-07-27 | 1.1 |
 | DEC-058 | Catálogo visual | Catálogo visual para artículos sin código individual. | 2026-07-27 | 1.1 |
 | DEC-059 | Venta por código o catálogo | Venta por código, catálogo visual o ambos. | 2026-07-27 | 1.1 |
+| DAT-SALE-001 | Venta local materializada | La venta local se materializa antes de ejecutar trabajos derivados. | 2026-09-08 | 1.9 |
+| DAT-SALE-002 | Cierre y evento atómicos | Venta cerrada y evento pendiente se guardan en la misma transacción. | 2026-09-08 | 1.9 |
+| DAT-SALE-003 | Inventario diferido | Inventario queda fuera del camino crítico del POS. | 2026-09-08 | 1.9 |
+| DAT-SALE-004 | Snapshot comercial | Los detalles de venta conservan variante, códigos, descripción, cantidad, precio unitario e importe históricos. | 2026-09-08 | 1.9 |
+| DAT-SALE-005 | Outbox local persistente | El outbox local representa la obligación persistente de ejecutar efectos derivados. | 2026-09-08 | 1.9 |
+| DAT-SALE-006 | Procesamiento reintentable | Los eventos pendientes pueden reintentarse después de errores sin perder la venta. | 2026-09-08 | 1.9 |
+| DAT-SALE-007 | Efectos idempotentes | Los efectos derivados de venta deben poder reintentarse sin duplicar inventario. | 2026-09-08 | 1.9 |
+| DAT-SALE-008 | UUID5 para movimientos de venta | Los movimientos derivados de venta usan UUID5 determinístico compatible con `String(36)`. | 2026-09-08 | 1.9 |
+| DAT-SALE-009 | Errores persistentes | Los eventos con error conservan estado, intentos y último error para revisión o reintento. | 2026-09-08 | 1.9 |
+| DAT-SALE-010 | Procesados no reaplicados | Los eventos procesados no vuelven a aplicar inventario. | 2026-09-08 | 1.9 |
+| DAT-SALE-011 | Stock negativo no bloqueante | El stock negativo no bloquea la venta local. | 2026-09-08 | 1.9 |
 
 ## Caja
 

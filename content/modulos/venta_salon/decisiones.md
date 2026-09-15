@@ -27,6 +27,17 @@
 | DEC-058 | Existirá un catálogo visual configurable para artículos sin etiqueta individual. |
 | DEC-059 | Un producto puede venderse por código, catálogo visual o ambos. |
 | DEC-060 | La pantalla de caja muestra solo la información imprescindible para trabajar con rapidez. |
+| DAT-SALE-001 | La venta local se materializa antes de ejecutar trabajos derivados. |
+| DAT-SALE-002 | Venta cerrada y evento pendiente se guardan atómicamente. |
+| DAT-SALE-003 | Inventario queda fuera del camino crítico del POS. |
+| DAT-SALE-004 | Los detalles conservan snapshot comercial histórico. |
+| DAT-SALE-005 | El outbox local persistente representa obligaciones derivadas. |
+| DAT-SALE-006 | El procesamiento de eventos es reintentable. |
+| DAT-SALE-007 | Los efectos derivados de venta son idempotentes. |
+| DAT-SALE-008 | Los movimientos derivados de venta usan UUID5 determinístico compatible con `String(36)`. |
+| DAT-SALE-009 | Los eventos con error no se pierden. |
+| DAT-SALE-010 | Los eventos procesados no vuelven a aplicar inventario. |
+| DAT-SALE-011 | El stock negativo no bloquea la venta local. |
 
 ## Cambios y créditos comerciales
 
@@ -35,4 +46,3 @@
 ## Arqueo y cierre de caja
 
 - DEC-078 a DEC-087: arqueo ciego, revisión guiada, tolerancia, cierre con diferencia y movimientos explícitos de efectivo.
-

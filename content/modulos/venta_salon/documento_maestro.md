@@ -12,6 +12,14 @@
 
 {{include:modulos/venta_salon/arquitectura}}
 
+## Sprint 6 — Motor de Venta Local
+
+Sprint 6 implementó y validó el núcleo transaccional de venta local: venta, detalles, pagos, outbox local, evento `VENTA_FINALIZADA` e integración posterior con inventario.
+
+La finalización de venta guarda `Venta CERRADA` y `VENTA_FINALIZADA` en una misma transacción rápida. Inventario queda fuera del camino crítico del POS y se procesa luego reutilizando `InventoryService`.
+
+Detalle completo: [Sprint 6 — Motor de Venta Local](/doc/modulos/venta_salon/sprint_6_motor_venta_local).
+
 ## Búsqueda de artículos
 
 La venta puede iniciarse por código, catálogo visual o ambos. El vendedor no selecciona variantes manualmente y el sistema prioriza velocidad operativa.

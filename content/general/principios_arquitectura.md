@@ -89,11 +89,13 @@ Todo proceso que pueda diferirse sin comprometer la integridad de los datos se r
 
 La materialización de una venta presencial tiene prioridad sobre procesos secundarios.
 
-La venta futura deberá persistir venta, ítems, pagos y evento pendiente en una misma transacción rápida.
+La venta local persiste venta, ítems, pagos y evento pendiente en una misma transacción rápida.
 
 Inventario, estadísticas, sincronización y otros procesos derivados podrán ejecutarse después del `COMMIT`.
 
 La creación del evento pendiente pertenece a la misma transacción que materializa la venta para impedir una venta registrada sin obligación posterior de procesamiento.
+
+En Sprint 6 este principio quedó implementado y validado mediante `POST /api/ventas/{venta_id}/finalizar`, que cierra la venta y crea `VENTA_FINALIZADA` en el outbox local sin procesar inventario dentro del cierre.
 
 ## API Interna
 
@@ -196,6 +198,7 @@ El usuario nunca necesita conocer cómo funciona internamente ese proceso.
 | Sprint 3 | Servicio de Generación de Variantes | ✓ Finalizado |
 | Sprint 4 | Motor de Reglas de Negocio | ✓ Finalizado |
 | Sprint 5 | Motor de Inventario | ✓ Finalizado |
+| Sprint 6 | Motor de Venta Local | ✓ Implementado y validado |
 
 ## Conclusión
 
@@ -211,4 +214,5 @@ Esta decisión busca reducir tiempos de capacitación, minimizar errores operati
 - [Modelo Conceptual](/doc/general/modelo_conceptual).
 - [Gestión de Variantes](/doc/general/gestion_variantes).
 - [Motor de Inventario](/doc/general/motor_inventario).
+- [Sprint 6 — Motor de Venta Local](/doc/modulos/venta_salon/sprint_6_motor_venta_local).
 - [Registro de Decisiones](/doc/referencias/decisiones_agrupadas).
