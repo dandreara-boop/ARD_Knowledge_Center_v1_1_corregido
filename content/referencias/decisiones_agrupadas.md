@@ -90,6 +90,17 @@ Cada decisión indica código, título, descripción, fecha y versión documenta
 | DAT-SALE-009 | Errores persistentes | Los eventos con error conservan estado, intentos y último error para revisión o reintento. | 2026-09-08 | 1.9 |
 | DAT-SALE-010 | Procesados no reaplicados | Los eventos procesados no vuelven a aplicar inventario. | 2026-09-08 | 1.9 |
 | DAT-SALE-011 | Stock negativo no bloqueante | El stock negativo no bloquea la venta local. | 2026-09-08 | 1.9 |
+| DAT-PRICE-001 | Precio por Artículo | El precio comercial pertenece al Artículo, no a la Variante. | 2026-09-17 | 2.0 |
+| DAT-PRICE-002 | Reglas por condición | Las reglas pertenecen a condiciones comerciales y no a cada artículo. | 2026-09-17 | 2.0 |
+| DAT-PRICE-003 | Reglas tipadas | El motor usa reglas Python tipadas y controladas, sin fórmulas libres. | 2026-09-17 | 2.0 |
+| DAT-PRICE-004 | Decimal monetario | Los cálculos monetarios utilizan Decimal. | 2026-09-17 | 2.0 |
+| DAT-PRICE-005 | Base recalcula derivados | Cambiar el precio BASE de un artículo recalcula derivados activos en forma atómica. | 2026-09-17 | 2.0 |
+| DAT-PRICE-006 | Regla general controlada | El cambio general de una regla requiere preview y aplicación explícita. | 2026-09-17 | 2.0 |
+| DAT-PRICE-007 | Preview sin persistencia | El preview no persiste cambios en PrecioArticulo. | 2026-09-17 | 2.0 |
+| DAT-PRICE-008 | Política de manuales | La política frente a precios manuales se define explícitamente al aplicar recálculo masivo. | 2026-09-17 | 2.0 |
+| DAT-PRICE-009 | Auditoría efectiva | La auditoría de precios se genera sólo ante cambios efectivos de precio u origen. | 2026-09-17 | 2.0 |
+| DAT-PRICE-010 | Snapshot histórico | Las ventas históricas conservan snapshot de precio y no se recalculan por cambios actuales. | 2026-09-17 | 2.0 |
+| DAT-PRICE-011 | BASE única en servicio | La condición BASE activa única se valida en servicio por compatibilidad con MariaDB. | 2026-09-17 | 2.0 |
 
 ## Caja
 

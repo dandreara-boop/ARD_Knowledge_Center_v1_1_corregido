@@ -1,5 +1,11 @@
 # Promociones y precios en la venta
 
+## Estado implementado
+
+Sprint 7 implementa el motor comercial de precios por Artículo y condiciones comerciales de precio.
+
+Las promociones descriptas en esta página siguen siendo alcance funcional de venta. No quedan documentadas como implementadas por Sprint 7.
+
 ## Principios
 
 - La forma de pago participa en el cálculo comercial.

@@ -38,6 +38,17 @@
 | DAT-SALE-009 | Los eventos con error no se pierden. |
 | DAT-SALE-010 | Los eventos procesados no vuelven a aplicar inventario. |
 | DAT-SALE-011 | El stock negativo no bloquea la venta local. |
+| DAT-PRICE-001 | El precio comercial pertenece al Artículo, no a la Variante. |
+| DAT-PRICE-002 | Las reglas pertenecen a condiciones comerciales y no a cada artículo. |
+| DAT-PRICE-003 | El motor usa reglas Python tipadas y controladas, sin fórmulas libres. |
+| DAT-PRICE-004 | Los cálculos monetarios utilizan Decimal. |
+| DAT-PRICE-005 | Cambiar el precio BASE de un artículo recalcula derivados activos en forma atómica. |
+| DAT-PRICE-006 | El cambio general de una regla requiere preview y aplicación explícita. |
+| DAT-PRICE-007 | El preview no persiste cambios en PrecioArticulo. |
+| DAT-PRICE-008 | La política frente a precios manuales se define explícitamente al aplicar recálculo masivo. |
+| DAT-PRICE-009 | La auditoría de precios se genera sólo ante cambios efectivos de precio u origen. |
+| DAT-PRICE-010 | Las ventas históricas conservan snapshot de precio y no se recalculan por cambios actuales. |
+| DAT-PRICE-011 | La condición BASE activa única se valida en servicio por compatibilidad con MariaDB. |
 
 ## Cambios y créditos comerciales
 

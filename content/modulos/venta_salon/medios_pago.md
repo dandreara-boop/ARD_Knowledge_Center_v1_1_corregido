@@ -1,5 +1,11 @@
 # Medios de pago y condiciones comerciales
 
+## Estado implementado
+
+Sprint 7 implementa condiciones comerciales de precio por Artículo.
+
+No implementa bancos, tarjetas, cuotas, caja ni el motor completo de medios de pago.
+
 ## Separación conceptual
 
 Un **medio de pago** indica cómo se recibe el dinero. Una **condición comercial** determina qué precios y promociones se aplican.

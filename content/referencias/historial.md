@@ -1,5 +1,23 @@
 # Historial de versiones
 
+## Versión 2.0 — Motor Comercial de Precios
+
+- Se creó la página específica Sprint 7 — Motor Comercial de Precios.
+- Se documentó Sprint 7 como implementado y validado funcionalmente.
+- Se documentaron `CondicionComercialPrecio`, `PrecioArticulo` y `AuditoriaPrecioArticulo`.
+- Se definió que el precio comercial pertenece al Artículo y no a la Variante.
+- Se documentaron condiciones `BASE` y derivadas, reglas Python tipadas y ausencia de fórmulas libres, `eval` o DSL dinámico.
+- Se registraron redondeos `SIN_REDONDEO`, `ENTERO` y `MULTIPLO`, con `ROUND_CEILING` para múltiplos comerciales.
+- Se documentó el cambio individual de precio `BASE` con recálculo atómico de derivados y eliminación de override manual.
+- Se documentó que el cambio general de una regla requiere preview y aplicación explícita, sin recálculo silencioso.
+- Se documentaron políticas `CONSERVAR_MANUALES` y `APLICAR_REGLA_A_TODOS`.
+- Se dejó `REVISAR_EXCEPCIONES` como reservado conceptualmente, no como funcionalidad operativa implementada.
+- Se documentó la auditoría sólo ante cambios efectivos de precio u origen.
+- Se registró la migración `20260917_0006_pricing_engine.py` con `down_revision` `20260908_0005`.
+- Se documentaron endpoints y errores comerciales implementados de precios.
+- Se registró la validación automática y manual con resultado final `66 passed` usando `python -m pytest -p no:cacheprovider`.
+- Se incorporaron las decisiones `DAT-PRICE-001` a `DAT-PRICE-011`.
+
 ## Versión 1.9 — Motor de Venta Local
 
 - Se creó la página específica Sprint 6 — Motor de Venta Local.

@@ -199,6 +199,7 @@ El usuario nunca necesita conocer cómo funciona internamente ese proceso.
 | Sprint 4 | Motor de Reglas de Negocio | ✓ Finalizado |
 | Sprint 5 | Motor de Inventario | ✓ Finalizado |
 | Sprint 6 | Motor de Venta Local | ✓ Implementado y validado |
+| Sprint 7 | Motor Comercial de Precios | ✓ Implementado y validado |
 
 ## Conclusión
 
@@ -215,4 +216,5 @@ Esta decisión busca reducir tiempos de capacitación, minimizar errores operati
 - [Gestión de Variantes](/doc/general/gestion_variantes).
 - [Motor de Inventario](/doc/general/motor_inventario).
 - [Sprint 6 — Motor de Venta Local](/doc/modulos/venta_salon/sprint_6_motor_venta_local).
+- [Sprint 7 — Motor Comercial de Precios](/doc/modulos/venta_salon/sprint_7_motor_comercial_precios).
 - [Registro de Decisiones](/doc/referencias/decisiones_agrupadas).

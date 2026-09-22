@@ -1,5 +1,11 @@
 # Pagos mixtos
 
+## Estado implementado
+
+Sprint 7 no implementa el optimizador de pagos mixtos ni prorrateo de pagos.
+
+Esta página conserva la definición funcional prevista para venta y caja.
+
 ## Objetivo
 
 Permitir que el cliente utilice varios medios de pago y que el sistema encuentre la mejor combinación comercial permitida.

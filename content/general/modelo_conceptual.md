@@ -6,6 +6,9 @@
 - Sucursal.
 - Destino.
 - Producto.
+- CondicionComercialPrecio.
+- PrecioArticulo.
+- AuditoriaPrecioArticulo.
 - Atributo.
 - Familia de atributos.
 - Valor de atributo.
@@ -70,11 +73,22 @@ Los efectos derivados, incluido inventario, se procesan posteriormente mediante 
 
 `DetalleVenta` conserva snapshot comercial para que la venta histórica no dependa de cambios posteriores en catálogo.
 
+## Motor comercial de precios
+
+Sprint 7 incorpora el motor comercial de precios a nivel de Artículo.
+
+El precio comercial pertenece al Artículo, no a la Variante.
+
+Las condiciones comerciales pueden ser `BASE` o derivadas de otra condición. Las reglas pertenecen a la condición comercial y se implementan como reglas Python tipadas y controladas.
+
+Los cambios actuales de precio no recalculan ventas históricas porque `DetalleVenta` conserva `precio_unitario` como snapshot.
+
 Ver también:
 
 - [Gestión de Variantes](/doc/general/gestion_variantes).
 - [Motor de Inventario](/doc/general/motor_inventario).
 - [Sprint 6 — Motor de Venta Local](/doc/modulos/venta_salon/sprint_6_motor_venta_local).
+- [Sprint 7 — Motor Comercial de Precios](/doc/modulos/venta_salon/sprint_7_motor_comercial_precios).
 - [Principios de Arquitectura](/doc/general/principios_arquitectura).
 
 ## Ejemplo

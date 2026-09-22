@@ -2,7 +2,55 @@
 
 ## Estado
 
+Sprint 7 implementó y validó funcionalmente el motor comercial de precios por Artículo.
+
 Sprint 6 implementó y validó funcionalmente el núcleo transaccional de venta local.
+
+## CondicionComercialPrecio
+
+- Identificador.
+- Nombre o código de condición.
+- Tipo `BASE` o derivada.
+- Condición base de referencia, cuando corresponde.
+- Tipo de regla.
+- Porcentaje.
+- Tipo de redondeo.
+- Múltiplo de redondeo, cuando corresponde.
+- Estado activo.
+
+Sólo puede existir una condición `BASE` activa según validación de servicio.
+
+Las reglas pertenecen a la condición comercial, no a cada artículo.
+
+## PrecioArticulo
+
+- Artículo.
+- Condición comercial.
+- Precio.
+- Origen `REGLA` o `MANUAL`.
+- Fechas de creación y actualización.
+
+La unicidad conceptual es:
+
+```text
+Artículo + Condición comercial
+```
+
+El precio pertenece al Artículo. La Variante no define precio independiente en Sprint 7.
+
+## AuditoriaPrecioArticulo
+
+- Artículo.
+- Condición comercial.
+- Precio anterior.
+- Precio nuevo.
+- Origen anterior.
+- Origen nuevo.
+- Motivo.
+- Usuario opcional.
+- Timestamp.
+
+La auditoría se genera sólo cuando cambia el precio o el origen.
 
 ## Venta
 

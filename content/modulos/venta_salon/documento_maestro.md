@@ -20,6 +20,14 @@ La finalización de venta guarda `Venta CERRADA` y `VENTA_FINALIZADA` en una mis
 
 Detalle completo: [Sprint 6 — Motor de Venta Local](/doc/modulos/venta_salon/sprint_6_motor_venta_local).
 
+## Sprint 7 — Motor Comercial de Precios
+
+Sprint 7 implementó y validó el motor comercial de precios a nivel de Artículo: condiciones comerciales, precios por artículo, recálculo derivado, preview de impacto, políticas para manuales y auditoría de cambios efectivos.
+
+El precio comercial pertenece al Artículo, no a la Variante. Las ventas históricas conservan `precio_unitario` como snapshot y no se recalculan por cambios posteriores.
+
+Detalle completo: [Sprint 7 — Motor Comercial de Precios](/doc/modulos/venta_salon/sprint_7_motor_comercial_precios).
+
 ## Búsqueda de artículos
 
 La venta puede iniciarse por código, catálogo visual o ambos. El vendedor no selecciona variantes manualmente y el sistema prioriza velocidad operativa.
@@ -52,6 +60,8 @@ El número de remito de venta permanece visible y de solo lectura en la pantalla
 
 Los precios de contado dependen de la condición comercial configurada para los medios de pago utilizados.
 
+Sprint 7 implementa condiciones comerciales de precio por artículo. No implementa todavía el motor completo de medios de pago ni pagos mixtos.
+
 ## Precios financiados
 
 Cuando una unidad o grupo promocional combina contado y financiado, pierde el beneficio de contado y se registra como financiado según política comercial.
@@ -66,7 +76,7 @@ Cuando una unidad o grupo promocional combina contado y financiado, pierde el be
 
 ## Flujo completo
 
-El flujo completo integra escaneo, carga o búsqueda de artículos, cálculo automático de promociones, carga de medios de pago, confirmación local, comprobante y sincronización con la nube.
+El flujo funcional completo integra escaneo, carga o búsqueda de artículos, cálculo automático de promociones, carga de medios de pago, confirmación local, comprobante y sincronización con la nube. Sprint 7 sólo concreta el backend de precios por artículo y condiciones comerciales de precio.
 
 ## Wireframes
 
@@ -90,7 +100,7 @@ El flujo completo integra escaneo, carga o búsqueda de artículos, cálculo aut
 
 - Venta con stock negativo: se registra localmente y la nube genera excepción administrativa.
 - Artículo sin etiqueta: se carga desde catálogo visual o búsqueda manual.
-- Pago mixto: el motor optimiza la combinación permitida.
+- Pago mixto: el motor optimiza la combinación permitida como definición funcional prevista; Sprint 7 no implementa el optimizador de pagos mixtos.
 - Venta suspendida: conserva toda la información cargada.
 
 ## Decisiones
