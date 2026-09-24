@@ -88,15 +88,17 @@ Los cambios actuales de precio no recalculan ventas históricas porque `DetalleV
 
 ## Resolución comercial y cobro POS
 
-Sprint 8 tiene diseño funcional aprobado y queda pendiente de implementación.
+Sprint 8 tiene diseño comercial definido, solver seleccionado y probado preliminarmente, y queda pendiente de implementación definitiva y QA.
 
 El diseño separa `MedioPago` de `CondicionComercialPrecio`.
 
 Una venta abierta comienza valorizada con la condición `BASE` y puede simular otros medios o condiciones sin persistir snapshots definitivos.
 
-La confirmación de cobro deberá congelar históricamente medios, condiciones, precios, importes, distribución, fracciones, redondeos y traza de decisión.
+La confirmación de cobro deberá congelar históricamente medios, condiciones, precios efectivos, importes, distribución, fracciones, redondeo final por medio y traza de decisión.
 
 La resolución comercial determina cuánto corresponde cobrar; inventario conserva la responsabilidad de mover stock mediante el mecanismo existente.
+
+La implementación deberá encapsular HiGHS detrás del optimizador comercial y validar con `Decimal` antes de cerrar una venta.
 
 Ver también:
 

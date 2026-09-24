@@ -4,7 +4,7 @@
 
 Documentar entidades funcionales sin programar tablas físicas. Cada entidad se relaciona con el módulo correspondiente.
 
-Estado actual: **Sprint 8 — Resolución Comercial y Cobro del POS con diseño funcional aprobado, pendiente de implementación**.
+Estado actual: **Sprint 8 — Resolución Comercial y Cobro del POS con diseño comercial definido, solver seleccionado y probado preliminarmente, pendiente de implementación definitiva y QA**.
 
 {{include:general/modelo_conceptual}}
 
@@ -20,7 +20,7 @@ Estado actual: **Sprint 8 — Resolución Comercial y Cobro del POS con diseño 
 | PrecioArticulo | Venta / Administración | Precio vigente de un artículo para una condición comercial, con origen REGLA o MANUAL. |
 | AuditoriaPrecioArticulo | Venta / Administración | Historial auditable de cambios efectivos de precio u origen. |
 | MedioPago | Venta / Caja | Medio configurable de cobro asociado a una condición comercial de precio. |
-| ResolucionComercialCobro | Venta / Caja | Resultado calculado para pagos simples o mixtos, pendiente de implementación en Sprint 8. |
+| ResolucionComercialCobro | Venta / Caja | Resultado calculado para pagos simples o mixtos, con redondeo final por medio y solver técnico pendiente de implementación formal en Sprint 8. |
 | TrazaResolucionComercial | Venta / Caja | Explicación estructurada de la resolución comercial confirmada o simulada. |
 | Atributo | Recepción / Administración | Característica configurable del producto. |
 | Familia de atributos | Administración | Plantilla reutilizable de atributos para configurar artículos. |
@@ -71,7 +71,7 @@ Detalle implementado del Sprint 6: [Motor de Venta Local](/doc/modulos/venta_sal
 
 Detalle implementado del Sprint 7: [Motor Comercial de Precios](/doc/modulos/venta_salon/sprint_7_motor_comercial_precios).
 
-Diseño aprobado del Sprint 8: [Resolución Comercial y Cobro del POS](/doc/modulos/venta_salon/sprint_8_resolucion_comercial_cobro_pos).
+Diseño comercial definido del Sprint 8: [Resolución Comercial y Cobro del POS](/doc/modulos/venta_salon/sprint_8_resolucion_comercial_cobro_pos).
 
 ### Cambios y Crédito Comercial
 

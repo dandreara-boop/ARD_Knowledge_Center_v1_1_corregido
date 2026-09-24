@@ -6,7 +6,7 @@ Sprint 7 no implementa el optimizador de pagos mixtos ni prorrateo de pagos.
 
 Esta página conserva la definición funcional prevista para venta y caja.
 
-Sprint 8 aprueba el diseño backend de resolución de pagos simples y mixtos. Queda pendiente de implementación.
+Sprint 8 define comercialmente la resolución de pagos simples y mixtos, selecciona HiGHS como solver técnico y queda pendiente de implementación definitiva y QA.
 
 ## Objetivo
 
@@ -37,7 +37,11 @@ El efectivo sigue registrado como medio de cobro, pero no genera un descuento pa
 
 Con varios productos, el motor deberá asignar unidades completas y fracciones monetarias cuando sea necesario para obtener el menor costo final para el cliente, respetando los importes solicitados.
 
-La resolución deberá aceptar N medios, un único `RESTO`, importes fijos desde cualquier condición y conversión proporcional con `Decimal`.
+La resolución deberá aceptar N medios, cero o un `RESTO`, importes fijos desde cualquier condición y conversión proporcional con `Decimal`.
+
+El redondeo comercial de pagos mixtos se aplica sólo al importe final calculado por cada medio, hacia arriba a múltiplos de `0,05`. Los fragmentos internos no se redondean individualmente y los importes fijos cargados por el cliente o cajero se respetan sin alterarlos.
+
+La implementación definitiva deberá encapsular HiGHS detrás del optimizador comercial y validar la solución reconstruida con `Decimal` antes de confirmar una venta.
 
 Detalle aprobado: [Sprint 8 — Resolución Comercial y Cobro del POS](/doc/modulos/venta_salon/sprint_8_resolucion_comercial_cobro_pos).
 

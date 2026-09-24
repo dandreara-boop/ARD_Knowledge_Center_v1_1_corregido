@@ -3,19 +3,26 @@
 ## Versión 2.1 — Resolución Comercial y Cobro del POS
 
 - Se creó la página específica Sprint 8 — Resolución Comercial y Cobro del POS.
-- Se documentó Sprint 8 como diseño funcional aprobado y pendiente de implementación.
+- Se documentó Sprint 8 como diseño comercial definido, solver seleccionado y probado preliminarmente, con implementación definitiva y QA pendientes.
 - Se conectó conceptualmente el Motor de Venta Local del Sprint 6 con el Motor Comercial de Precios del Sprint 7.
 - Se documentó la separación entre `MedioPago` y `CondicionComercialPrecio`.
 - Se definió que toda venta nueva comienza valorizada con la condición comercial `BASE`.
 - Se documentó la simulación reversible sin persistencia comercial definitiva.
 - Se registró el requisito `REQ-POS-SIM` para futuro frontend POS.
-- Se aprobó el diseño de pagos simples y mixtos con N medios, un único `RESTO`, conversión simétrica y menor costo para el cliente.
-- Se documentó unidad física antes de fraccionamiento, fraccionamiento proporcional y redondeo monetario hacia arriba a `0,05` configurable.
+- Se aprobó el diseño de pagos simples y mixtos con N medios, cero o un `RESTO`, conversión simétrica y menor total final para el cliente.
+- Se documentó unidad física antes de fraccionamiento, fraccionamiento proporcional y redondeo monetario final por medio hacia arriba a `0,05` configurable.
+- Se corrigió la decisión de redondeo: los fragmentos internos no se redondean individualmente y los importes fijos se respetan sin alterarlos.
+- Se documentó la evolución técnica desde una estrategia greedy inicial, el problema de dependencia de orden y la búsqueda exacta, hasta el modelo LP/MILP.
+- Se seleccionó HiGHS mediante `highspy` como solver técnico preliminar, encapsulado detrás de `CommercialOptimizer`.
+- Se registró la prueba aislada del 24/09/2026 en Windows con Python `3.13.3`, `highspy` `1.15.1` y HiGHS `1.15.1`.
+- Se documentaron benchmarks sintéticos preliminares hasta 100 unidades sin establecer SLA ni límites arbitrarios de ticket.
+- Se asentó que ARD debe soportar Windows y Linux, pero la integración Linux y CI de Sprint 8 quedan pendientes.
+- Se dejó explícito que `highspy` todavía no está incorporado formalmente a `requirements` ni al repositorio de implementación.
 - Se definió la traza estructurada de resolución y el snapshot histórico de la venta confirmada.
 - Se documentó que confirmar cobro es local, atómico y offline-first.
 - Se preservó el mecanismo de inventario existente de Sprint 6.
 - Se dejó fuera del alcance frontend POS definitivo, caja completa, promociones, bancos, cuotas, Tiendanube y nuevas funciones de sincronización cloud.
-- Se incorporaron las decisiones `DAT-POS-001` a `DAT-POS-016`.
+- Se incorporaron las decisiones `DAT-POS-001` a `DAT-POS-028`.
 
 ## Versión 2.0 — Motor Comercial de Precios
 

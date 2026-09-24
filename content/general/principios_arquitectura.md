@@ -65,6 +65,14 @@ Debe:
 
 El Frontend nunca debe implementar reglas de negocio.
 
+## Principio Multiplataforma Local
+
+ARD Suite debe poder operar al menos en Windows y Linux.
+
+Las dependencias técnicas incorporadas a motores locales no deben exigir características exclusivas de Windows.
+
+En Sprint 8, HiGHS mediante `highspy` fue seleccionado preliminarmente como solver técnico para resolución comercial. La prueba aislada se realizó en Windows; la validación Linux y CI quedan pendientes antes de declarar cerrado el soporte multiplataforma de ese motor.
+
 ## Principio de Reutilización
 
 Toda regla importante debe existir una única vez.
@@ -200,7 +208,7 @@ El usuario nunca necesita conocer cómo funciona internamente ese proceso.
 | Sprint 5 | Motor de Inventario | ✓ Finalizado |
 | Sprint 6 | Motor de Venta Local | ✓ Implementado y validado |
 | Sprint 7 | Motor Comercial de Precios | ✓ Implementado y validado |
-| Sprint 8 | Resolución Comercial y Cobro del POS | Diseño funcional aprobado / pendiente de implementación |
+| Sprint 8 | Resolución Comercial y Cobro del POS | Diseño comercial definido / solver probado preliminarmente / implementación y QA pendientes |
 
 ## Conclusión
 

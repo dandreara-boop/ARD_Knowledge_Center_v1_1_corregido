@@ -30,9 +30,11 @@ Detalle completo: [Sprint 7 — Motor Comercial de Precios](/doc/modulos/venta_s
 
 ## Sprint 8 — Resolución Comercial y Cobro del POS
 
-Sprint 8 tiene diseño funcional aprobado y queda pendiente de implementación.
+Sprint 8 tiene diseño comercial definido, solver seleccionado y probado preliminarmente, y queda pendiente de implementación definitiva y QA.
 
-El diseño conecta el Motor de Venta Local, el Motor Comercial de Precios, medios de pago y resolución de pagos simples o mixtos. El backend deberá permitir cotización reversible, múltiples medios, un único `RESTO`, resolución de menor costo para el cliente, traza estructurada, snapshot histórico y confirmación local atómica.
+El diseño conecta el Motor de Venta Local, el Motor Comercial de Precios, medios de pago y resolución de pagos simples o mixtos. El backend deberá permitir cotización reversible, múltiples medios, cero o un `RESTO`, resolución de menor costo final para el cliente, redondeo final por medio, traza estructurada, snapshot histórico y confirmación local atómica.
+
+HiGHS mediante `highspy` fue seleccionado como solver técnico preliminar. La implementación deberá encapsularlo detrás del optimizador comercial y validar la solución con `Decimal` antes de confirmar.
 
 El frontend POS definitivo, caja completa, promociones, bancos, cuotas y sincronización cloud quedan fuera del Sprint 8.
 
@@ -92,7 +94,7 @@ El flujo funcional completo integra escaneo, carga o búsqueda de artículos, c�
 
 Sprint 7 concreta el backend de precios por artículo y condiciones comerciales de precio.
 
-Sprint 8 define el diseño de resolución comercial y cobro, pero no implementa todavía frontend POS definitivo ni sincronización cloud nueva.
+Sprint 8 define la resolución comercial y cobro, pero no implementa todavía frontend POS definitivo ni sincronización cloud nueva.
 
 ## Wireframes
 
@@ -116,7 +118,7 @@ Sprint 8 define el diseño de resolución comercial y cobro, pero no implementa 
 
 - Venta con stock negativo: se registra localmente y la nube genera excepción administrativa.
 - Artículo sin etiqueta: se carga desde catálogo visual o búsqueda manual.
-- Pago mixto: Sprint 8 aprueba el diseño backend para resolver combinaciones por menor costo, múltiples medios, un único `RESTO` y traza explicable. Queda pendiente de implementación.
+- Pago mixto: Sprint 8 define la resolución por menor total final, múltiples medios, cero o un `RESTO`, redondeo final por medio, solver HiGHS encapsulado y traza explicable. Queda pendiente de implementación definitiva y QA.
 - Venta suspendida: conserva toda la información cargada.
 
 ## Decisiones

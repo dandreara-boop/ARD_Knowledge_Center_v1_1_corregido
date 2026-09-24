@@ -6,7 +6,7 @@ Sprint 7 implementó y validó funcionalmente el motor comercial de precios por 
 
 Sprint 6 implementó y validó funcionalmente el núcleo transaccional de venta local.
 
-Sprint 8 tiene diseño funcional aprobado para resolución comercial y cobro del POS. Queda pendiente de implementación.
+Sprint 8 tiene diseño comercial definido para resolución comercial y cobro del POS, con solver seleccionado y probado preliminarmente. Queda pendiente de implementación definitiva y QA.
 
 ## CondicionComercialPrecio
 
@@ -77,7 +77,8 @@ Concepto aprobado para Sprint 8:
 - Distribución calculada.
 - Asignaciones completas.
 - Fracciones.
-- Redondeos.
+- Subtotal interno por medio.
+- Ajuste de redondeo final por medio.
 - Total final.
 - Estado de simulación o confirmación.
 
@@ -90,8 +91,11 @@ Concepto aprobado para Sprint 8:
 - Artículos.
 - Unidades.
 - Precios efectivos.
+- Origen de precios, cuando corresponda.
 - Relaciones de conversión.
-- Importes antes y después de redondeo.
+- Valores internos antes de redondeo.
+- Subtotal interno por medio.
+- Ajuste de redondeo final.
 - Criterio de selección.
 - Resultado por medio.
 - Explicación histórica.

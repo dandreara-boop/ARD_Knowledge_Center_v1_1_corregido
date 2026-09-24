@@ -105,18 +105,30 @@ Cada decisión indica código, título, descripción, fecha y versión documenta
 | DAT-POS-002 | BASE por defecto | Toda venta nueva inicia valorizada con la condición comercial BASE. | 2026-09-24 | 2.1 |
 | DAT-POS-003 | Simulación sin persistencia | La consulta o simulación comercial no persiste snapshot ni pagos definitivos. | 2026-09-24 | 2.1 |
 | DAT-POS-004 | Visualización reversible | El futuro POS podrá usar una condición o medio de visualización reversible durante la carga. | 2026-09-24 | 2.1 |
-| DAT-POS-005 | Único RESTO | Una distribución de pagos admite múltiples medios y como máximo un RESTO. | 2026-09-24 | 2.1 |
+| DAT-POS-005 | RESTO opcional único | Una distribución de pagos admite múltiples medios y cero o un RESTO. | 2026-09-24 | 2.1 |
 | DAT-POS-006 | Algoritmo único | El mismo algoritmo debe resolver pagos simples, mixtos y N medios. | 2026-09-24 | 2.1 |
 | DAT-POS-007 | Menor costo | La resolución debe minimizar el costo final para el cliente respetando los importes solicitados. | 2026-09-24 | 2.1 |
 | DAT-POS-008 | Unidad antes que fracción | La unidad física se prioriza antes del fraccionamiento monetario. | 2026-09-24 | 2.1 |
 | DAT-POS-009 | Conversión simétrica | La conversión proporcional entre condiciones es simétrica y usa Decimal. | 2026-09-24 | 2.1 |
-| DAT-POS-010 | Redondeo de cobro | El redondeo monetario de cobro sube al siguiente múltiplo configurable de 0,05. | 2026-09-24 | 2.1 |
+| DAT-POS-010 | Redondeo final de cobro | El redondeo monetario de cobro se aplica sólo al importe final calculado por medio y sube al siguiente múltiplo configurable de 0,05. | 2026-09-24 | 2.1 |
 | DAT-POS-011 | Traza explicable | La resolución debe generar una traza estructurada explicable. | 2026-09-24 | 2.1 |
 | DAT-POS-012 | Snapshot de resolución | La venta confirmada conserva snapshot histórico completo de la resolución. | 2026-09-24 | 2.1 |
 | DAT-POS-013 | Cierre inmutable | Una venta CERRADA es inmutable. | 2026-09-24 | 2.1 |
 | DAT-POS-014 | Corrección por anulación | Un error posterior al cierre se corrige mediante anulación explícita y nueva venta. | 2026-09-24 | 2.1 |
 | DAT-POS-015 | Confirmación atómica | Confirmar cobro es una operación local y atómica. | 2026-09-24 | 2.1 |
 | DAT-POS-016 | Inventario separado | El motor comercial no mueve stock y conserva el mecanismo de inventario existente. | 2026-09-24 | 2.1 |
+| DAT-POS-017 | Sin redondeo de fragmentos | Los fragmentos internos no se redondean individualmente; se conserva precisión suficiente hasta el subtotal por medio. | 2026-09-24 | 2.1 |
+| DAT-POS-018 | Fijos respetados | Los importes fijos ingresados por cliente o cajero se respetan sin alterarlos por redondeo. | 2026-09-24 | 2.1 |
+| DAT-POS-019 | LP/MILP comercial | La resolución monetaria se modela como LP y, al minimizar unidades fraccionadas, como MILP. | 2026-09-24 | 2.1 |
+| DAT-POS-020 | Solver HiGHS | HiGHS mediante highspy es el solver técnico elegido para la implementación definitiva. | 2026-09-24 | 2.1 |
+| DAT-POS-021 | Solver encapsulado | highspy debe quedar encapsulado detrás de CommercialOptimizer; dominio, routers y endpoints no dependen directamente del solver. | 2026-09-24 | 2.1 |
+| DAT-POS-022 | Validación Decimal | La solución del solver debe reconstruirse y validarse con Decimal antes de permitir la confirmación. | 2026-09-24 | 2.1 |
+| DAT-POS-023 | Orden sin prioridad | El orden de medios del request no tiene prioridad comercial; los desempates usan criterio canónico interno. | 2026-09-24 | 2.1 |
+| DAT-POS-024 | Precios efectivos | El optimizador usa precios efectivos de PrecioArticulo y no reconstruye reglas del Sprint 7. | 2026-09-24 | 2.1 |
+| DAT-POS-025 | Sin límite arbitrario | No se aprueban límites arbitrarios de ticket sin medición y documentación previas. | 2026-09-24 | 2.1 |
+| DAT-POS-026 | Oráculo independiente | La implementación productiva debe compararse contra un oráculo independiente en escenarios pequeños. | 2026-09-24 | 2.1 |
+| DAT-POS-027 | Windows y Linux | ARD debe soportar Windows y Linux; la integración Linux de Sprint 8 queda pendiente de validación automatizada. | 2026-09-24 | 2.1 |
+| DAT-POS-028 | Dependencia formal | highspy queda pendiente de incorporación formal, pin de versión y validación CI durante implementación. | 2026-09-24 | 2.1 |
 
 ## Caja
 

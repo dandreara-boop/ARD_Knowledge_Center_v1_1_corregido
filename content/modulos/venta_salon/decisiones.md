@@ -53,18 +53,30 @@
 | DAT-POS-002 | Toda venta nueva inicia valorizada con la condición comercial BASE. |
 | DAT-POS-003 | La consulta o simulación comercial no persiste snapshot ni pagos definitivos. |
 | DAT-POS-004 | El futuro POS podrá usar una condición o medio de visualización reversible durante la carga. |
-| DAT-POS-005 | Una distribución de pagos admite múltiples medios y como máximo un RESTO. |
+| DAT-POS-005 | Una distribución de pagos admite múltiples medios y cero o un RESTO. |
 | DAT-POS-006 | El mismo algoritmo debe resolver pagos simples, mixtos y N medios. |
 | DAT-POS-007 | La resolución debe minimizar el costo final para el cliente respetando los importes solicitados. |
 | DAT-POS-008 | La unidad física se prioriza antes del fraccionamiento monetario. |
 | DAT-POS-009 | La conversión proporcional entre condiciones es simétrica y usa Decimal. |
-| DAT-POS-010 | El redondeo monetario de cobro sube al siguiente múltiplo configurable de 0,05. |
+| DAT-POS-010 | El redondeo monetario de cobro se aplica sólo al importe final calculado por medio y sube al siguiente múltiplo configurable de 0,05. |
 | DAT-POS-011 | La resolución debe generar una traza estructurada explicable. |
 | DAT-POS-012 | La venta confirmada conserva snapshot histórico completo de la resolución. |
 | DAT-POS-013 | Una venta CERRADA es inmutable. |
 | DAT-POS-014 | Un error posterior al cierre se corrige mediante anulación explícita y nueva venta. |
 | DAT-POS-015 | Confirmar cobro es una operación local y atómica. |
 | DAT-POS-016 | El motor comercial no mueve stock y conserva el mecanismo de inventario existente. |
+| DAT-POS-017 | Los fragmentos internos no se redondean individualmente; se conserva precisión suficiente hasta el subtotal por medio. |
+| DAT-POS-018 | Los importes fijos ingresados por cliente o cajero se respetan sin alterarlos por redondeo. |
+| DAT-POS-019 | La resolución monetaria se modela como LP y, al minimizar unidades fraccionadas, como MILP. |
+| DAT-POS-020 | HiGHS mediante highspy es el solver técnico elegido para la implementación definitiva. |
+| DAT-POS-021 | highspy debe quedar encapsulado detrás de CommercialOptimizer; dominio, routers y endpoints no dependen directamente del solver. |
+| DAT-POS-022 | La solución del solver debe reconstruirse y validarse con Decimal antes de permitir la confirmación. |
+| DAT-POS-023 | El orden de medios del request no tiene prioridad comercial; los desempates usan criterio canónico interno. |
+| DAT-POS-024 | El optimizador usa precios efectivos de PrecioArticulo y no reconstruye reglas del Sprint 7. |
+| DAT-POS-025 | No se aprueban límites arbitrarios de ticket sin medición y documentación previas. |
+| DAT-POS-026 | La implementación productiva debe compararse contra un oráculo independiente en escenarios pequeños. |
+| DAT-POS-027 | ARD debe soportar Windows y Linux; la integración Linux de Sprint 8 queda pendiente de validación automatizada. |
+| DAT-POS-028 | highspy queda pendiente de incorporación formal, pin de versión y validación CI durante implementación. |
 
 ## Cambios y créditos comerciales
 
