@@ -9,6 +9,9 @@
 - CondicionComercialPrecio.
 - PrecioArticulo.
 - AuditoriaPrecioArticulo.
+- MedioPago.
+- ResolucionComercialCobro.
+- TrazaResolucionComercial.
 - Atributo.
 - Familia de atributos.
 - Valor de atributo.
@@ -83,12 +86,25 @@ Las condiciones comerciales pueden ser `BASE` o derivadas de otra condición. La
 
 Los cambios actuales de precio no recalculan ventas históricas porque `DetalleVenta` conserva `precio_unitario` como snapshot.
 
+## Resolución comercial y cobro POS
+
+Sprint 8 tiene diseño funcional aprobado y queda pendiente de implementación.
+
+El diseño separa `MedioPago` de `CondicionComercialPrecio`.
+
+Una venta abierta comienza valorizada con la condición `BASE` y puede simular otros medios o condiciones sin persistir snapshots definitivos.
+
+La confirmación de cobro deberá congelar históricamente medios, condiciones, precios, importes, distribución, fracciones, redondeos y traza de decisión.
+
+La resolución comercial determina cuánto corresponde cobrar; inventario conserva la responsabilidad de mover stock mediante el mecanismo existente.
+
 Ver también:
 
 - [Gestión de Variantes](/doc/general/gestion_variantes).
 - [Motor de Inventario](/doc/general/motor_inventario).
 - [Sprint 6 — Motor de Venta Local](/doc/modulos/venta_salon/sprint_6_motor_venta_local).
 - [Sprint 7 — Motor Comercial de Precios](/doc/modulos/venta_salon/sprint_7_motor_comercial_precios).
+- [Sprint 8 — Resolución Comercial y Cobro del POS](/doc/modulos/venta_salon/sprint_8_resolucion_comercial_cobro_pos).
 - [Principios de Arquitectura](/doc/general/principios_arquitectura).
 
 ## Ejemplo

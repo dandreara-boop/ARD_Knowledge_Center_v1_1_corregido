@@ -49,6 +49,22 @@
 | DAT-PRICE-009 | La auditoría de precios se genera sólo ante cambios efectivos de precio u origen. |
 | DAT-PRICE-010 | Las ventas históricas conservan snapshot de precio y no se recalculan por cambios actuales. |
 | DAT-PRICE-011 | La condición BASE activa única se valida en servicio por compatibilidad con MariaDB. |
+| DAT-POS-001 | MedioPago y CondicionComercialPrecio son conceptos separados. |
+| DAT-POS-002 | Toda venta nueva inicia valorizada con la condición comercial BASE. |
+| DAT-POS-003 | La consulta o simulación comercial no persiste snapshot ni pagos definitivos. |
+| DAT-POS-004 | El futuro POS podrá usar una condición o medio de visualización reversible durante la carga. |
+| DAT-POS-005 | Una distribución de pagos admite múltiples medios y como máximo un RESTO. |
+| DAT-POS-006 | El mismo algoritmo debe resolver pagos simples, mixtos y N medios. |
+| DAT-POS-007 | La resolución debe minimizar el costo final para el cliente respetando los importes solicitados. |
+| DAT-POS-008 | La unidad física se prioriza antes del fraccionamiento monetario. |
+| DAT-POS-009 | La conversión proporcional entre condiciones es simétrica y usa Decimal. |
+| DAT-POS-010 | El redondeo monetario de cobro sube al siguiente múltiplo configurable de 0,05. |
+| DAT-POS-011 | La resolución debe generar una traza estructurada explicable. |
+| DAT-POS-012 | La venta confirmada conserva snapshot histórico completo de la resolución. |
+| DAT-POS-013 | Una venta CERRADA es inmutable. |
+| DAT-POS-014 | Un error posterior al cierre se corrige mediante anulación explícita y nueva venta. |
+| DAT-POS-015 | Confirmar cobro es una operación local y atómica. |
+| DAT-POS-016 | El motor comercial no mueve stock y conserva el mecanismo de inventario existente. |
 
 ## Cambios y créditos comerciales
 

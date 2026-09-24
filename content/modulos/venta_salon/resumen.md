@@ -2,9 +2,9 @@
 
 ## Estado
 
-**Sprint 7 — Motor Comercial de Precios implementado y validado funcionalmente.**
+**Sprint 8 — Resolución Comercial y Cobro del POS con diseño funcional aprobado, pendiente de implementación.**
 
-Este estado refiere al backend de precios por Artículo. El resto de componentes del módulo conserva su alcance funcional previsto según cada documento específico.
+Sprint 6 y Sprint 7 se mantienen como implementados y validados. Sprint 8 documenta el diseño backend aprobado para resolución comercial y cobro, sin frontend POS definitivo.
 
 ## Objetivo
 
@@ -26,6 +26,7 @@ Registrar ventas presenciales con la menor fricción posible para el vendedor y 
 - Renglones de venta.
 - Motor comercial.
 - Motor comercial de precios por Artículo.
+- Resolución comercial y cobro del POS.
 - Caja.
 - Pagos.
 - Cambios.

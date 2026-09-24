@@ -6,6 +6,8 @@ Sprint 7 no implementa el optimizador de pagos mixtos ni prorrateo de pagos.
 
 Esta página conserva la definición funcional prevista para venta y caja.
 
+Sprint 8 aprueba el diseño backend de resolución de pagos simples y mixtos. Queda pendiente de implementación.
+
 ## Objetivo
 
 Permitir que el cliente utilice varios medios de pago y que el sistema encuentre la mejor combinación comercial permitida.
@@ -33,7 +35,11 @@ El efectivo sigue registrado como medio de cobro, pero no genera un descuento pa
 
 ## Optimización
 
-Con varios productos, el motor puede asignar unidades completas al contado y otras al financiado para obtener el menor total permitido.
+Con varios productos, el motor deberá asignar unidades completas y fracciones monetarias cuando sea necesario para obtener el menor costo final para el cliente, respetando los importes solicitados.
+
+La resolución deberá aceptar N medios, un único `RESTO`, importes fijos desde cualquier condición y conversión proporcional con `Decimal`.
+
+Detalle aprobado: [Sprint 8 — Resolución Comercial y Cobro del POS](/doc/modulos/venta_salon/sprint_8_resolucion_comercial_cobro_pos).
 
 ## Historial
 

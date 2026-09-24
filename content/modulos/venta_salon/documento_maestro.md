@@ -28,6 +28,16 @@ El precio comercial pertenece al Artículo, no a la Variante. Las ventas histór
 
 Detalle completo: [Sprint 7 — Motor Comercial de Precios](/doc/modulos/venta_salon/sprint_7_motor_comercial_precios).
 
+## Sprint 8 — Resolución Comercial y Cobro del POS
+
+Sprint 8 tiene diseño funcional aprobado y queda pendiente de implementación.
+
+El diseño conecta el Motor de Venta Local, el Motor Comercial de Precios, medios de pago y resolución de pagos simples o mixtos. El backend deberá permitir cotización reversible, múltiples medios, un único `RESTO`, resolución de menor costo para el cliente, traza estructurada, snapshot histórico y confirmación local atómica.
+
+El frontend POS definitivo, caja completa, promociones, bancos, cuotas y sincronización cloud quedan fuera del Sprint 8.
+
+Detalle completo: [Sprint 8 — Resolución Comercial y Cobro del POS](/doc/modulos/venta_salon/sprint_8_resolucion_comercial_cobro_pos).
+
 ## Búsqueda de artículos
 
 La venta puede iniciarse por código, catálogo visual o ambos. El vendedor no selecciona variantes manualmente y el sistema prioriza velocidad operativa.
@@ -62,6 +72,8 @@ Los precios de contado dependen de la condición comercial configurada para los 
 
 Sprint 7 implementa condiciones comerciales de precio por artículo. No implementa todavía el motor completo de medios de pago ni pagos mixtos.
 
+Sprint 8 define el diseño backend para asociar medios de pago configurables a condiciones comerciales, sin hardcodear relaciones como Visa = `PRECIO_2`.
+
 ## Precios financiados
 
 Cuando una unidad o grupo promocional combina contado y financiado, pierde el beneficio de contado y se registra como financiado según política comercial.
@@ -76,7 +88,11 @@ Cuando una unidad o grupo promocional combina contado y financiado, pierde el be
 
 ## Flujo completo
 
-El flujo funcional completo integra escaneo, carga o búsqueda de artículos, cálculo automático de promociones, carga de medios de pago, confirmación local, comprobante y sincronización con la nube. Sprint 7 sólo concreta el backend de precios por artículo y condiciones comerciales de precio.
+El flujo funcional completo integra escaneo, carga o búsqueda de artículos, cálculo automático de promociones, carga de medios de pago, confirmación local, comprobante y sincronización con la nube.
+
+Sprint 7 concreta el backend de precios por artículo y condiciones comerciales de precio.
+
+Sprint 8 define el diseño de resolución comercial y cobro, pero no implementa todavía frontend POS definitivo ni sincronización cloud nueva.
 
 ## Wireframes
 
@@ -100,7 +116,7 @@ El flujo funcional completo integra escaneo, carga o búsqueda de artículos, c�
 
 - Venta con stock negativo: se registra localmente y la nube genera excepción administrativa.
 - Artículo sin etiqueta: se carga desde catálogo visual o búsqueda manual.
-- Pago mixto: el motor optimiza la combinación permitida como definición funcional prevista; Sprint 7 no implementa el optimizador de pagos mixtos.
+- Pago mixto: Sprint 8 aprueba el diseño backend para resolver combinaciones por menor costo, múltiples medios, un único `RESTO` y traza explicable. Queda pendiente de implementación.
 - Venta suspendida: conserva toda la información cargada.
 
 ## Decisiones

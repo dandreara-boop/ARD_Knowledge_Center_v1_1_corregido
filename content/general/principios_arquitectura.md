@@ -200,6 +200,7 @@ El usuario nunca necesita conocer cómo funciona internamente ese proceso.
 | Sprint 5 | Motor de Inventario | ✓ Finalizado |
 | Sprint 6 | Motor de Venta Local | ✓ Implementado y validado |
 | Sprint 7 | Motor Comercial de Precios | ✓ Implementado y validado |
+| Sprint 8 | Resolución Comercial y Cobro del POS | Diseño funcional aprobado / pendiente de implementación |
 
 ## Conclusión
 
@@ -217,4 +218,5 @@ Esta decisión busca reducir tiempos de capacitación, minimizar errores operati
 - [Motor de Inventario](/doc/general/motor_inventario).
 - [Sprint 6 — Motor de Venta Local](/doc/modulos/venta_salon/sprint_6_motor_venta_local).
 - [Sprint 7 — Motor Comercial de Precios](/doc/modulos/venta_salon/sprint_7_motor_comercial_precios).
+- [Sprint 8 — Resolución Comercial y Cobro del POS](/doc/modulos/venta_salon/sprint_8_resolucion_comercial_cobro_pos).
 - [Registro de Decisiones](/doc/referencias/decisiones_agrupadas).

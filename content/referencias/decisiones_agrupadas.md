@@ -101,6 +101,22 @@ Cada decisión indica código, título, descripción, fecha y versión documenta
 | DAT-PRICE-009 | Auditoría efectiva | La auditoría de precios se genera sólo ante cambios efectivos de precio u origen. | 2026-09-17 | 2.0 |
 | DAT-PRICE-010 | Snapshot histórico | Las ventas históricas conservan snapshot de precio y no se recalculan por cambios actuales. | 2026-09-17 | 2.0 |
 | DAT-PRICE-011 | BASE única en servicio | La condición BASE activa única se valida en servicio por compatibilidad con MariaDB. | 2026-09-17 | 2.0 |
+| DAT-POS-001 | Medio y condición separados | MedioPago y CondicionComercialPrecio son conceptos separados. | 2026-09-24 | 2.1 |
+| DAT-POS-002 | BASE por defecto | Toda venta nueva inicia valorizada con la condición comercial BASE. | 2026-09-24 | 2.1 |
+| DAT-POS-003 | Simulación sin persistencia | La consulta o simulación comercial no persiste snapshot ni pagos definitivos. | 2026-09-24 | 2.1 |
+| DAT-POS-004 | Visualización reversible | El futuro POS podrá usar una condición o medio de visualización reversible durante la carga. | 2026-09-24 | 2.1 |
+| DAT-POS-005 | Único RESTO | Una distribución de pagos admite múltiples medios y como máximo un RESTO. | 2026-09-24 | 2.1 |
+| DAT-POS-006 | Algoritmo único | El mismo algoritmo debe resolver pagos simples, mixtos y N medios. | 2026-09-24 | 2.1 |
+| DAT-POS-007 | Menor costo | La resolución debe minimizar el costo final para el cliente respetando los importes solicitados. | 2026-09-24 | 2.1 |
+| DAT-POS-008 | Unidad antes que fracción | La unidad física se prioriza antes del fraccionamiento monetario. | 2026-09-24 | 2.1 |
+| DAT-POS-009 | Conversión simétrica | La conversión proporcional entre condiciones es simétrica y usa Decimal. | 2026-09-24 | 2.1 |
+| DAT-POS-010 | Redondeo de cobro | El redondeo monetario de cobro sube al siguiente múltiplo configurable de 0,05. | 2026-09-24 | 2.1 |
+| DAT-POS-011 | Traza explicable | La resolución debe generar una traza estructurada explicable. | 2026-09-24 | 2.1 |
+| DAT-POS-012 | Snapshot de resolución | La venta confirmada conserva snapshot histórico completo de la resolución. | 2026-09-24 | 2.1 |
+| DAT-POS-013 | Cierre inmutable | Una venta CERRADA es inmutable. | 2026-09-24 | 2.1 |
+| DAT-POS-014 | Corrección por anulación | Un error posterior al cierre se corrige mediante anulación explícita y nueva venta. | 2026-09-24 | 2.1 |
+| DAT-POS-015 | Confirmación atómica | Confirmar cobro es una operación local y atómica. | 2026-09-24 | 2.1 |
+| DAT-POS-016 | Inventario separado | El motor comercial no mueve stock y conserva el mecanismo de inventario existente. | 2026-09-24 | 2.1 |
 
 ## Caja
 

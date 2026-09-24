@@ -6,6 +6,8 @@ Sprint 7 implementa condiciones comerciales de precio por Artículo.
 
 No implementa bancos, tarjetas, cuotas, caja ni el motor completo de medios de pago.
 
+Sprint 8 aprueba el diseño funcional backend para configurar medios de pago y asociarlos a condiciones comerciales. Queda pendiente de implementación.
+
 ## Separación conceptual
 
 Un **medio de pago** indica cómo se recibe el dinero. Una **condición comercial** determina qué precios y promociones se aplican.
@@ -20,6 +22,22 @@ Un **medio de pago** indica cómo se recibe el dinero. Una **condición comercia
 | Cuenta corriente | Cuenta corriente |
 
 La clasificación es global y no la decide el cajero.
+
+Sprint 8 mantiene como decisión vigente que `MedioPago` y `CondicionComercialPrecio` son conceptos distintos.
+
+Ejemplo:
+
+```text
+EFECTIVO       -> PRECIO_1
+TRANSFERENCIA  -> PRECIO_1
+VISA           -> PRECIO_2
+MASTERCARD     -> PRECIO_2
+QR             -> PRECIO_2
+```
+
+Varios medios pueden compartir una misma condición comercial y la relación debe ser configurable.
+
+No se debe hardcodear que un medio específico usa siempre una condición determinada.
 
 ## Formulario de cobro
 

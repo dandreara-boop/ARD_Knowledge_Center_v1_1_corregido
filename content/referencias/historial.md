@@ -1,5 +1,22 @@
 # Historial de versiones
 
+## Versión 2.1 — Resolución Comercial y Cobro del POS
+
+- Se creó la página específica Sprint 8 — Resolución Comercial y Cobro del POS.
+- Se documentó Sprint 8 como diseño funcional aprobado y pendiente de implementación.
+- Se conectó conceptualmente el Motor de Venta Local del Sprint 6 con el Motor Comercial de Precios del Sprint 7.
+- Se documentó la separación entre `MedioPago` y `CondicionComercialPrecio`.
+- Se definió que toda venta nueva comienza valorizada con la condición comercial `BASE`.
+- Se documentó la simulación reversible sin persistencia comercial definitiva.
+- Se registró el requisito `REQ-POS-SIM` para futuro frontend POS.
+- Se aprobó el diseño de pagos simples y mixtos con N medios, un único `RESTO`, conversión simétrica y menor costo para el cliente.
+- Se documentó unidad física antes de fraccionamiento, fraccionamiento proporcional y redondeo monetario hacia arriba a `0,05` configurable.
+- Se definió la traza estructurada de resolución y el snapshot histórico de la venta confirmada.
+- Se documentó que confirmar cobro es local, atómico y offline-first.
+- Se preservó el mecanismo de inventario existente de Sprint 6.
+- Se dejó fuera del alcance frontend POS definitivo, caja completa, promociones, bancos, cuotas, Tiendanube y nuevas funciones de sincronización cloud.
+- Se incorporaron las decisiones `DAT-POS-001` a `DAT-POS-016`.
+
 ## Versión 2.0 — Motor Comercial de Precios
 
 - Se creó la página específica Sprint 7 — Motor Comercial de Precios.

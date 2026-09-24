@@ -6,6 +6,8 @@ Sprint 7 implementó y validó funcionalmente el motor comercial de precios por 
 
 Sprint 6 implementó y validó funcionalmente el núcleo transaccional de venta local.
 
+Sprint 8 tiene diseño funcional aprobado para resolución comercial y cobro del POS. Queda pendiente de implementación.
+
 ## CondicionComercialPrecio
 
 - Identificador.
@@ -51,6 +53,50 @@ El precio pertenece al Artículo. La Variante no define precio independiente en 
 - Timestamp.
 
 La auditoría se genera sólo cuando cambia el precio o el origen.
+
+## MedioPago
+
+Concepto aprobado para Sprint 8:
+
+- Identificador.
+- Nombre.
+- Estado activo.
+- Condición comercial asociada.
+
+`MedioPago` y `CondicionComercialPrecio` son conceptos separados.
+
+La relación entre ambos debe ser configurable.
+
+## ResolucionComercialCobro
+
+Concepto aprobado para Sprint 8:
+
+- Solicitud de pago.
+- Medios utilizados.
+- Condiciones comerciales aplicadas.
+- Distribución calculada.
+- Asignaciones completas.
+- Fracciones.
+- Redondeos.
+- Total final.
+- Estado de simulación o confirmación.
+
+No se documenta todavía como tabla implementada.
+
+## TrazaResolucionComercial
+
+Concepto aprobado para Sprint 8:
+
+- Artículos.
+- Unidades.
+- Precios efectivos.
+- Relaciones de conversión.
+- Importes antes y después de redondeo.
+- Criterio de selección.
+- Resultado por medio.
+- Explicación histórica.
+
+La traza confirmada debe conservarse como snapshot y no reconstruirse con precios actuales.
 
 ## Venta
 

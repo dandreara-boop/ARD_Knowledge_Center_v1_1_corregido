@@ -6,6 +6,8 @@ Sprint 7 implementa el motor comercial de precios por Artículo y condiciones co
 
 Las promociones descriptas en esta página siguen siendo alcance funcional de venta. No quedan documentadas como implementadas por Sprint 7.
 
+Sprint 8 tampoco implementa promociones. Su alcance aprobado se limita a resolución comercial de cobro, medios de pago, simulaciones, pagos simples y pagos mixtos.
+
 ## Principios
 
 - La forma de pago participa en el cálculo comercial.
