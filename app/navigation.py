@@ -19,7 +19,7 @@ PROJECT_PROGRESS = [
     {"name": "Sprint 5 — Motor de Inventario", "progress": 100, "visual": "✓ Finalizado"},
     {"name": "Sprint 6 — Motor de Venta Local", "progress": 100, "visual": "✓ Finalizado y validado"},
     {"name": "Sprint 7 — Motor Comercial de Precios", "progress": 100, "visual": "✓ Finalizado y validado"},
-    {"name": "Sprint 8 — Resolución Comercial y Cobro del POS", "progress": 100, "visual": "DISEÑO FUNCIONAL APROBADO"},
+    {"name": "Sprint 8 — Resolución Comercial y Cobro del POS", "progress": 100, "visual": "IMPLEMENTADO Y VALIDADO"},
     {"name": "Recepción de Mercadería", "progress": 100, "visual": "██████████ 100%"},
     {"name": "Venta en Salón", "progress": 90, "visual": "█████████░ 90%"},
     {"name": "Caja", "progress": 80, "visual": "████████░░ 80%"},

@@ -6,7 +6,7 @@ Sprint 7 implementó y validó funcionalmente el motor comercial de precios por 
 
 Sprint 6 implementó y validó funcionalmente el núcleo transaccional de venta local.
 
-Sprint 8 tiene diseño comercial definido para resolución comercial y cobro del POS, con solver seleccionado y probado preliminarmente. Queda pendiente de implementación definitiva y QA.
+Sprint 8 tiene implementada la resolución comercial y cobro del POS, con solver HiGHS integrado, migración aplicada y QA automático y manual aprobado.
 
 ## CondicionComercialPrecio
 

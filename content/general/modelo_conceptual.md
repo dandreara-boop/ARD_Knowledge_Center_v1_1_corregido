@@ -88,7 +88,7 @@ Los cambios actuales de precio no recalculan ventas históricas porque `DetalleV
 
 ## Resolución comercial y cobro POS
 
-Sprint 8 tiene diseño comercial definido, solver seleccionado y probado preliminarmente, y queda pendiente de implementación definitiva y QA.
+Sprint 8 se encuentra implementado, con solver HiGHS integrado, migración aplicada y QA automático y manual aprobado.
 
 El diseño separa `MedioPago` de `CondicionComercialPrecio`.
 

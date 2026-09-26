@@ -30,7 +30,7 @@ Detalle completo: [Sprint 7 — Motor Comercial de Precios](/doc/modulos/venta_s
 
 ## Sprint 8 — Resolución Comercial y Cobro del POS
 
-Sprint 8 tiene diseño comercial definido, solver seleccionado y probado preliminarmente, y queda pendiente de implementación definitiva y QA.
+Sprint 8 se encuentra implementado, con solver HiGHS integrado, migración aplicada y QA automático y manual aprobado.
 
 El diseño conecta el Motor de Venta Local, el Motor Comercial de Precios, medios de pago y resolución de pagos simples o mixtos. El backend deberá permitir cotización reversible, múltiples medios, cero o un `RESTO`, resolución de menor costo final para el cliente, redondeo final por medio, traza estructurada, snapshot histórico y confirmación local atómica.
 
@@ -118,7 +118,7 @@ Sprint 8 define la resolución comercial y cobro, pero no implementa todavía fr
 
 - Venta con stock negativo: se registra localmente y la nube genera excepción administrativa.
 - Artículo sin etiqueta: se carga desde catálogo visual o búsqueda manual.
-- Pago mixto: Sprint 8 define la resolución por menor total final, múltiples medios, cero o un `RESTO`, redondeo final por medio, solver HiGHS encapsulado y traza explicable. Queda pendiente de implementación definitiva y QA.
+- Pago mixto: Sprint 8 implementa la resolución por menor total final, múltiples medios, cero o un `RESTO`, redondeo final por medio, solver HiGHS encapsulado y traza explicable. Implementación y QA aprobados.
 - Venta suspendida: conserva toda la información cargada.
 
 ## Decisiones

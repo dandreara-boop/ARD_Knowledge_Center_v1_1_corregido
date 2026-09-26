@@ -208,7 +208,7 @@ El usuario nunca necesita conocer cómo funciona internamente ese proceso.
 | Sprint 5 | Motor de Inventario | ✓ Finalizado |
 | Sprint 6 | Motor de Venta Local | ✓ Implementado y validado |
 | Sprint 7 | Motor Comercial de Precios | ✓ Implementado y validado |
-| Sprint 8 | Resolución Comercial y Cobro del POS | Diseño comercial definido / solver probado preliminarmente / implementación y QA pendientes |
+| Sprint 8 | Resolución Comercial y Cobro del POS | Implementado / migración aplicada / QA automático y manual aprobado |
 
 ## Conclusión
 

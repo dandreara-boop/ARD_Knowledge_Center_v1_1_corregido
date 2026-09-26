@@ -4,7 +4,7 @@
 
 Documentar entidades funcionales sin programar tablas físicas. Cada entidad se relaciona con el módulo correspondiente.
 
-Estado actual: **Sprint 8 — Resolución Comercial y Cobro del POS con diseño comercial definido, solver seleccionado y probado preliminarmente, pendiente de implementación definitiva y QA**.
+Estado actual: **Sprint 8 — Resolución Comercial y Cobro del POS implementado, con migración aplicada y QA automático y manual aprobado**.
 
 {{include:general/modelo_conceptual}}
 

@@ -2,30 +2,89 @@
 
 ## Estado
 
-DISEÑO COMERCIAL DEFINIDO / SOLVER SELECCIONADO Y PROBADO PRELIMINARMENTE / IMPLEMENTACIÓN DEFINITIVA PENDIENTE.
+IMPLEMENTADO / MIGRACIÓN APLICADA / QA AUTOMÁTICO Y MANUAL APROBADO.
 
-Sprint 8 no se documenta como implementado ni validado por QA.
+Sprint 8 se encuentra implementado y validado.
 
-El Sprint 8 no está cerrado todavía.
+El Sprint 8 queda cerrado funcional y técnicamente en backend.
 
 Estado operativo:
 
-- Diseño comercial definido.
-- Solver seleccionado y probado preliminarmente.
-- Implementación definitiva pendiente.
-- QA definitivo pendiente.
-- Migración `0007` todavía no aplicada.
-- Sin commit/push final de Sprint 8.
+- Diseño comercial definitivo documentado.
+- Solver HiGHS/highspy integrado al backend.
+- Resolución comercial simple y mixta implementada.
+- Medios de pago asociados a condiciones comerciales implementados.
+- Simulación comercial sin persistencia validada.
+- Confirmación comercial y snapshot inmutable implementados.
+- Migración `20260924_0007_commercial_resolution` aplicada correctamente.
+- Integración con Motor de Venta Local del Sprint 6 validada.
+- Integración con Motor Comercial de Precios del Sprint 7 validada.
+- Integración con inventario mediante `EventoPendiente` validada.
+- Idempotencia del procesamiento de inventario validada.
+- Protección de ventas cerradas validada.
+- QA automático aprobado: `94 passed`.
+- QA manual funcional aprobado.
+- Pendiente únicamente commit/push final del código del Sprint 8.
 
-El Sprint 8 define el diseño funcional del backend que conectará:
+### Resultado del QA manual
+
+Se validó una venta real de prueba con una unidad cuyo precio efectivo era:
+
+- `PRECIO_1` / Efectivo: `$12.000,00`.
+- `PRECIO_2` / Visa: `$13.800,00`.
+
+Se comprobó:
+
+- Cotización independiente por medio de pago sin modificar la venta.
+- Simulación de `$12.000,00` íntegramente en efectivo.
+- Simulación mixta con importe fijo y `RESTO`.
+- Fraccionamiento comercial de una unidad entre dos medios.
+- Uso de precios diferentes según condición comercial.
+- Conservación exacta de importes fijos.
+- Cálculo interno con alta precisión Decimal.
+- Redondeo comercial únicamente sobre el subtotal final calculado del medio.
+- Redondeo hacia arriba al múltiplo de `$0,05`.
+- Caso validado: subtotal interno Visa `$6.899,885` → importe final `$6.899,90`.
+- Ajuste de redondeo registrado: `$0,015`.
+- Total comercial confirmado: `$12.900,00`.
+- Persistencia de la resolución comercial y de su traza.
+- Cierre de la venta y materialización de los pagos.
+- Conservación del precio histórico de la línea de venta.
+- Generación de `EventoPendiente` tipo `VENTA_FINALIZADA`.
+- Procesamiento correcto del evento por inventario.
+- Stock de la variante validada: `-3 → -4`.
+- Segunda ejecución del procesador: `0` eventos procesados y sin nuevo movimiento de stock.
+- Stock posterior a la segunda ejecución: permanece en `-4`.
+- Intentos de agregar o eliminar ítems de la venta cerrada rechazados con `SALE_ALREADY_CLOSED`.
+
+### QA automático
+
+Suite completa ejecutada después de aplicar la migración y finalizar el QA manual:
+
+`94 passed in 6.66s`
+
+La suite incluye pruebas de:
+
+- catálogo;
+- resolución comercial;
+- familias y variantes;
+- inventario;
+- aplicación principal;
+- motor de precios;
+- motor de ventas;
+- reglas de negocio de variantes.
+
+El Sprint 8 conecta:
 
 - Motor de Venta Local del Sprint 6.
 - Motor Comercial de Precios del Sprint 7.
 - Medios de pago.
 - Resolución de pagos simples y mixtos.
+- Confirmación comercial.
+- Persistencia de snapshot y traza.
+- Generación de eventos para actualización de inventario.
 
 El frontend POS definitivo no pertenece al Sprint 8.
-
 ## Objetivo
 
 El vendedor carga artículos y formas de pago.

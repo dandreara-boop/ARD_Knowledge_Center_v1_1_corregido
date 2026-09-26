@@ -6,7 +6,7 @@ Sprint 7 implementa condiciones comerciales de precio por Artículo.
 
 No implementa bancos, tarjetas, cuotas, caja ni el motor completo de medios de pago.
 
-Sprint 8 aprueba el diseño funcional backend para configurar medios de pago y asociarlos a condiciones comerciales. Queda pendiente de implementación.
+Sprint 8 implementa la configuración backend de medios de pago y su asociación a condiciones comerciales.
 
 ## Separación conceptual
 

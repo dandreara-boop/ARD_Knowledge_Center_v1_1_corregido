@@ -2,7 +2,7 @@
 
 ## Estado
 
-**Sprint 8 — Resolución Comercial y Cobro del POS con diseño comercial definido, solver seleccionado y probado preliminarmente, pendiente de implementación definitiva y QA.**
+**Sprint 8 — Resolución Comercial y Cobro del POS implementado, con migración aplicada y QA automático y manual aprobado.**
 
 Sprint 6 y Sprint 7 se mantienen como implementados y validados. Sprint 8 documenta la resolución comercial y cobro, sin frontend POS definitivo y sin cierre final del sprint.
 

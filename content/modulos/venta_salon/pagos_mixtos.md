@@ -6,7 +6,7 @@ Sprint 7 no implementa el optimizador de pagos mixtos ni prorrateo de pagos.
 
 Esta página conserva la definición funcional prevista para venta y caja.
 
-Sprint 8 define comercialmente la resolución de pagos simples y mixtos, selecciona HiGHS como solver técnico y queda pendiente de implementación definitiva y QA.
+Sprint 8 implementa la resolución de pagos simples y mixtos mediante HiGHS como solver técnico, con QA automático y manual aprobado.
 
 ## Objetivo
 
