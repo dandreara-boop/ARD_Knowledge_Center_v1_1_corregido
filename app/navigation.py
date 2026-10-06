@@ -3,8 +3,8 @@ from __future__ import annotations
 PROJECT_INFO = {
     "name": "ARD Suite",
     "subtitle": "Documento Maestro de Arquitectura Funcional",
-    "version": "v2.1",
-    "status": "Sprint 1 a Sprint 7 finalizados; Sprint 8 aprobado funcionalmente",
+    "version": "v2.2",
+    "status": "Sprint 1 a Sprint 8 finalizados; Sprint 9 cerrado funcionalmente y pendiente de implementación",
     "description": (
         "Centro documental para lineamientos, modulos funcionales, modelo de datos, "
         "wireframes, decisiones e historial del proyecto."
@@ -20,6 +20,7 @@ PROJECT_PROGRESS = [
     {"name": "Sprint 6 — Motor de Venta Local", "progress": 100, "visual": "✓ Finalizado y validado"},
     {"name": "Sprint 7 — Motor Comercial de Precios", "progress": 100, "visual": "✓ Finalizado y validado"},
     {"name": "Sprint 8 — Resolución Comercial y Cobro del POS", "progress": 100, "visual": "IMPLEMENTADO Y VALIDADO"},
+    {"name": "Sprint 9 — Operación de Caja y Flujo de Venta en Salón", "progress": 100, "visual": "DISEÑO FUNCIONAL CERRADO"},
     {"name": "Recepción de Mercadería", "progress": 100, "visual": "██████████ 100%"},
     {"name": "Venta en Salón", "progress": 90, "visual": "█████████░ 90%"},
     {"name": "Caja", "progress": 80, "visual": "████████░░ 80%"},
@@ -176,8 +177,9 @@ NAVIGATION = [
                     {"title": "Sprint 6 — Motor de Venta Local", "icon": "•", "route": "/doc/modulos/venta_salon/sprint_6_motor_venta_local", "doc_slug": "modulos/venta_salon/sprint_6_motor_venta_local", "order": 30},
                     {"title": "Sprint 7 — Motor Comercial de Precios", "icon": "•", "route": "/doc/modulos/venta_salon/sprint_7_motor_comercial_precios", "doc_slug": "modulos/venta_salon/sprint_7_motor_comercial_precios", "order": 40},
                     {"title": "Sprint 8 — Resolución Comercial y Cobro", "icon": "•", "route": "/doc/modulos/venta_salon/sprint_8_resolucion_comercial_cobro_pos", "doc_slug": "modulos/venta_salon/sprint_8_resolucion_comercial_cobro_pos", "order": 50},
-                    {"title": "Flujo operativo", "icon": "•", "route": "/doc/modulos/venta_salon/flujo", "doc_slug": "modulos/venta_salon/flujo", "order": 60},
-                    {"title": "Promociones y precios", "icon": "•", "route": "/doc/modulos/venta_salon/promociones", "doc_slug": "modulos/venta_salon/promociones", "order": 70},
+                    {"title": "Sprint 9 — Operación de Caja", "icon": "•", "route": "/doc/modulos/venta_salon/sprint_9_operacion_caja_flujo_venta_salon", "doc_slug": "modulos/venta_salon/sprint_9_operacion_caja_flujo_venta_salon", "order": 60},
+                    {"title": "Flujo operativo", "icon": "•", "route": "/doc/modulos/venta_salon/flujo", "doc_slug": "modulos/venta_salon/flujo", "order": 70},
+                    {"title": "Promociones y precios", "icon": "•", "route": "/doc/modulos/venta_salon/promociones", "doc_slug": "modulos/venta_salon/promociones", "order": 80},
                 ],
             },
             {

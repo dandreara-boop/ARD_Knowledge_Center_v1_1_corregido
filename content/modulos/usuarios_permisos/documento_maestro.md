@@ -20,13 +20,26 @@ Los tipos de usuario funcionan como plantillas de permisos y pueden ajustarse si
 
 ## Tipos de usuario iniciales
 
-- Cajero.
 - Vendedor.
-- Encargado.
-- Administrador de sucursal.
+- Cajero.
+- Supervisor.
+- Administrador.
 - Operario de recepción.
 - Auditor.
-- Administrador general.
+
+La jerarquía funcional inicial para salón y caja es:
+
+```text
+VENDEDOR
+  ↓
+CAJERO
+  ↓
+SUPERVISOR
+  ↓
+ADMINISTRADOR
+```
+
+Los roles son agrupaciones de permisos, no lógica hardcodeada por nombre de rol. El cajero hereda funcionalmente capacidades de vendedor; el supervisor hereda capacidades de cajero; el administrador hereda capacidades de supervisor.
 
 ## Permisos configurables
 
@@ -37,11 +50,13 @@ Los permisos deben poder configurarse por rol y, cuando corresponda, por usuario
 - Iniciar venta.
 - Suspender venta.
 - Recuperar ventas abiertas.
+- Preparar venta para caja.
+- Enviar venta a caja.
 - Anular venta propia.
 - Anular venta de otro usuario.
 - Modificar cantidades.
 - Modificar precios.
-- Corregir medio de pago.
+- Consultar ventas del mismo local según alcance.
 - Aplicar crédito comercial.
 
 ### Cambios
@@ -56,15 +71,23 @@ Los permisos deben poder configurarse por rol y, cuando corresponda, por usuario
 ### Caja
 
 - Abrir turno.
-- Corregir fondo heredado.
+- Abrir sesión de caja con efectivo inicial declarado manualmente.
+- Capturar venta lista para cobrar.
+- Liberar venta capturada.
+- Modificar venta capturada antes del cobro.
+- Cobrar con sesión de caja válida.
+- Verificar mercadería.
 - Registrar ingresos de caja.
 - Registrar retiros.
-- Registrar gastos.
+- Registrar egresos o pagos.
 - Realizar arqueo.
 - Revisar diferencias.
-- Corregir medios de pago.
+- Solicitar corrección de conteo durante el cierre inmediato.
+- Marcar posible error de medio de pago.
 - Anular desde la revisión.
 - Cerrar con diferencia.
+
+Tener permiso para cobrar no significa tener una caja abierta. Para cobrar también debe existir una sesión de caja válida. Un supervisor o administrador que cobre también necesita sesión de caja.
 
 ### Productos y stock
 
@@ -84,6 +107,8 @@ Los permisos deben poder configurarse por rol y, cuando corresponda, por usuario
 - Crear tipos de usuario.
 - Configurar permisos.
 - Revisar correcciones.
+- Revisar solicitudes de corrección de arqueo.
+- Resolver posibles errores de medio de pago mediante operación administrativa separada.
 - Aprobar excepciones.
 - Consultar auditoría.
 - Configurar promociones.

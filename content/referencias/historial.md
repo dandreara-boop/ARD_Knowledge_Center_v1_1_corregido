@@ -1,5 +1,24 @@
 # Historial de versiones
 
+## Versión 2.2 — Sprint 9 Operación de Caja y Flujo de Venta en Salón
+
+- Se registró el cierre de diseño funcional del Sprint 9 con fecha 2026-10-05.
+- Se dejó explícito que la implementación backend, migración, QA y frontend siguen pendientes.
+- Se separaron conceptualmente dispositivo/terminal, vendedor, cajero, caja y sesión de caja.
+- Se documentaron modo normal y modo alta demanda con estados `ABIERTA`, `LISTA_PARA_COBRAR`, `EN_COBRO`, `CERRADA` y anulación cuando corresponda.
+- Se incorporó venta preparada con `global_id`, número corto operativo, referencia de cliente, vendedor, local y estado, sin aprobar todavía una política definitiva de reinicio diario del número corto.
+- Se definió captura exclusiva por una sola caja, liberación de venta capturada y auditoría del flujo.
+- Se documentaron los modos de verificación de mercadería y correcciones operativas sin motivo por cada diferencia.
+- Se reemplazó la regla histórica de herencia automática de efectivo: cada sesión requiere apertura obligatoria y efectivo inicial declarado manualmente.
+- Se dejó asentado que una sesión pertenece a una caja concreta, no se traslada entre cajas y una caja no puede tener dos sesiones activas simultáneamente.
+- Se separaron RETIRO y EGRESO/PAGO como conceptos distintos de movimiento de caja.
+- Se mantuvo arqueo ciego y se agregó solicitud de corrección de conteo con estado pendiente de supervisión.
+- Se reemplazó la corrección directa de medio de pago durante arqueo por marcado de posible error y resolución posterior por supervisor.
+- Se incorporó el principio de que los pendientes de supervisión no bloquean el siguiente turno.
+- Se documentó la jerarquía funcional inicial `VENDEDOR → CAJERO → SUPERVISOR → ADMINISTRADOR`, manteniendo permisos configurables.
+- Se ratificó que venta `CERRADA` es inmutable y que toda operación crítica del POS debe funcionar offline-first.
+- Se incorporaron las decisiones `DEC-174` a `DEC-187`.
+
 ## Versión 2.1 — Resolución Comercial y Cobro del POS
 
 - Se creó la página específica Sprint 8 — Resolución Comercial y Cobro del POS.

@@ -8,6 +8,8 @@ Sprint 6 implementó y validó funcionalmente el núcleo transaccional de venta 
 
 Sprint 8 tiene implementada la resolución comercial y cobro del POS, con solver HiGHS integrado, migración aplicada y QA automático y manual aprobado.
 
+Sprint 9 tiene diseño funcional cerrado y pendiente de implementación. Este documento incorpora sus conceptos operativos sin fijar todavía tablas SQL definitivas.
+
 ## CondicionComercialPrecio
 
 - Identificador.
@@ -106,22 +108,130 @@ La traza confirmada debe conservarse como snapshot y no reconstruirse con precio
 
 - Identificador global.
 - Sucursal.
-- Terminal.
-- Vendedor.
+- Local.
+- Dispositivo o terminal de origen, cuando corresponda.
+- Vendedor atribuido, opcional en autoservicio.
+- Cajero responsable del cobro, cuando corresponda.
 - Cliente.
+- Referencia simple de cliente para operación de salón.
+- Número corto operativo.
+- Tipo de atención: vendedor asistido o autoservicio.
 - Fecha local.
 - Fecha de sincronización.
 - Estado.
+- Caja capturadora, cuando esté en cobro.
+- Sesión de caja asociada al cobro, cuando corresponda.
 
 Estados preparados:
 
 - `ABIERTA`.
+- `LISTA_PARA_COBRAR`.
+- `EN_COBRO`.
 - `SUSPENDIDA`.
 - `EN_PAGO`.
 - `CERRADA`.
 - `ANULADA`.
 
 Sprint 6 implementa el cierre transaccional local, pero no implementa todavía toda la operatoria de suspensión, anulación, caja, promociones, cambios ni devoluciones.
+
+Sprint 9 reemplaza cualquier interpretación que equipare terminal, caja, vendedor y cajero. Una caja no es una PC/tablet y una sesión pertenece a una caja concreta y a un cajero responsable.
+
+El número corto no reemplaza al `global_id`. Su política definitiva de numeración y reinicio queda pendiente de validación técnica; una venta anulada no reutiliza su número corto.
+
+## Caja
+
+Concepto funcional aprobado para Sprint 9:
+
+- Identificador.
+- Local.
+- Nombre o código operativo.
+- Estado.
+
+Una Caja representa un punto lógico/físico de cobro, no una PC o tablet.
+
+## SesionCaja
+
+Concepto funcional aprobado para Sprint 9:
+
+- Identificador.
+- Local.
+- Caja concreta.
+- Cajero responsable.
+- Fecha/hora de apertura.
+- Efectivo inicial declarado manualmente.
+- Fecha/hora de cierre.
+- Estado.
+
+Para cobrar debe existir una sesión abierta y válida. Una caja no puede tener dos sesiones activas simultáneamente. La sesión no se traslada entre cajas y el efectivo inicial nunca se hereda automáticamente del turno anterior.
+
+## MovimientoCaja
+
+Concepto funcional aprobado para Sprint 9:
+
+- Sesión.
+- Tipo.
+- Importe.
+- Usuario.
+- Fecha/hora.
+- Motivo, cuando corresponda.
+
+`RETIRO` mueve dinero fuera del cajón, no requiere motivo obligatorio ni autorización previa y no representa un gasto. `EGRESO` o `PAGO` utiliza efectivo para pagar algo, requiere motivo obligatorio y representa una salida económica.
+
+## ArqueoCaja
+
+Concepto funcional aprobado para Sprint 9:
+
+- Sesión.
+- Tipo de arqueo.
+- Conteo original.
+- Efectivo esperado.
+- Diferencia.
+- Fecha/hora.
+- Estado.
+
+El primer conteo es ciego y nunca se borra. Después del primer conteo se muestran esperado, contado y diferencia.
+
+## SolicitudCorreccionArqueo
+
+Concepto funcional aprobado para Sprint 9:
+
+- Arqueo.
+- Conteo original.
+- Conteo corregido propuesto.
+- Cajero solicitante.
+- Fecha/hora.
+- Estado `PENDIENTE`, aprobado o rechazado.
+- Supervisor revisor, cuando corresponda.
+
+La solicitud sólo puede iniciarse durante el cierre inmediato. Una corrección pendiente no bloquea el cierre ni la siguiente apertura.
+
+## PosibleErrorPago
+
+Concepto funcional aprobado para Sprint 9:
+
+- Venta.
+- Sesión.
+- Cajero que marca el caso.
+- Fecha/hora.
+- Estado pendiente.
+- Resolución de supervisor, cuando corresponda.
+
+La venta `CERRADA` permanece inmutable. La corrección posterior del medio de pago se registra como operación administrativa separada y auditable, nunca como edición silenciosa de `PagoVenta`.
+
+## AuditoriaOperativa
+
+Concepto funcional aprobado para Sprint 9:
+
+- Entidad afectada.
+- Operación.
+- Usuario.
+- Caja y sesión, cuando corresponda.
+- Fecha/hora.
+- Valor anterior.
+- Valor nuevo.
+- Contexto operativo.
+
+Debe permitir reconstruir creación, envío, captura, liberación, modificaciones, cobro, anulación, verificación, movimientos, cierre y pendientes.
 
 ## DetalleVenta
 

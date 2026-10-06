@@ -40,6 +40,14 @@ El frontend POS definitivo, caja completa, promociones, bancos, cuotas y sincron
 
 Detalle completo: [Sprint 8 — Resolución Comercial y Cobro del POS](/doc/modulos/venta_salon/sprint_8_resolucion_comercial_cobro_pos).
 
+## Sprint 9 — Operación de Caja y Flujo de Venta en Salón
+
+DISEÑO FUNCIONAL CERRADO / PENDIENTE DE IMPLEMENTACIÓN.
+
+Sprint 9 define la operación cotidiana del salón y de las cajas: separa dispositivo, vendedor, cajero, caja y sesión de caja; habilita modo normal y modo alta demanda; formaliza venta preparada, captura por caja, verificación de mercadería, apertura manual de sesión, arqueo ciego, pendientes de supervisión y correcciones administrativas auditables.
+
+Detalle completo: [Sprint 9 — Operación de Caja y Flujo de Venta en Salón](/doc/modulos/venta_salon/sprint_9_operacion_caja_flujo_venta_salon).
+
 ## Búsqueda de artículos
 
 La venta puede iniciarse por código, catálogo visual o ambos. El vendedor no selecciona variantes manualmente y el sistema prioriza velocidad operativa.
@@ -58,7 +66,18 @@ El campo principal de caja recibe códigos de barras y conserva el foco operativ
 
 ## Ventas abiertas
 
-La caja puede mantener varios remitos de venta abiertos o suspendidos simultáneamente. Una venta suspendida conserva artículos, cliente, promociones preliminares y última actividad.
+La operación admite ventas abiertas o suspendidas cuando corresponda y, desde Sprint 9, ventas preparadas para caja durante alta demanda.
+
+Estados operativos definidos para el flujo de venta preparada:
+
+```text
+ABIERTA
+→ LISTA_PARA_COBRAR
+→ EN_COBRO
+→ CERRADA
+```
+
+Una venta `EN_COBRO` puede liberarse y volver a `LISTA_PARA_COBRAR`. Se mantiene `ANULADA` para operaciones que no continuarán.
 
 ## Remitos de venta
 
@@ -96,6 +115,8 @@ Sprint 7 concreta el backend de precios por artículo y condiciones comerciales 
 
 Sprint 8 define la resolución comercial y cobro, pero no implementa todavía frontend POS definitivo ni sincronización cloud nueva.
 
+Sprint 9 agrega el contexto operativo de salón y caja, sin implementar todavía backend: vendedor atribuido, cajero responsable, caja, sesión, venta preparada, captura, verificación, arqueo, pendientes de supervisión y auditoría operativa.
+
 ## Wireframes
 
 - WF-004 — Caja de Venta.
@@ -109,6 +130,12 @@ Sprint 8 define la resolución comercial y cobro, pero no implementa todavía fr
 ## Reglas de negocio
 
 - El cajero no elige promociones.
+- Cajero y vendedor son responsabilidades separadas; no se asume que el usuario que cobra sea el vendedor.
+- AUTOSERVICIO se registra con `vendedor_id = null`.
+- Para cobrar no alcanza con tener permiso: debe existir una sesión de caja abierta y válida.
+- Una sesión pertenece a una caja concreta y no se traslada entre cajas.
+- El efectivo inicial de cada sesión se declara manualmente y no se hereda automáticamente del cierre anterior.
+- Venta `CERRADA` permanece inmutable; los errores posteriores se resuelven con registros separados auditables o anulación y nueva venta cuando corresponda.
 - La venta se guarda primero localmente.
 - El historial se envía a la nube.
 - Cada artículo conserva precio de lista, precio aplicado, promoción, explicación y valor reconocido para cambio.

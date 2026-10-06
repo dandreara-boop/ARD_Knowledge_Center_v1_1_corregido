@@ -4,7 +4,7 @@
 
 Documentar entidades funcionales sin programar tablas físicas. Cada entidad se relaciona con el módulo correspondiente.
 
-Estado actual: **Sprint 8 — Resolución Comercial y Cobro del POS implementado, con migración aplicada y QA automático y manual aprobado**.
+Estado actual: **Sprint 9 — Operación de Caja y Flujo de Venta en Salón con diseño funcional cerrado y pendiente de implementación**.
 
 {{include:general/modelo_conceptual}}
 
@@ -37,14 +37,17 @@ Estado actual: **Sprint 8 — Resolución Comercial y Cobro del POS implementado
 | Movimiento de stock | Recepción / Venta / Logística | Libro histórico auditable de toda variación de stock. |
 | StockActual | Recepción / Venta / Logística / Web | Saldo materializado por variante, destino de inventario y estado. |
 | Evento de dominio | Venta / Inventario / Sincronización | Punto de integración preparado para desacoplar procesos derivados sin bus completo todavía. |
-| Venta | Venta | Operación comercial presencial local con estados preparados para apertura, pago, cierre, suspensión y anulación futura. |
+| Venta | Venta | Operación comercial presencial local con estados operativos para apertura, preparación para caja, captura, cobro, cierre, suspensión y anulación. |
 | DetalleVenta | Venta | Línea vendida con snapshot comercial histórico de variante, códigos, descripción, cantidad, precio unitario e importe. |
 | PagoVenta | Venta / Caja | Pago asociado a una venta local; Sprint 6 valida suficiencia sin implementar todavía el módulo completo de caja. |
 | EventoPendiente | Venta / Inventario | Outbox local persistente para procesar efectos derivados de la venta fuera del camino crítico del POS. |
-| Caja | Caja | Unidad operativa de cobro por sucursal. |
-| Turno de caja | Caja | Apertura, operación, arqueo y cierre de un cajero. |
-| Arqueo | Caja | Control de efectivo contado contra esperado. |
-| Corrección de cobro | Caja | Cambio auditable de medio de pago. |
+| Caja | Caja | Punto lógico/físico de cobro de un local; no equivale a una PC o tablet. |
+| SesionCaja | Caja | Período de responsabilidad de un cajero sobre una caja concreta, con efectivo inicial declarado manualmente. |
+| MovimientoCaja | Caja | Ingresos, retiros y egresos/pagos asociados a una sesión, manteniendo RETIRO separado de EGRESO/PAGO. |
+| ArqueoCaja | Caja | Control de efectivo contado contra esperado, con primer conteo ciego y conservación del conteo original. |
+| SolicitudCorreccionArqueo | Caja | Solicitud iniciada por el cajero durante el cierre inmediato y resuelta posteriormente por supervisor. |
+| PosibleErrorPago | Caja | Marcado de una operación para supervisión por posible error de medio de pago, sin modificar la venta cerrada. |
+| AuditoriaOperativa | Venta / Caja | Registro de creación, envío, captura, liberación, modificación, cobro, anulación, verificación, movimientos, cierre y pendientes. |
 | Operación de cambio | Cambios | Registro funcional de prendas recibidas para cambio. |
 | Renglón de cambio | Cambios | Prenda y valor reconocido dentro de una operación. |
 | Crédito Comercial | Cambios | Saldo comercial generado por un cambio. |
@@ -72,6 +75,8 @@ Detalle implementado del Sprint 6: [Motor de Venta Local](/doc/modulos/venta_sal
 Detalle implementado del Sprint 7: [Motor Comercial de Precios](/doc/modulos/venta_salon/sprint_7_motor_comercial_precios).
 
 Diseño comercial definido del Sprint 8: [Resolución Comercial y Cobro del POS](/doc/modulos/venta_salon/sprint_8_resolucion_comercial_cobro_pos).
+
+Diseño funcional cerrado del Sprint 9: [Operación de Caja y Flujo de Venta en Salón](/doc/modulos/venta_salon/sprint_9_operacion_caja_flujo_venta_salon).
 
 ### Cambios y Crédito Comercial
 

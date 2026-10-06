@@ -2,13 +2,13 @@
 
 ## Estado
 
-**Propuesta funcional v1.2 para revisión.**
+**Actualizado por Sprint 9: diseño funcional cerrado / pendiente de implementación.**
 
 ![WF-008 Arqueo y Cierre de Caja](/static/images/wf008_arqueo_caja_v1_2.png)
 
 ## Objetivo
 
-Permitir que un cajero identificado realice un control de caja en cualquier momento y cierre formalmente su turno cuando corresponda, conservando todas las diferencias y correcciones.
+Permitir que un cajero identificado realice un control de caja en cualquier momento y cierre formalmente su sesión cuando corresponda, conservando diferencias, solicitudes de corrección y pendientes de supervisión sin bloquear el cambio de turno.
 
 ## Diferencia entre arqueo y cierre
 
@@ -19,23 +19,25 @@ Permitir que un cajero identificado realice un control de caja en cualquier mome
 - No finaliza el turno.
 - Después del control, el cajero continúa vendiendo.
 
-### Cierre de turno
+### Cierre de sesión
 
-- Finaliza formalmente el turno del cajero.
+- Finaliza formalmente la sesión de caja del cajero.
 - Registra efectivo real, diferencia, correcciones y observaciones.
-- Define el fondo real que recibirá el siguiente turno.
+- No define automáticamente el fondo de la siguiente sesión.
 
 ## Apertura del turno
 
-El cajero recibe el fondo heredado del turno anterior y puede confirmarlo o corregirlo.
+La apertura es obligatoria para cobrar. El cajero declara manualmente el efectivo inicial de cada nueva sesión.
 
 ```text
-Fondo heredado:          $120.000
-Efectivo recibido real:  $118.000
-Motivo: faltante informado al recibir la caja
+Caja:                    Caja 1
+Efectivo inicial:        $118.000
+Cajero responsable:      Usuario actual
 ```
 
-El nuevo turno comienza con el efectivo real confirmado. La corrección queda auditada.
+No se hereda automáticamente el efectivo del cierre anterior.
+
+Una sesión pertenece a una caja concreta y no se traslada entre cajas. Si el cajero cambia de caja, debe cerrar la sesión actual, realizar arqueo y abrir una nueva sesión en la nueva caja.
 
 ## Movimientos de caja
 
@@ -50,7 +52,7 @@ Solo se consideran movimientos manuales aquellos que no provienen directamente d
 
 - Retiro de efectivo.
 - Entrega o depósito de recaudación.
-- Gastos autorizados.
+- Egresos o pagos.
 
 ### Ajustes
 
@@ -63,12 +65,12 @@ Fondo inicial
 + Ventas en efectivo
 + Refuerzos
 - Retiros
-- Gastos
+- Egresos/pagos
 ± Ajustes autorizados
 = Efectivo esperado
 ```
 
-Cada movimiento conserva tipo, importe, usuario, fecha, hora y motivo.
+Cada movimiento conserva tipo, importe, usuario, fecha y hora. El motivo es obligatorio para egresos/pagos, pero no para retiros.
 
 ## Conteo ciego
 
@@ -97,27 +99,36 @@ Administración define una tolerancia global o por sucursal.
 
 ## Revisión guiada
 
-El error más frecuente es registrar un medio de pago incorrecto. El sistema ofrece:
+El sistema permite revisar las operaciones de la sesión mostrando como mínimo:
 
-- ventas registradas como efectivo;
-- ventas pagadas con medios electrónicos;
-- importes, horarios y remitos;
-- posibles coincidencias con la diferencia;
-- sugerencias de operaciones sospechosas.
+- número corto;
+- hora;
+- total;
+- medio o medios de pago.
 
-El cajero puede corregir el medio de pago. La venta original no se borra ni se sobrescribe silenciosamente.
+Si el cajero sospecha un error de medio de pago, marca la operación como posible error. Puede marcar varias operaciones y no necesita indicar inmediatamente cuál sería el medio correcto.
 
-Cada corrección registra:
+La venta cerrada no se modifica. Se genera un pendiente de supervisión.
 
-- medio original;
-- medio corregido;
-- importe;
+El supervisor investiga posteriormente y resuelve mediante una operación administrativa separada y auditable.
+
+Nunca se edita silenciosamente `PagoVenta` ni la venta histórica.
+
+## Corrección de conteo
+
+Si el cajero detecta durante el propio cierre que contó incorrectamente, puede solicitar una corrección.
+
+La solicitud conserva:
+
+- conteo original;
+- conteo corregido propuesto;
 - usuario;
-- fecha y hora;
-- motivo;
-- arqueo que originó la revisión.
+- fecha/hora;
+- estado `PENDIENTE`.
 
-Después de cada corrección, la diferencia se recalcula automáticamente.
+El supervisor puede aprobarla o rechazarla. El supervisor no debe crear una corrección que el cajero nunca solicitó.
+
+La solicitud sólo puede iniciarse durante el cierre inmediato, no posteriormente.
 
 ## Cierre con diferencia
 
@@ -132,7 +143,7 @@ Diferencia:         -$3.000
 Estado: CERRADA_CON_DIFERENCIA
 ```
 
-El siguiente turno hereda **$517.000**, porque ese es el efectivo físico confirmado.
+Una corrección pendiente no bloquea el cierre. La sesión se cierra igualmente y el siguiente cajero puede abrir una nueva sesión inmediatamente, declarando manualmente su efectivo inicial.
 
 ## Estados
 
@@ -147,14 +158,13 @@ CERRADA_CON_DIFERENCIA
 
 ## Modelo conceptual
 
-### Turno de caja
+### Sesión de caja
 
 - sucursal;
 - caja;
 - cajero;
 - apertura;
-- fondo heredado;
-- fondo confirmado;
+- efectivo inicial declarado manualmente;
 - estado;
 - cierre;
 - efectivo real final.
@@ -170,16 +180,23 @@ CERRADA_CON_DIFERENCIA
 - tolerancia aplicada;
 - estado.
 
-### Corrección de cobro
+### Solicitud de corrección de arqueo
+
+- arqueo;
+- conteo original;
+- conteo corregido propuesto;
+- usuario;
+- fecha y hora;
+- estado.
+
+### Posible error de medio de pago
 
 - venta;
-- arqueo;
-- medio original;
-- medio corregido;
-- importe;
-- usuario;
-- motivo;
-- fecha y hora.
+- sesión;
+- cajero;
+- fecha y hora;
+- estado;
+- resolución posterior de supervisor.
 
 ## Decisiones relacionadas
 
@@ -188,8 +205,9 @@ CERRADA_CON_DIFERENCIA
 - **DEC-080:** medios electrónicos calculados automáticamente.
 - **DEC-081:** tolerancia configurable.
 - **DEC-082:** primera revisión por el cajero.
-- **DEC-083:** corrección de medios totalmente auditable.
+- **DEC-083:** decisión histórica de corrección auditable de medios; Sprint 9 reemplaza la corrección directa por marcado de posible error y resolución posterior del supervisor mediante operación administrativa separada y auditable.
 - **DEC-084:** cierre permitido con diferencia.
-- **DEC-085:** herencia del efectivo real.
-- **DEC-086:** fondo inicial corregible y documentado.
+- **DEC-085:** decisión histórica reemplazada por Sprint 9; ya no hay herencia automática de efectivo.
+- **DEC-086:** decisión histórica reemplazada por Sprint 9; ya no hay corrección de fondo heredado.
 - **DEC-087:** todo ingreso o egreso no proveniente de una venta es un movimiento explícito de caja.
+- **DEC-174 a DEC-187:** decisiones Sprint 9 de operación de caja, venta preparada, sesión, arqueo, pendientes y permisos.

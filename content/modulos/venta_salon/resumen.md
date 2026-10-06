@@ -2,9 +2,9 @@
 
 ## Estado
 
-**Sprint 8 — Resolución Comercial y Cobro del POS implementado, con migración aplicada y QA automático y manual aprobado.**
+**Sprint 9 — Operación de Caja y Flujo de Venta en Salón con diseño funcional cerrado y pendiente de implementación.**
 
-Sprint 6 y Sprint 7 se mantienen como implementados y validados. Sprint 8 documenta la resolución comercial y cobro, sin frontend POS definitivo y sin cierre final del sprint.
+Sprint 6, Sprint 7 y Sprint 8 se mantienen como implementados y validados. Sprint 9 documenta el flujo operativo de salón y caja, sin backend implementado todavía.
 
 ## Objetivo
 
@@ -12,13 +12,16 @@ Registrar ventas presenciales con la menor fricción posible para el vendedor y 
 
 ## Principios
 
-- El vendedor escanea y cobra.
+- Vendedor, cajero, dispositivo, caja y sesión de caja son conceptos separados.
+- En modo normal, caja puede crear y cobrar la venta.
+- En modo alta demanda, vendedor prepara y envía a caja.
 - No selecciona variantes manualmente.
 - No recibe advertencias por stock negativo.
 - No elige promociones.
 - El sistema aplica la opción más conveniente para el cliente.
 - La venta se guarda primero localmente.
 - El historial se envía a la nube.
+- La operación esencial del POS no depende de Internet.
 
 ## Componentes funcionales del módulo
 
@@ -27,6 +30,7 @@ Registrar ventas presenciales con la menor fricción posible para el vendedor y 
 - Motor comercial.
 - Motor comercial de precios por Artículo.
 - Resolución comercial y cobro del POS.
+- Operación de caja y flujo de venta en salón.
 - Caja.
 - Pagos.
 - Cambios.

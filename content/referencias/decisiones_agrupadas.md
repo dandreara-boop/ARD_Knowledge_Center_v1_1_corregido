@@ -143,11 +143,30 @@ Cada decisión indica código, título, descripción, fecha y versión documenta
 | DEC-080 | Solo efectivo manual | Solo se cuenta efectivo; los medios electrónicos los calcula el sistema. | 2026-07-27 | 1.2 |
 | DEC-081 | Tolerancia configurable | Administración define la tolerancia de diferencias. | 2026-07-27 | 1.2 |
 | DEC-082 | Revisión guiada | La primera revisión la realiza el cajero mediante un flujo guiado. | 2026-07-27 | 1.2 |
-| DEC-083 | Corrección auditable | Toda corrección del medio de pago conserva el valor original y su auditoría. | 2026-07-27 | 1.2 |
+| DEC-083 | Corrección auditable | Toda corrección del medio de pago conserva el valor original y su auditoría; Sprint 9 redefine que la detección en cierre se marca como pendiente y la resolución queda a cargo de supervisión. | 2026-07-27 | 1.2 / 2.2 |
 | DEC-084 | Cierre con diferencia | El turno puede cerrarse aunque exista una diferencia documentada. | 2026-07-27 | 1.2 |
-| DEC-085 | Herencia de efectivo real | El próximo turno hereda el efectivo físico real confirmado. | 2026-07-27 | 1.2 |
-| DEC-086 | Fondo inicial corregible | El fondo heredado puede corregirse al abrir el turno dejando motivo. | 2026-07-27 | 1.2 |
+| DEC-085 | Herencia de efectivo real | Decisión histórica reemplazada por Sprint 9: el próximo turno ya no hereda automáticamente el efectivo físico real confirmado. | 2026-07-27 | 1.2 / 2.2 |
+| DEC-086 | Fondo inicial corregible | Decisión histórica reemplazada por Sprint 9: ya no existe corrección de fondo heredado; cada sesión declara manualmente su efectivo inicial. | 2026-07-27 | 1.2 / 2.2 |
 | DEC-087 | Movimiento explícito | Todo ingreso o egreso ajeno a una venta es un movimiento explícito de caja. | 2026-07-27 | 1.2 |
+
+## Sprint 9 — Operación de Caja y Flujo de Venta en Salón
+
+| Código | Título | Descripción | Fecha | Versión |
+|---|---|---|---|---|
+| DEC-174 | Separación operativa | Sprint 9 separa dispositivo, vendedor, cajero, caja y sesión de caja como responsabilidades distintas. | 2026-10-05 | 2.2 |
+| DEC-175 | Modos de venta | La venta puede operar en modo normal o en modo alta demanda con preparación por vendedor y cobro por caja. | 2026-10-05 | 2.2 |
+| DEC-176 | Identificación de venta preparada | La venta preparada conserva `global_id` permanente y número corto operativo; el número corto no reemplaza al identificador global ni se reutiliza tras anulación. | 2026-10-05 | 2.2 |
+| DEC-177 | Captura exclusiva | Una venta `LISTA_PARA_COBRAR` sólo puede estar capturada por una caja a la vez y puede liberarse de `EN_COBRO` a `LISTA_PARA_COBRAR`. | 2026-10-05 | 2.2 |
+| DEC-178 | Verificación auditable | La verificación de mercadería es configurable y sus correcciones se auditan sin pedir motivo por cada diferencia operativa. | 2026-10-05 | 2.2 |
+| DEC-179 | Cobro con sesión válida | Para cobrar se requiere permiso y una sesión de caja abierta y válida. | 2026-10-05 | 2.2 |
+| DEC-180 | Sesión ligada a caja | Una sesión de caja pertenece a una caja concreta y a un cajero responsable; no se traslada entre cajas. | 2026-10-05 | 2.2 |
+| DEC-181 | Efectivo inicial manual | El efectivo inicial de cada sesión se declara manualmente y no se hereda automáticamente del cierre anterior. | 2026-10-05 | 2.2 |
+| DEC-182 | Retiro separado de egreso | RETIRO y EGRESO/PAGO son movimientos distintos: retiro no es gasto, egreso/pago sí representa salida económica. | 2026-10-05 | 2.2 |
+| DEC-183 | Primer conteo ciego | El primer conteo de arqueo es ciego y nunca se borra. | 2026-10-05 | 2.2 |
+| DEC-184 | Corrección solicitada por cajero | La corrección de conteo de arqueo sólo puede solicitarla el cajero durante el cierre inmediato y queda pendiente de supervisor. | 2026-10-05 | 2.2 |
+| DEC-185 | Posible error de pago | Un posible error de medio de pago se marca para supervisión; no se corrige directamente la venta cerrada ni `PagoVenta`. | 2026-10-05 | 2.2 |
+| DEC-186 | Pendientes no bloqueantes | Los pendientes de supervisión no bloquean el cierre ni la apertura de la siguiente sesión. | 2026-10-05 | 2.2 |
+| DEC-187 | Roles por permisos | Los roles son agrupaciones configurables de permisos; la jerarquía funcional inicial es `VENDEDOR → CAJERO → SUPERVISOR → ADMINISTRADOR`. | 2026-10-05 | 2.2 |
 
 ## Administración
 
