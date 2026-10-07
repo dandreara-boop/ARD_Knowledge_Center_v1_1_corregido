@@ -11,7 +11,16 @@ Estado técnico:
 - No requirió nueva migración.
 - Alembic continúa en `20261006_0009` (head).
 
-Sprint 9.4 documenta decisiones previas a implementación para movimientos operativos de caja. No está implementado todavía.
+Sprint 9.4 implementó movimientos operativos de caja:
+
+- `MovimientoCaja` reutilizado sin cambios de schema.
+- Sin migración adicional.
+- Alembic continúa en `20261006_0009` (head).
+- 132 tests passed.
+- Movimientos `INGRESO`, `RETIRO` y `EGRESO`.
+- Movimientos append-only.
+
+Sprint 9.5 documenta decisiones previas a implementación para efectivo físico, cierre y alcance del arqueo. No está implementado todavía.
 
 Sprint 9 define la operación cotidiana del salón y de las cajas sobre las capacidades construidas en Sprint 6, Sprint 7 y Sprint 8.
 
@@ -372,18 +381,37 @@ Sprint 9.4 no desarrolla todavía contabilidad ni cuenta corriente de proveedore
 
 ### Efectivo esperado
 
+Sprint 9.5 define que el único `MedioPago` que mueve dinero físico dentro del cajón es `EFECTIVO`. Los demás medios pueden representar cobros, pero no modifican el efectivo físico esperado: tarjetas, transferencias, QR y otros medios electrónicos no suman ni restan dinero físico del cajón.
+
+Esta condición no debe identificarse comparando el texto visible o nombre del medio de pago. El modelo debe poseer una identificación explícita y estable que permita reconocer al único medio de pago que representa efectivo físico. La implementación técnica concreta se revisará contra el modelo actual antes de programar.
+
+Debe respetarse la regla funcional de que existe un único medio de pago que representa efectivo físico.
+
+En pagos mixtos, sólo la porción cobrada mediante `EFECTIVO` incrementa el efectivo físico esperado.
+
+Ejemplo:
+
 ```text
-efectivo inicial declarado
-+ cobros en efectivo
-+ ingresos manuales
-- retiros
-- egresos/pagos
-= efectivo esperado
+Venta total: 30.000
+
+EFECTIVO: 10.000
+VISA:     20.000
+
+Impacto sobre efectivo físico: +10.000
 ```
 
-Sólo los medios de pago que representen efectivo físico deben sumarse al efectivo esperado. Transferencias, QR, tarjetas y otros medios no efectivos pertenecen a la información de la sesión, pero no forman parte del efectivo físico del cajón.
+No se suman al cajón los `20.000` cobrados electrónicamente.
 
-La clasificación exacta de medios de pago como efectivo o no efectivo puede resolverse en el sprint correspondiente si todavía no existe en el modelo. Sprint 9.4 no anticipa una solución técnica no definida.
+```text
+efectivo inicial declarado
++ cobros de ventas realizados en EFECTIVO
++ movimientos INGRESO
+- movimientos RETIRO
+- movimientos EGRESO
+= efectivo esperado en el cajón
+```
+
+Los movimientos de Sprint 9.4 conservan su significado: `INGRESO` aumenta el efectivo esperado; `RETIRO` lo disminuye sin representar gasto; `EGRESO` lo disminuye y representa una salida económica.
 
 ### Selección de sesión para movimientos
 
@@ -404,13 +432,66 @@ Si en el futuro se diseña anulación o corrección de movimientos, deberá real
 
 ## Cierre y arqueo
 
-El cierre requiere conteo físico del efectivo.
+Sprint 9.5 prepara el cierre y arqueo de caja. No implementa todavía endpoints, cálculo en código, migraciones, frontend, sincronización ni contabilidad.
+
+El cierre requiere conteo físico del efectivo que permanece en el cajón de la `SesionCaja`.
+
+En el cierre de su sesión, el cajero cuenta únicamente el dinero físico que permanece dentro de su cajón. No debe recuperar retiros, reunir dinero retirado previamente, contar dinero guardado en caja fuerte ni contar fondos que ya dejaron físicamente su caja.
+
+El importe declarado por el cajero representa:
+
+```text
+EFECTIVO FISICO RESTANTE EN EL CAJON
+```
 
 El primer conteo es ciego: antes de confirmarlo el cajero no ve el efectivo esperado.
 
 Después del primer conteo se muestran efectivo esperado, efectivo contado y diferencia.
 
 El primer conteo nunca se elimina ni sobrescribe.
+
+Ejemplo:
+
+```text
+Efectivo inicial:                 50.000
+Ventas cobradas en EFECTIVO:     200.000
+Ventas Visa/QR/transferencia:    300.000
+INGRESOS:                         30.000
+RETIROS:                         150.000
+EGRESOS:                          20.000
+
+Efectivo esperado en cajon:
+
+50.000
++ 200.000
++ 30.000
+- 150.000
+- 20.000
+= 110.000
+```
+
+Los `300.000` electrónicos no intervienen en el efectivo esperado. Si el cajero declara `108.000`, la diferencia es `-2.000`. Los `150.000` retirados no deben volver a agregarse al conteo del cajero.
+
+Una diferencia de arqueo no debe interpretarse automáticamente como error, faltante o sobrante atribuible al cajero. Es una diferencia operativa que debe conservarse y, cuando corresponda, investigarse.
+
+### Retiros y verificación posterior
+
+Los `RETIRO` registrados durante la sesión ya no forman parte del efectivo que debe contar el cajero. Permanecen registrados y auditables.
+
+El supervisor o encargado puede posteriormente verificar o contar el dinero correspondiente a los retiros cuando investiga una diferencia de caja.
+
+Ejemplo:
+
+```text
+Efectivo esperado en cajon: 110.000
+Cajero declara:            108.000
+Diferencia:                 -2.000
+
+Retiros registrados:       150.000
+Retiros verificados:       148.000
+```
+
+La verificación posterior de retiros puede aportar evidencia para una investigación o corrección administrativa, pero no reescribe el conteo original del cajero.
 
 ### Corrección de conteo
 
@@ -425,6 +506,8 @@ Se conservan conteo original, conteo corregido propuesto, cajero, fecha/hora y e
 La solicitud queda `PENDIENTE` y requiere revisión de supervisor, quien puede aprobarla o rechazarla.
 
 El supervisor no inventa una corrección que el cajero nunca solicitó.
+
+La posterior verificación de retiros por supervisor o encargado puede aportar evidencia para una investigación o corrección administrativa, pero no debe reescribir el primer conteo histórico del cajero.
 
 ### Cierre con revisión pendiente
 
@@ -609,12 +692,23 @@ No se documentan como implementados en Sprint 9.3:
 
 No se documentan como implementados en Sprint 9.4:
 
-- Implementación backend de `INGRESO`, `RETIRO` y `EGRESO/PAGO`.
 - Frontend para movimientos operativos de caja.
 - Contabilidad.
 - Cuenta corriente de proveedores.
 - Aprobación de supervisor para movimientos.
 - Anulación o corrección de movimientos.
+
+No se documentan como implementados en Sprint 9.5:
+
+- Endpoints de cierre.
+- Cálculo en código.
+- Modificación de `MedioPago`.
+- Migraciones.
+- Verificación formal de retiros.
+- Autorización de supervisor.
+- Frontend.
+- Sincronización.
+- Contabilidad.
 
 ## Estado de implementación
 
@@ -624,7 +718,10 @@ Implementación backend Sprint 9.3: TERMINADA
 Migración nueva Sprint 9.3: NO REQUERIDA
 Alembic head: 20261006_0009
 QA automático: 122 tests passed
-Decisiones Sprint 9.4 movimientos operativos: DOCUMENTADAS / PENDIENTES DE IMPLEMENTACIÓN
+Implementación backend Sprint 9.4: TERMINADA
+Migración nueva Sprint 9.4: NO REQUERIDA
+QA automático Sprint 9.4: 132 tests passed
+Decisiones Sprint 9.5 cierre y arqueo: DOCUMENTADAS / PENDIENTES DE IMPLEMENTACIÓN
 Frontend: PENDIENTE
 ```
 

@@ -10,7 +10,9 @@ Sprint 8 tiene implementada la resolución comercial y cobro del POS, con solver
 
 Sprint 9.3 implementó las reglas backend de sesiones de caja, captura explícita para cobro y confirmación por cajero responsable. No requirió nueva migración; Alembic continúa en `20261006_0009` (head).
 
-Sprint 9.4 documenta decisiones previas a implementación para movimientos operativos de caja. No está implementado todavía.
+Sprint 9.4 implementó movimientos operativos de caja reutilizando `MovimientoCaja` sin cambios de schema, sin migración, con Alembic en `20261006_0009` (head), 132 tests aprobados y movimientos append-only.
+
+Sprint 9.5 documenta decisiones previas a implementación para efectivo físico, cierre y alcance del arqueo. No está implementado todavía.
 
 ## CondicionComercialPrecio
 
@@ -66,10 +68,13 @@ Concepto aprobado para Sprint 8:
 - Nombre.
 - Estado activo.
 - Condición comercial asociada.
+- Identificación explícita y estable de si representa efectivo físico, cuando corresponda definirla técnicamente.
 
 `MedioPago` y `CondicionComercialPrecio` son conceptos separados.
 
 La relación entre ambos debe ser configurable.
+
+Sprint 9.5 define funcionalmente que existe un único `MedioPago` que representa efectivo físico dentro del cajón: `EFECTIVO`. No debe identificarse comparando el texto visible o nombre del medio de pago; el modelo deberá permitir reconocerlo mediante una identificación explícita y estable. La implementación técnica concreta se revisará contra el modelo actual antes de programar.
 
 ## ResolucionComercialCobro
 
@@ -206,6 +211,10 @@ Concepto funcional aprobado para Sprint 9:
 
 El primer conteo es ciego y nunca se borra. Después del primer conteo se muestran esperado, contado y diferencia.
 
+El efectivo esperado en el cajón se calcula conceptualmente con efectivo inicial declarado, cobros de ventas realizados en `EFECTIVO`, movimientos `INGRESO`, menos movimientos `RETIRO` y movimientos `EGRESO`. En pagos mixtos sólo la porción `EFECTIVO` modifica el efectivo físico esperado.
+
+El cajero cuenta únicamente el efectivo físico restante en su cajón. Los retiros registrados quedan fuera de su conteo y pueden verificarse posteriormente por supervisor o encargado para investigar diferencias. Esa verificación no reescribe el primer conteo histórico.
+
 ## SolicitudCorreccionArqueo
 
 Concepto funcional aprobado para Sprint 9:
@@ -219,6 +228,8 @@ Concepto funcional aprobado para Sprint 9:
 - Supervisor revisor, cuando corresponda.
 
 La solicitud sólo puede iniciarse durante el cierre inmediato. Una corrección pendiente no bloquea el cierre ni la siguiente apertura.
+
+La verificación posterior de retiros puede aportar evidencia para una investigación o corrección administrativa, pero no modifica el conteo original del cajero.
 
 ## PosibleErrorPago
 

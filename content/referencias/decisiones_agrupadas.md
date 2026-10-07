@@ -176,6 +176,11 @@ Cada decisión indica código, título, descripción, fecha y versión documenta
 | DEC-194 | Movimiento con sesión abierta | Los movimientos operativos de caja sólo pueden registrarse sobre una `SesionCaja` abierta y por el cajero responsable de esa sesión. | 2026-10-07 | 2.4 |
 | DEC-195 | Selección de sesión para movimientos | Para movimientos rápidos de caja, la UI puede usar la única sesión abierta del cajero; si existen varias, debe pedir selección explícita. La persistencia siempre conserva `sesion_caja_id`. | 2026-10-07 | 2.4 |
 | DEC-196 | Auditoría de movimientos | Los movimientos de caja conservan trazabilidad de tipo, importe, motivo, cajero, caja, sesión y fecha/hora; cualquier futura anulación o corrección deberá ser auditable. | 2026-10-07 | 2.4 |
+| DEC-197 | Efectivo físico único | `EFECTIVO` es el único `MedioPago` que mueve efectivo físico dentro del cajón y debe reconocerse mediante una identificación explícita y estable, no por texto visible. | 2026-10-07 | 2.5 |
+| DEC-198 | Pago mixto y efectivo | En pagos mixtos sólo la porción cobrada mediante `EFECTIVO` incrementa el efectivo físico esperado. | 2026-10-07 | 2.5 |
+| DEC-199 | Conteo del cajero | En el cierre de su `SesionCaja`, el cajero cuenta exclusivamente el efectivo físico que permanece en su cajón. | 2026-10-07 | 2.5 |
+| DEC-200 | Retiros fuera del conteo | Los `RETIRO` registrados quedan fuera del conteo del cajero y pueden verificarse posteriormente por supervisor o encargado para investigar diferencias. | 2026-10-07 | 2.5 |
+| DEC-201 | Conteo histórico conservado | La verificación posterior de retiros no reescribe el primer conteo histórico; una diferencia de arqueo no culpabiliza automáticamente al cajero. | 2026-10-07 | 2.5 |
 
 ## Administración
 

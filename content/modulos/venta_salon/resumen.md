@@ -6,7 +6,9 @@
 
 Sprint 6, Sprint 7, Sprint 8 y Sprint 9.3 se mantienen como implementados y validados. Sprint 9.3 registra sesiones de caja, captura explícita para cobro y confirmación por cajero responsable.
 
-Sprint 9.4 documenta decisiones previas a implementación para movimientos operativos de caja: `INGRESO`, `RETIRO` y `EGRESO/PAGO`. Cierre de caja, arqueo, correcciones, supervisión, frontend, contabilidad, cuenta corriente de proveedores y sincronización cloud siguen fuera de lo implementado.
+Sprint 9.4 implementó movimientos operativos de caja: `INGRESO`, `RETIRO` y `EGRESO`, reutilizando `MovimientoCaja` sin cambios de schema, sin migración, con Alembic en `20261006_0009` y 132 tests aprobados.
+
+Sprint 9.5 documenta decisiones previas a implementación para efectivo físico, cierre y alcance del arqueo. Cierre de caja, arqueo, correcciones, supervisión, frontend, contabilidad, cuenta corriente de proveedores y sincronización cloud siguen fuera de lo implementado.
 
 ## Objetivo
 
@@ -18,6 +20,7 @@ Registrar ventas presenciales con la menor fricción posible para el vendedor y 
 - Una caja puede tener una sola sesión abierta y un cajero puede tener varias sesiones abiertas en cajas distintas.
 - Si un cajero tiene varias sesiones abiertas, debe seleccionar explícitamente con cuál cobra.
 - Los movimientos operativos de caja se asocian a una sesión abierta y al cajero responsable.
+- `EFECTIVO` es el único medio que mueve efectivo físico dentro del cajón.
 - En modo normal, caja puede crear y cobrar la venta.
 - En modo alta demanda, vendedor prepara y envía a caja.
 - No selecciona variantes manualmente.

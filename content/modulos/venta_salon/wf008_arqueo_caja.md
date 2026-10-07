@@ -2,7 +2,7 @@
 
 ## Estado
 
-**Actualizado por Sprint 9.4: movimientos operativos documentados; cierre y arqueo pendientes.**
+**Actualizado por Sprint 9.5: efectivo físico, cierre y alcance del arqueo documentados; implementación pendiente.**
 
 ![WF-008 Arqueo y Cierre de Caja](/static/images/wf008_arqueo_caja_v1_2.png)
 
@@ -65,14 +65,18 @@ El efectivo esperado se calcula así:
 
 ```text
 efectivo inicial
-+ ventas cobradas en efectivo
-+ ingresos manuales
-- retiros
-- egresos/pagos
-= efectivo esperado
++ cobros de ventas realizados en EFECTIVO
++ movimientos INGRESO
+- movimientos RETIRO
+- movimientos EGRESO
+= efectivo esperado en el cajón
 ```
 
-Sólo los medios que representen efectivo físico suman al efectivo esperado. Transferencias, QR, tarjetas y otros medios no efectivos pertenecen a la información de la sesión, pero no al efectivo físico del cajón.
+El único `MedioPago` que mueve efectivo físico dentro del cajón es `EFECTIVO`. En pagos mixtos, sólo la porción cobrada mediante `EFECTIVO` incrementa el efectivo esperado.
+
+No debe reconocerse efectivo físico comparando el texto visible o nombre del medio de pago. El modelo deberá poseer una identificación explícita y estable para el único medio que representa efectivo físico.
+
+Transferencias, QR, tarjetas y otros medios no efectivos pertenecen a la información de la sesión, pero no al efectivo físico del cajón.
 
 Cada movimiento conserva tipo, importe, cajero, caja, sesión, fecha y hora. El motivo es obligatorio para egresos/pagos, pero no para ingresos ni retiros.
 
@@ -80,9 +84,17 @@ Los movimientos sólo pueden registrarse sobre una sesión `ABIERTA` y por el ca
 
 ## Conteo ciego
 
-Al iniciar el arqueo, el cajero solo ve un campo para ingresar el efectivo contado. No puede ver el efectivo esperado ni las ventas acumuladas antes de confirmar.
+Al iniciar el arqueo, el cajero solo ve un campo para ingresar el efectivo contado. No puede ver el efectivo esperado, la diferencia esperada ni cuánto debería tener antes de confirmar.
 
 Esto evita que adapte el conteo al importe teórico.
+
+El cajero cuenta únicamente el dinero físico que permanece dentro de su cajón. No recupera retiros, no reúne dinero retirado previamente, no cuenta dinero guardado en caja fuerte y no cuenta fondos que ya dejaron físicamente su caja.
+
+El importe declarado representa:
+
+```text
+EFECTIVO FISICO RESTANTE EN EL CAJON
+```
 
 ## Resultado
 
@@ -95,6 +107,31 @@ Después del primer conteo, el sistema muestra:
 - estado del arqueo.
 
 Los medios electrónicos son calculados automáticamente por el sistema. Solo el efectivo se cuenta manualmente.
+
+Ejemplo:
+
+```text
+Efectivo inicial:                 50.000
+Ventas cobradas en EFECTIVO:     200.000
+Ventas Visa/QR/transferencia:    300.000
+INGRESOS:                         30.000
+RETIROS:                         150.000
+EGRESOS:                          20.000
+
+Efectivo esperado en cajon:
+
+50.000
++ 200.000
++ 30.000
+- 150.000
+- 20.000
+= 110.000
+
+Cajero declara:                  108.000
+Diferencia:                       -2.000
+```
+
+Los `300.000` electrónicos no intervienen en el efectivo esperado. Los `150.000` retirados no deben volver a agregarse al conteo del cajero.
 
 ## Tolerancia
 
@@ -120,6 +157,10 @@ El supervisor investiga posteriormente y resuelve mediante una operación admini
 
 Nunca se edita silenciosamente `PagoVenta` ni la venta histórica.
 
+Los `RETIRO` registrados durante la sesión quedan fuera del conteo del cajero. Permanecen registrados y auditables. El supervisor o encargado puede verificar posteriormente el dinero correspondiente a los retiros para investigar una diferencia de caja.
+
+Una diferencia de arqueo no debe interpretarse automáticamente como error, faltante o sobrante atribuible al cajero. Es una diferencia operativa que se conserva y, cuando corresponda, se investiga.
+
 ## Corrección de conteo
 
 Si el cajero detecta durante el propio cierre que contó incorrectamente, puede solicitar una corrección.
@@ -135,6 +176,8 @@ La solicitud conserva:
 El supervisor puede aprobarla o rechazarla. El supervisor no debe crear una corrección que el cajero nunca solicitó.
 
 La solicitud sólo puede iniciarse durante el cierre inmediato, no posteriormente.
+
+La verificación posterior de retiros puede aportar evidencia para una investigación o corrección administrativa, pero no reescribe el conteo original del cajero.
 
 ## Cierre con diferencia
 
@@ -218,3 +261,4 @@ CERRADA_CON_DIFERENCIA
 - **DEC-087:** todo ingreso o egreso no proveniente de una venta es un movimiento explícito de caja.
 - **DEC-174 a DEC-191:** decisiones Sprint 9 de operación de caja, venta preparada, sesión, captura ligada a sesión, arqueo, pendientes, permisos y confirmación por responsable.
 - **DEC-192 a DEC-196:** decisiones Sprint 9.4 de movimientos operativos de caja, efectivo esperado, sesión abierta, responsable, selección de sesión y auditoría.
+- **DEC-197 a DEC-201:** decisiones Sprint 9.5 de efectivo físico, pagos mixtos, alcance del conteo, retiros verificados posteriormente y conservación del primer conteo.

@@ -100,6 +100,11 @@
 | DEC-194 | Los movimientos operativos de caja sólo pueden registrarse sobre una `SesionCaja` abierta y por el cajero responsable de esa sesión. |
 | DEC-195 | Para movimientos rápidos de caja, la UI puede usar la única sesión abierta del cajero; si existen varias, debe pedir selección explícita. La persistencia siempre conserva `sesion_caja_id`. |
 | DEC-196 | Los movimientos de caja conservan trazabilidad de tipo, importe, motivo, cajero, caja, sesión y fecha/hora; cualquier futura anulación o corrección deberá ser auditable. |
+| DEC-197 | `EFECTIVO` es el único `MedioPago` que mueve efectivo físico dentro del cajón y debe reconocerse mediante una identificación explícita y estable, no por texto visible. |
+| DEC-198 | En pagos mixtos sólo la porción cobrada mediante `EFECTIVO` incrementa el efectivo físico esperado. |
+| DEC-199 | En el cierre de su `SesionCaja`, el cajero cuenta exclusivamente el efectivo físico que permanece en su cajón. |
+| DEC-200 | Los `RETIRO` registrados quedan fuera del conteo del cajero y pueden verificarse posteriormente por supervisor o encargado para investigar diferencias. |
+| DEC-201 | La verificación posterior de retiros no reescribe el primer conteo histórico; una diferencia de arqueo no culpabiliza automáticamente al cajero. |
 
 ## Cambios y créditos comerciales
 
@@ -112,4 +117,4 @@
 
 ## Sprint 9 — Operación de Caja y Flujo de Venta en Salón
 
-- DEC-174 a DEC-196: separación conceptual de roles y caja, sesión independiente del dispositivo, modos de venta, venta preparada, captura/liberación ligada a sesión, verificación, sesión de caja personal, apertura manual, varias sesiones por cajero con advertencia no bloqueante, sesión activa explícita, confirmación por responsable, movimientos operativos de caja, arqueo ciego, correcciones pendientes, posible error de pago, pendientes de supervisión y permisos.
+- DEC-174 a DEC-201: separación conceptual de roles y caja, sesión independiente del dispositivo, modos de venta, venta preparada, captura/liberación ligada a sesión, verificación, sesión de caja personal, apertura manual, varias sesiones por cajero con advertencia no bloqueante, sesión activa explícita, confirmación por responsable, movimientos operativos de caja, efectivo físico, arqueo ciego, alcance del conteo, retiros verificables posteriormente, correcciones pendientes, posible error de pago, pendientes de supervisión y permisos.

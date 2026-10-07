@@ -1,5 +1,21 @@
 # Historial de versiones
 
+## Versión 2.5 — Sprint 9.5 Efectivo Físico, Cierre y Alcance del Arqueo
+
+- Se documentaron decisiones previas a implementación para Sprint 9.5 — Cierre y Arqueo de Caja.
+- Se actualizó Sprint 9.4 como implementado: `MovimientoCaja` reutilizado sin cambios de schema, sin migración, Alembic `20261006_0009`, 132 tests, movimientos `INGRESO` / `RETIRO` / `EGRESO` y registros append-only.
+- Se definió que `EFECTIVO` es el único `MedioPago` que mueve efectivo físico dentro del cajón.
+- Se dejó explícito que `EFECTIVO` debe reconocerse por una identificación explícita y estable, no por comparación del texto visible o nombre del medio.
+- Se documentó que en pagos mixtos sólo la porción cobrada mediante `EFECTIVO` incrementa el efectivo físico esperado.
+- Se fijó la fórmula conceptual de efectivo esperado en el cajón: efectivo inicial, más cobros en `EFECTIVO`, más `INGRESO`, menos `RETIRO`, menos `EGRESO`.
+- Se definió que el cajero cuenta únicamente el efectivo físico restante en su cajón durante el cierre.
+- Se dejó explícito que los retiros registrados no se recuperan ni se vuelven a sumar al conteo del cajero.
+- Se documentó que el supervisor o encargado puede verificar posteriormente retiros para investigar diferencias.
+- Se ratificó que el primer conteo ciego nunca se borra ni se reescribe, y que la verificación posterior de retiros no altera ese conteo histórico.
+- Se aclaró que una diferencia de arqueo es operativa y no culpabiliza automáticamente al cajero.
+- Se incorporaron las decisiones `DEC-197` a `DEC-201`.
+- Se dejó explícito que Sprint 9.5 no implementa endpoints de cierre, cálculo en código, modificación de `MedioPago`, migraciones, verificación formal de retiros, autorización de supervisor, frontend, sincronización ni contabilidad.
+
 ## Versión 2.4 — Sprint 9.4 Movimientos Operativos de Caja
 
 - Se documentaron decisiones previas a implementación para movimientos operativos de caja durante una `SesionCaja`.
@@ -14,7 +30,7 @@
 - Se ratificó que la regla de sesión explícita para cobro de Sprint 9.3 no se debilita.
 - Se documentó la trazabilidad mínima de movimientos y se dejó cualquier anulación/corrección futura como mecanismo auditable no diseñado todavía.
 - Se incorporaron las decisiones `DEC-192` a `DEC-196`.
-- Se dejó explícito que Sprint 9.4 no está implementado todavía y que cierre de caja, arqueo, corrección de arqueo, aprobación de supervisor, posibles errores de medios de pago, frontend, contabilidad, cuenta corriente de proveedores y sincronización cloud siguen fuera de alcance implementado.
+- Se dejó explícito el alcance funcional de Sprint 9.4 y que cierre de caja, arqueo, corrección de arqueo, aprobación de supervisor, posibles errores de medios de pago, frontend, contabilidad, cuenta corriente de proveedores y sincronización cloud seguían fuera de alcance implementado.
 
 ## Versión 2.3 — Sprint 9.3 Sesiones de Caja
 

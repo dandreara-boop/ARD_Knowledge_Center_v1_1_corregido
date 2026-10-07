@@ -30,7 +30,7 @@ En el flujo nuevo de salón, una venta `EN_COBRO` queda ligada a `caja_captura_i
 
 ## Movimientos de caja
 
-Sprint 9.4 documenta decisiones previas a implementación para movimientos operativos de efectivo durante una `SesionCaja`.
+Sprint 9.4 implementó movimientos operativos de efectivo durante una `SesionCaja`, reutilizando `MovimientoCaja` sin cambios de schema, sin migración y con movimientos append-only.
 
 Todo ingreso, retiro o egreso/pago ajeno a una venta se registra como movimiento explícito de caja. Son conceptos diferentes y se conservan separados.
 
@@ -72,14 +72,18 @@ Fórmula conceptual para futuro arqueo:
 
 ```text
 efectivo inicial
-+ ventas cobradas en efectivo
-+ ingresos manuales
-- retiros
-- egresos/pagos
-= efectivo esperado
++ cobros de ventas realizados en EFECTIVO
++ movimientos INGRESO
+- movimientos RETIRO
+- movimientos EGRESO
+= efectivo esperado en el cajón
 ```
 
-Sólo los medios que representen efectivo físico suman al efectivo esperado. Transferencias, QR, tarjetas y otros medios no efectivos pertenecen a la información de la sesión, pero no al efectivo físico del cajón.
+El único `MedioPago` que mueve efectivo físico dentro del cajón es `EFECTIVO`. En pagos mixtos, sólo la porción cobrada con `EFECTIVO` incrementa el efectivo esperado.
+
+No se identifica efectivo físico comparando el nombre visible del medio. El modelo deberá poseer una identificación explícita y estable del único medio que representa efectivo físico.
+
+Transferencias, QR, tarjetas y otros medios electrónicos pertenecen a la información de la sesión, pero no al efectivo físico del cajón.
 
 ## Ajustes
 
@@ -89,9 +93,17 @@ Los ajustes son correcciones excepcionales autorizadas.
 
 El primer conteo de efectivo es ciego: el cajero no ve el importe esperado antes de confirmar.
 
+En el cierre de su `SesionCaja`, el cajero cuenta únicamente el efectivo físico que permanece en su cajón. No recupera retiros, no reúne dinero retirado previamente, no cuenta dinero guardado en caja fuerte y no cuenta fondos que ya dejaron físicamente su caja.
+
+Los retiros registrados ya no forman parte del efectivo que debe contar el cajero. Permanecen registrados y auditables; el supervisor o encargado puede verificarlos posteriormente para investigar una diferencia.
+
+Una diferencia de arqueo no implica automáticamente error, faltante o sobrante atribuible al cajero. Es una diferencia operativa que se conserva y puede investigarse.
+
 ## Corrección guiada
 
 La revisión guiada permite detectar diferencias sin alterar silenciosamente ventas cerradas ni pagos históricos.
+
+La posterior verificación de retiros puede aportar evidencia para una investigación o corrección administrativa, pero no reescribe el primer conteo histórico del cajero.
 
 ## Anulación desde arqueo
 
@@ -133,4 +145,5 @@ Principio: la operación del local no debe detenerse por controles administrativ
 - DEC-078 a DEC-087 registran la decisión histórica de arqueo independiente del cierre, conteo ciego, tolerancia, revisión guiada, corrección auditable, cierre con diferencia, herencia del efectivo real y movimientos explícitos de caja.
 - Sprint 9 reemplaza la herencia automática de efectivo por apertura manual obligatoria y reemplaza la corrección directa de medio de pago durante arqueo por pendientes de supervisión auditables.
 - Sprint 9.3 refina sesiones de caja: sesión independiente del dispositivo, responsable único, una sesión abierta por caja, varias sesiones abiertas por cajero en cajas distintas, advertencia no bloqueante, selección explícita de sesión y confirmación por cajero responsable.
-- Sprint 9.4 documenta decisiones previas a implementación para movimientos operativos de caja: `INGRESO`, `RETIRO`, `EGRESO/PAGO`, impacto en efectivo esperado, sesión abierta, responsable y trazabilidad.
+- Sprint 9.4 implementa movimientos operativos de caja: `INGRESO`, `RETIRO`, `EGRESO/PAGO`, impacto en efectivo esperado, sesión abierta, responsable y trazabilidad.
+- Sprint 9.5 documenta decisiones previas a implementación para efectivo físico, cierre y alcance del arqueo.
