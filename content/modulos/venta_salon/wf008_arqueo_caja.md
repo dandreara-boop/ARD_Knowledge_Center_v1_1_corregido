@@ -2,7 +2,7 @@
 
 ## Estado
 
-**Actualizado por Sprint 9: diseño funcional cerrado / pendiente de implementación.**
+**Actualizado por Sprint 9.3: sesiones de caja implementadas; cierre y arqueo pendientes.**
 
 ![WF-008 Arqueo y Cierre de Caja](/static/images/wf008_arqueo_caja_v1_2.png)
 
@@ -37,7 +37,11 @@ Cajero responsable:      Usuario actual
 
 No se hereda automáticamente el efectivo del cierre anterior.
 
-Una sesión pertenece a una caja concreta y no se traslada entre cajas. Si el cajero cambia de caja, debe cerrar la sesión actual, realizar arqueo y abrir una nueva sesión en la nueva caja.
+Una sesión pertenece a una caja concreta y a un único cajero responsable. No se traslada entre cajas ni entre dispositivos.
+
+Una caja no puede tener dos sesiones abiertas simultáneamente. Un cajero puede tener varias sesiones abiertas en cajas distintas; al abrir otra sesión recibe una advertencia no bloqueante.
+
+Si existen varias sesiones abiertas para el cajero, la sesión activa de cobro se selecciona explícitamente. El sistema no elige cualquier sesión abierta.
 
 ## Movimientos de caja
 
@@ -210,4 +214,4 @@ CERRADA_CON_DIFERENCIA
 - **DEC-085:** decisión histórica reemplazada por Sprint 9; ya no hay herencia automática de efectivo.
 - **DEC-086:** decisión histórica reemplazada por Sprint 9; ya no hay corrección de fondo heredado.
 - **DEC-087:** todo ingreso o egreso no proveniente de una venta es un movimiento explícito de caja.
-- **DEC-174 a DEC-187:** decisiones Sprint 9 de operación de caja, venta preparada, sesión, arqueo, pendientes y permisos.
+- **DEC-174 a DEC-191:** decisiones Sprint 9 de operación de caja, venta preparada, sesión, captura ligada a sesión, arqueo, pendientes, permisos y confirmación por responsable.

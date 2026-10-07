@@ -16,11 +16,17 @@ El efectivo inicial se declara manualmente en cada nueva sesión. No se hereda a
 
 Una caja no puede tener dos sesiones activas simultáneamente. La sesión queda ligada a una caja concreta durante toda su vida y no puede trasladarse a otra caja.
 
-Si el cajero cambia de caja, debe cerrar la sesión actual, realizar arqueo, abrir una nueva sesión en la nueva caja y declarar manualmente el nuevo efectivo inicial.
+La sesión no pertenece al dispositivo. Si una PC/tablet falla, el mismo cajero puede continuar la misma sesión desde otro dispositivo sin transferirla.
+
+Un cajero puede tener más de una sesión abierta en cajas distintas. Al abrir una nueva sesión mientras ya tiene otra abierta, el sistema advierte, pero no bloquea.
+
+Cuando un cajero tenga varias sesiones abiertas, la sesión activa para cobrar debe seleccionarse explícitamente. El sistema no debe elegir "cualquier sesión abierta".
 
 ## Ventas
 
 La caja cobra ventas presenciales registradas primero localmente.
+
+En el flujo nuevo de salón, una venta `EN_COBRO` queda ligada a `caja_captura_id` y `sesion_caja_id`. La confirmación exige `usuario_id`, sesión abierta correspondiente y cajero responsable de esa sesión.
 
 ## Movimientos de caja
 
@@ -93,3 +99,4 @@ Principio: la operación del local no debe detenerse por controles administrativ
 
 - DEC-078 a DEC-087 registran la decisión histórica de arqueo independiente del cierre, conteo ciego, tolerancia, revisión guiada, corrección auditable, cierre con diferencia, herencia del efectivo real y movimientos explícitos de caja.
 - Sprint 9 reemplaza la herencia automática de efectivo por apertura manual obligatoria y reemplaza la corrección directa de medio de pago durante arqueo por pendientes de supervisión auditables.
+- Sprint 9.3 refina sesiones de caja: sesión independiente del dispositivo, responsable único, una sesión abierta por caja, varias sesiones abiertas por cajero en cajas distintas, advertencia no bloqueante, selección explícita de sesión y confirmación por cajero responsable.

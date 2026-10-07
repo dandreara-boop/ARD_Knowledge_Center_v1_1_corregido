@@ -1,5 +1,23 @@
 # Historial de versiones
 
+## Versión 2.3 — Sprint 9.3 Sesiones de Caja
+
+- Se registró Sprint 9.3 como implementado con 122 tests aprobados.
+- Se dejó explícito que no requirió nueva migración y Alembic continúa en `20261006_0009` (head).
+- Se reforzó la separación `DISPOSITIVO != CAJERO != CAJA != SESION DE CAJA`.
+- Se documentó que la sesión de caja no pertenece a una PC/tablet y puede usarse desde otro dispositivo sin transferencia.
+- Se refinó que una sesión tiene un único cajero responsable durante toda su vida.
+- Se corrigió la interpretación de cambio de caja: una caja puede tener una sola sesión abierta, pero un cajero puede tener varias sesiones abiertas en cajas distintas.
+- Se documentó advertencia no bloqueante al abrir otra sesión cuando el cajero ya tiene una abierta.
+- Se incorporó la selección explícita de sesión activa para cobrar, sin búsqueda automática de cualquier sesión abierta.
+- Se documentó que la venta `EN_COBRO` queda ligada a `caja_captura_id` y `sesion_caja_id`.
+- Se documentó la liberación `EN_COBRO -> LISTA_PARA_COBRAR`, eliminando captura de la venta activa y conservando caja/sesión en el evento histórico.
+- Se documentó que confirmar `EN_COBRO -> CERRADA` exige `usuario_id`, sesión abierta correspondiente y cajero responsable.
+- Se dejó asentada la compatibilidad temporal del flujo legacy `ABIERTA -> CERRADA` sin convertirlo en bypass del nuevo POS de salón.
+- Se registró la protección concurrente para apertura de sesión por caja y para captura simultánea de ventas.
+- Se incorporaron las decisiones `DEC-188` a `DEC-191` y se refinaron `DEC-174`, `DEC-179` y `DEC-180`.
+- Se dejó explícito que cierre de caja, arqueo, retiros, egresos/pagos, correcciones de arqueo, posibles errores de medios de pago, supervisión, frontend, modelo de dispositivos y sincronización cloud siguen pendientes.
+
 ## Versión 2.2 — Sprint 9 Operación de Caja y Flujo de Venta en Salón
 
 - Se registró el cierre de diseño funcional del Sprint 9 con fecha 2026-10-05.

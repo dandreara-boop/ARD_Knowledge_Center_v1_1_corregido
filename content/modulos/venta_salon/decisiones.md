@@ -77,13 +77,13 @@
 | DAT-POS-026 | La implementación productiva debe compararse contra un oráculo independiente en escenarios pequeños. |
 | DAT-POS-027 | ARD debe soportar Windows y Linux; la integración Linux de Sprint 8 queda pendiente de validación automatizada. |
 | DAT-POS-028 | highspy queda pendiente de incorporación formal, pin de versión y validación CI durante implementación. |
-| DEC-174 | Sprint 9 separa dispositivo, vendedor, cajero, caja y sesión de caja como responsabilidades distintas. |
+| DEC-174 | Sprint 9 separa dispositivo, vendedor, cajero, caja y sesión de caja como responsabilidades distintas; la sesión no pertenece a una PC/tablet. |
 | DEC-175 | La venta puede operar en modo normal o en modo alta demanda con preparación por vendedor y cobro por caja. |
 | DEC-176 | La venta preparada conserva `global_id` permanente y número corto operativo; el número corto no reemplaza al identificador global ni se reutiliza tras anulación. |
 | DEC-177 | Una venta `LISTA_PARA_COBRAR` sólo puede estar capturada por una caja a la vez y puede liberarse de `EN_COBRO` a `LISTA_PARA_COBRAR`. |
 | DEC-178 | La verificación de mercadería es configurable y sus correcciones se auditan sin pedir motivo por cada diferencia operativa. |
-| DEC-179 | Para cobrar se requiere permiso y una sesión de caja abierta y válida. |
-| DEC-180 | Una sesión de caja pertenece a una caja concreta y a un cajero responsable; no se traslada entre cajas. |
+| DEC-179 | Para cobrar se requiere permiso y una sesión de caja abierta, válida y seleccionada explícitamente. |
+| DEC-180 | Una sesión de caja pertenece a una caja concreta y a un único cajero responsable; no se traslada entre cajas ni entre dispositivos. |
 | DEC-181 | El efectivo inicial de cada sesión se declara manualmente y no se hereda automáticamente del cierre anterior. |
 | DEC-182 | RETIRO y EGRESO/PAGO son movimientos distintos: retiro no es gasto, egreso/pago sí representa salida económica. |
 | DEC-183 | El primer conteo de arqueo es ciego y nunca se borra. |
@@ -91,6 +91,10 @@
 | DEC-185 | Un posible error de medio de pago se marca para supervisión; no se corrige directamente la venta cerrada ni `PagoVenta`. |
 | DEC-186 | Los pendientes de supervisión no bloquean el cierre ni la apertura de la siguiente sesión. |
 | DEC-187 | Los roles son agrupaciones configurables de permisos; la jerarquía funcional inicial es `VENDEDOR → CAJERO → SUPERVISOR → ADMINISTRADOR`. |
+| DEC-188 | Una caja puede tener una sola sesión abierta; un cajero puede tener varias sesiones abiertas en cajas distintas, con advertencia no bloqueante al abrir otra. |
+| DEC-189 | Si el cajero tiene varias sesiones abiertas, el sistema no elige automáticamente: la sesión activa de cobro debe seleccionarse y mostrarse explícitamente. |
+| DEC-190 | Una venta `EN_COBRO` queda ligada a `caja_captura_id` y `sesion_caja_id`; la caja se obtiene de la sesión y no se captura sólo con `caja_id`. |
+| DEC-191 | Confirmar `EN_COBRO -> CERRADA` exige `usuario_id`, sesión abierta correspondiente y cajero responsable de esa sesión; el legacy `ABIERTA -> CERRADA` conserva compatibilidad temporal sin habilitar bypass del POS nuevo. |
 
 ## Cambios y créditos comerciales
 
@@ -103,4 +107,4 @@
 
 ## Sprint 9 — Operación de Caja y Flujo de Venta en Salón
 
-- DEC-174 a DEC-187: separación conceptual de roles y caja, modos de venta, venta preparada, captura/liberación, verificación, sesión de caja, apertura manual, retiro vs egreso, arqueo ciego, correcciones pendientes, posible error de pago, pendientes de supervisión y permisos.
+- DEC-174 a DEC-191: separación conceptual de roles y caja, sesión independiente del dispositivo, modos de venta, venta preparada, captura/liberación ligada a sesión, verificación, sesión de caja personal, apertura manual, varias sesiones por cajero con advertencia no bloqueante, sesión activa explícita, confirmación por responsable, retiro vs egreso, arqueo ciego, correcciones pendientes, posible error de pago, pendientes de supervisión y permisos.

@@ -153,13 +153,13 @@ Cada decisión indica código, título, descripción, fecha y versión documenta
 
 | Código | Título | Descripción | Fecha | Versión |
 |---|---|---|---|---|
-| DEC-174 | Separación operativa | Sprint 9 separa dispositivo, vendedor, cajero, caja y sesión de caja como responsabilidades distintas. | 2026-10-05 | 2.2 |
+| DEC-174 | Separación operativa | Sprint 9 separa dispositivo, vendedor, cajero, caja y sesión de caja como responsabilidades distintas; la sesión no pertenece a una PC/tablet. | 2026-10-05 | 2.2 / 2.3 |
 | DEC-175 | Modos de venta | La venta puede operar en modo normal o en modo alta demanda con preparación por vendedor y cobro por caja. | 2026-10-05 | 2.2 |
 | DEC-176 | Identificación de venta preparada | La venta preparada conserva `global_id` permanente y número corto operativo; el número corto no reemplaza al identificador global ni se reutiliza tras anulación. | 2026-10-05 | 2.2 |
 | DEC-177 | Captura exclusiva | Una venta `LISTA_PARA_COBRAR` sólo puede estar capturada por una caja a la vez y puede liberarse de `EN_COBRO` a `LISTA_PARA_COBRAR`. | 2026-10-05 | 2.2 |
 | DEC-178 | Verificación auditable | La verificación de mercadería es configurable y sus correcciones se auditan sin pedir motivo por cada diferencia operativa. | 2026-10-05 | 2.2 |
-| DEC-179 | Cobro con sesión válida | Para cobrar se requiere permiso y una sesión de caja abierta y válida. | 2026-10-05 | 2.2 |
-| DEC-180 | Sesión ligada a caja | Una sesión de caja pertenece a una caja concreta y a un cajero responsable; no se traslada entre cajas. | 2026-10-05 | 2.2 |
+| DEC-179 | Cobro con sesión válida | Para cobrar se requiere permiso y una sesión de caja abierta, válida y seleccionada explícitamente. | 2026-10-05 | 2.2 / 2.3 |
+| DEC-180 | Sesión personal ligada a caja | Una sesión de caja pertenece a una caja concreta y a un único cajero responsable; no se traslada entre cajas ni entre dispositivos. | 2026-10-05 | 2.2 / 2.3 |
 | DEC-181 | Efectivo inicial manual | El efectivo inicial de cada sesión se declara manualmente y no se hereda automáticamente del cierre anterior. | 2026-10-05 | 2.2 |
 | DEC-182 | Retiro separado de egreso | RETIRO y EGRESO/PAGO son movimientos distintos: retiro no es gasto, egreso/pago sí representa salida económica. | 2026-10-05 | 2.2 |
 | DEC-183 | Primer conteo ciego | El primer conteo de arqueo es ciego y nunca se borra. | 2026-10-05 | 2.2 |
@@ -167,6 +167,10 @@ Cada decisión indica código, título, descripción, fecha y versión documenta
 | DEC-185 | Posible error de pago | Un posible error de medio de pago se marca para supervisión; no se corrige directamente la venta cerrada ni `PagoVenta`. | 2026-10-05 | 2.2 |
 | DEC-186 | Pendientes no bloqueantes | Los pendientes de supervisión no bloquean el cierre ni la apertura de la siguiente sesión. | 2026-10-05 | 2.2 |
 | DEC-187 | Roles por permisos | Los roles son agrupaciones configurables de permisos; la jerarquía funcional inicial es `VENDEDOR → CAJERO → SUPERVISOR → ADMINISTRADOR`. | 2026-10-05 | 2.2 |
+| DEC-188 | Varias sesiones por cajero | Una caja puede tener una sola sesión abierta; un cajero puede tener varias sesiones abiertas en cajas distintas, con advertencia no bloqueante al abrir otra. | 2026-10-07 | 2.3 |
+| DEC-189 | Sesión activa explícita | Si el cajero tiene varias sesiones abiertas, el sistema no elige automáticamente: la sesión activa de cobro debe seleccionarse y mostrarse explícitamente. | 2026-10-07 | 2.3 |
+| DEC-190 | Captura ligada a sesión | Una venta `EN_COBRO` queda ligada a `caja_captura_id` y `sesion_caja_id`; la caja se obtiene de la sesión y no se captura sólo con `caja_id`. | 2026-10-07 | 2.3 |
+| DEC-191 | Confirmación por responsable | Confirmar `EN_COBRO -> CERRADA` exige `usuario_id`, sesión abierta correspondiente y cajero responsable de esa sesión; el legacy `ABIERTA -> CERRADA` conserva compatibilidad temporal sin habilitar bypass del POS nuevo. | 2026-10-07 | 2.3 |
 
 ## Administración
 

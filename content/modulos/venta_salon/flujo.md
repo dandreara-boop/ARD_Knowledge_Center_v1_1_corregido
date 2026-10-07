@@ -40,9 +40,13 @@ El vendedor puede preparar una venta sin sesión de caja. La venta conserva `glo
 
 Una venta `LISTA_PARA_COBRAR` queda disponible para cajas del mismo local. Una sola caja puede capturarla; al capturarla pasa a `EN_COBRO`.
 
+La captura se realiza con una sesión de caja explícita. La venta `EN_COBRO` queda ligada a `caja_captura_id` y `sesion_caja_id`; la caja se obtiene de la sesión.
+
 Si la venta debe volver al vendedor, primero se libera desde `EN_COBRO` a `LISTA_PARA_COBRAR`. La liberación se audita y no equivale a anulación.
 
 Una venta anulada permanece en historial y no reutiliza su número corto.
+
+Para confirmar `EN_COBRO -> CERRADA`, el cajero debe ser el responsable de la sesión abierta asociada a la venta.
 
 ## Verificación de mercadería
 

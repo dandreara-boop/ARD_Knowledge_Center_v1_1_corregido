@@ -8,7 +8,7 @@ Sprint 6 implementó y validó funcionalmente el núcleo transaccional de venta 
 
 Sprint 8 tiene implementada la resolución comercial y cobro del POS, con solver HiGHS integrado, migración aplicada y QA automático y manual aprobado.
 
-Sprint 9 tiene diseño funcional cerrado y pendiente de implementación. Este documento incorpora sus conceptos operativos sin fijar todavía tablas SQL definitivas.
+Sprint 9.3 implementó las reglas backend de sesiones de caja, captura explícita para cobro y confirmación por cajero responsable. No requirió nueva migración; Alembic continúa en `20261006_0009` (head).
 
 ## CondicionComercialPrecio
 
@@ -121,6 +121,7 @@ La traza confirmada debe conservarse como snapshot y no reconstruirse con precio
 - Estado.
 - Caja capturadora, cuando esté en cobro.
 - Sesión de caja asociada al cobro, cuando corresponda.
+- Momento de captura, cuando esté en cobro.
 
 Estados preparados:
 
@@ -134,7 +135,7 @@ Estados preparados:
 
 Sprint 6 implementa el cierre transaccional local, pero no implementa todavía toda la operatoria de suspensión, anulación, caja, promociones, cambios ni devoluciones.
 
-Sprint 9 reemplaza cualquier interpretación que equipare terminal, caja, vendedor y cajero. Una caja no es una PC/tablet y una sesión pertenece a una caja concreta y a un cajero responsable.
+Sprint 9 reemplaza cualquier interpretación que equipare terminal, caja, vendedor y cajero. Una caja no es una PC/tablet y una sesión pertenece a una caja concreta y a un único cajero responsable. La sesión no pertenece al dispositivo.
 
 El número corto no reemplaza al `global_id`. Su política definitiva de numeración y reinicio queda pendiente de validación técnica; una venta anulada no reutiliza su número corto.
 
@@ -162,7 +163,11 @@ Concepto funcional aprobado para Sprint 9:
 - Fecha/hora de cierre.
 - Estado.
 
-Para cobrar debe existir una sesión abierta y válida. Una caja no puede tener dos sesiones activas simultáneamente. La sesión no se traslada entre cajas y el efectivo inicial nunca se hereda automáticamente del turno anterior.
+Para cobrar debe existir una sesión abierta, válida y seleccionada explícitamente. Una caja no puede tener dos sesiones activas simultáneamente. Un cajero puede tener varias sesiones abiertas en cajas distintas, con advertencia no bloqueante al abrir otra. La sesión no se traslada entre cajas ni entre dispositivos, y el efectivo inicial nunca se hereda automáticamente del turno anterior.
+
+Una sesión puede ser consultada y utilizada desde otra computadora sin modificar su identidad. Otro cajero no puede cobrar ni confirmar utilizando una sesión ajena.
+
+La venta `EN_COBRO` debe conservar `caja_captura_id` y `sesion_caja_id`. Al liberar de `EN_COBRO` a `LISTA_PARA_COBRAR`, esos datos y `capturada_at` se eliminan de la venta activa, pero quedan en el evento histórico de liberación.
 
 ## MovimientoCaja
 

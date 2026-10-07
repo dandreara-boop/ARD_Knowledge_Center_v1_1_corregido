@@ -2,7 +2,14 @@
 
 ## Estado
 
-DISEÑO FUNCIONAL CERRADO / PENDIENTE DE IMPLEMENTACIÓN.
+SPRINT 9.3 IMPLEMENTADO.
+
+Estado técnico:
+
+- Sprint 9.3 terminado.
+- 122 tests passed.
+- No requirió nueva migración.
+- Alembic continúa en `20261006_0009` (head).
 
 Sprint 9 define la operación cotidiana del salón y de las cajas sobre las capacidades construidas en Sprint 6, Sprint 7 y Sprint 8.
 
@@ -13,6 +20,8 @@ El objetivo es separar correctamente vendedor, cajero, dispositivo, caja y sesi�
 La operación del local no debe detenerse por controles administrativos pendientes.
 
 Las verificaciones, diferencias de arqueo y posibles errores detectados durante el cierre deben conservar trazabilidad y control sin impedir innecesariamente el cambio de turno.
+
+La posibilidad de que un cajero tenga más de una sesión abierta en cajas distintas y la independencia de la sesión respecto del dispositivo responden a este principio: advertir no significa impedir.
 
 ## Conceptos separados
 
@@ -32,8 +41,15 @@ ARD Suite distingue explícitamente:
 Un dispositivo no es una caja.
 Un vendedor no es necesariamente el cajero.
 Una caja no es una PC.
+Una sesión de caja no pertenece a una PC.
 
 Una sesión de caja representa la responsabilidad de un cajero sobre una caja concreta durante un período determinado.
+
+La separación conceptual definitiva es:
+
+```text
+DISPOSITIVO != CAJERO != CAJA != SESION DE CAJA
+```
 
 ## Modos operativos
 
@@ -176,25 +192,117 @@ Una Caja representa un punto lógico/físico de cobro, no una PC o tablet.
 
 Para cobrar y confirmar una venta debe existir una sesión de caja abierta y válida. Preparar una venta no requiere sesión de caja.
 
-La sesión pertenece a un local, una caja concreta y un cajero responsable.
+La sesión pertenece a un local, una caja concreta y un único cajero responsable durante toda su vida.
 
 La sesión no se traslada entre cajas.
 
-Si el cajero debe pasar a otra caja física, debe cerrar la sesión actual y abrir una nueva sesión en la nueva caja.
+La sesión tampoco se traslada entre dispositivos. Puede ser consultada y utilizada desde otra computadora sin transferirla ni modificar su identidad.
 
 Una caja no puede tener dos sesiones abiertas simultáneamente.
 
-Los detalles de recuperación ante falla de dispositivo deberán resolverse sin trasladar la sesión a otra caja física.
+Un cajero puede tener más de una sesión abierta simultáneamente, siempre que correspondan a cajas diferentes.
+
+Ejemplo válido:
+
+```text
+Maria
+├── CAJA-2 -> Sesion #458 -> ABIERTA
+└── CAJA-3 -> Sesion #461 -> ABIERTA
+```
+
+Si Maria abrió `Sesion #458` en `CAJA-2` desde `PC-2` y `PC-2` falla, puede ingresar desde `PC-3` y continuar utilizando la misma `Sesion #458`. No existe transferencia de sesión entre PCs porque la sesión nunca perteneció al dispositivo.
+
+Otro cajero no puede cobrar utilizando la sesión de Maria. Una intervención administrativa futura de supervisor no cambia quién fue el responsable original de la sesión.
+
+Si el cajero abre una nueva sesión y ya posee otra sesión abierta, el sistema debe mostrar una advertencia clara, pero no bloquear la apertura.
+
+Ejemplo conceptual:
+
+```text
+ATENCION
+
+Ya tenes una sesion abierta:
+
+CAJA-2
+Sesion #458
+
+¿Queres abrir tambien una sesion en CAJA-3?
+```
+
+Cuando existan varias sesiones abiertas para un cajero, el sistema no debe elegir automáticamente cuál utilizar. La sesión activa para cobrar debe seleccionarse explícitamente y mostrarse de manera visible, por ejemplo:
+
+```text
+Maria | CAJA-3 | Sesion #461
+```
+
+No se permite una regla del tipo "buscar cualquier sesión abierta del cajero".
 
 ## Apertura
 
 La apertura es obligatoria para cobrar.
 
-El efectivo inicial se declara manualmente en cada nueva sesión.
+El efectivo inicial se declara manualmente en cada nueva sesión. Puede ser `0` o mayor.
 
 No se hereda automáticamente el efectivo del cierre anterior.
 
 Cada sesión constituye un período independiente de responsabilidad.
+
+Dos solicitudes simultáneas no pueden abrir dos sesiones abiertas sobre la misma Caja. Sprint 9.3 protege la apertura mediante bloqueo transaccional de la Caja.
+
+## Captura, sesión y confirmación
+
+Una venta capturada para cobro queda asociada de manera inequívoca a:
+
+- `caja_captura_id`.
+- `sesion_caja_id`.
+
+Flujo:
+
+```text
+LISTA_PARA_COBRAR
+        |
+        v
+captura con sesión explícita
+        |
+        v
+EN_COBRO
+        |
+        v
+CERRADA
+```
+
+Al capturar:
+
+- La sesión debe existir.
+- Debe estar `ABIERTA`.
+- Debe pertenecer al cajero que opera.
+- Su Caja debe estar activa.
+- Caja y Venta deben pertenecer al mismo local/destino.
+
+La caja se obtiene de la sesión. No se permite capturar utilizando solamente `caja_id`.
+
+También se mantiene la protección para que dos cajas o sesiones no puedan capturar simultáneamente la misma Venta.
+
+Si una venta pasa de `EN_COBRO` a `LISTA_PARA_COBRAR`, se eliminan de la venta activa:
+
+- `caja_captura_id`.
+- `sesion_caja_id`.
+- `capturada_at`.
+
+El evento histórico de liberación conserva la caja y sesión anteriores. El `numero_corto` de la venta no se modifica ni se reutiliza.
+
+Para el flujo nuevo de salón, confirmar `EN_COBRO -> CERRADA` exige:
+
+- Que exista `sesion_caja_id`.
+- Que la sesión continúe `ABIERTA`.
+- Que corresponda a `caja_captura_id`.
+- Que el cajero que confirma sea el responsable de esa sesión.
+
+`usuario_id` no puede omitirse para confirmar una venta `EN_COBRO`. Otro cajero no puede confirmar utilizando una sesión ajena.
+
+La venta `CERRADA` conserva `caja_captura_id` y `sesion_caja_id` como trazabilidad histórica.
+
+El backend mantiene temporalmente compatibilidad con el flujo anterior `ABIERTA -> CERRADA` sin exigir `usuario_id` ni sesión, porque corresponde a mecanismos anteriores a Sprint 9. Esto no constituye un bypass permitido para el nuevo flujo POS de salón `LISTA_PARA_COBRAR -> EN_COBRO -> CERRADA`.
 
 ## Movimientos de efectivo
 
@@ -415,7 +523,7 @@ La sincronización posterior no pertenece al camino crítico de venta.
 
 ## Fuera de alcance del Sprint 9
 
-No se incorporan en este Sprint:
+No se documentan como implementados en Sprint 9.3:
 
 - Motor completo de promociones.
 - Devoluciones.
@@ -424,6 +532,14 @@ No se incorporan en este Sprint:
 - Estadísticas avanzadas.
 - Sincronización cloud definitiva.
 - Frontend definitivo completo.
+- Cierre de caja.
+- Arqueo.
+- Retiros.
+- Egresos/pagos.
+- Correcciones de arqueo.
+- Posibles errores de medios de pago.
+- Supervisión.
+- Modelo de dispositivos.
 - Contabilidad general.
 - Conciliación bancaria automática.
 - Integraciones fiscales no definidas.
@@ -432,12 +548,10 @@ No se incorporan en este Sprint:
 
 ```text
 Diseño funcional: CERRADO
-Implementación backend: PENDIENTE
-Migración: PENDIENTE
-QA automático: PENDIENTE
-QA manual: PENDIENTE
+Implementación backend Sprint 9.3: TERMINADA
+Migración nueva Sprint 9.3: NO REQUERIDA
+Alembic head: 20261006_0009
+QA automático: 122 tests passed
 Frontend: PENDIENTE
 ```
-
-La implementación debe comenzar solamente después de actualizar y versionar el Knowledge correspondiente.
 
