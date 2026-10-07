@@ -11,6 +11,8 @@ Estado técnico:
 - No requirió nueva migración.
 - Alembic continúa en `20261006_0009` (head).
 
+Sprint 9.4 documenta decisiones previas a implementación para movimientos operativos de caja. No está implementado todavía.
+
 Sprint 9 define la operación cotidiana del salón y de las cajas sobre las capacidades construidas en Sprint 6, Sprint 7 y Sprint 8.
 
 El objetivo es separar correctamente vendedor, cajero, dispositivo, caja y sesión de caja, permitiendo tanto la venta directa en caja como la preparación de ventas por vendedores durante períodos de alta demanda.
@@ -306,37 +308,99 @@ El backend mantiene temporalmente compatibilidad con el flujo anterior `ABIERTA 
 
 ## Movimientos de efectivo
 
+Sprint 9.4 define tres movimientos manuales de efectivo durante una `SesionCaja`:
+
+```text
+INGRESO
+RETIRO
+EGRESO/PAGO
+```
+
+Son conceptos distintos y deben conservarse separados.
+
+Los tres movimientos sólo pueden registrarse sobre una `SesionCaja` `ABIERTA`. El cajero que registra el movimiento debe ser el responsable de esa sesión. Otro cajero no puede utilizar una sesión ajena para registrar ingresos, retiros ni egresos.
+
+Todo movimiento persistido debe quedar asociado de manera inequívoca a:
+
+- `sesion_caja_id`.
+- `caja_id`.
+- `cajero_id`.
+- Tipo.
+- Importe.
+- Fecha/hora.
+- Motivo, cuando corresponda.
+
+La Caja se deriva de la `SesionCaja`. No se permite registrar movimientos sobre sesiones cerradas ni persistir movimientos ambiguos asociados solamente al cajero.
+
+### INGRESO
+
+Representa efectivo que entra al cajón por una causa distinta de una venta.
+
+Ejemplo: la caja tiene poco cambio y se agregan `$30.000` al cajón.
+
+Consecuencias:
+
+- Aumenta el efectivo físico esperado.
+- No es una venta.
+- No genera `Venta`.
+- No genera `PagoVenta`.
+- No representa ingreso comercial por venta.
+
+Requiere importe mayor a `0`, sesión, cajero y fecha/hora. El motivo es opcional para no ralentizar la operación.
+
 ### RETIRO
 
 Representa mover dinero fuera del cajón hacia una caja fuerte u otro lugar de resguardo.
 
-Requiere importe, usuario, sesión y fecha/hora.
+Requiere importe mayor a `0`, sesión, cajero y fecha/hora.
 
 No requiere motivo obligatorio ni autorización previa del supervisor.
 
-Reduce el efectivo físico esperado y no representa un gasto de la empresa.
+Reduce el efectivo físico esperado y no representa un gasto, un pago a proveedor ni una pérdida. Simplemente cambia dónde se encuentra físicamente el dinero.
 
 ### EGRESO / PAGO
 
 Representa utilizar efectivo de caja para pagar algo.
 
-Requiere importe, motivo, usuario, sesión y fecha/hora.
+Requiere importe mayor a `0`, motivo obligatorio, sesión, cajero y fecha/hora.
 
 Reduce el efectivo esperado y representa una salida económica diferenciada de un retiro.
+
+Ejemplos de motivo: `Flete`, `Compra de insumos`, `Pago mensajería`.
+
+Sprint 9.4 no desarrolla todavía contabilidad ni cuenta corriente de proveedores. El movimiento registra la salida operativa de efectivo.
 
 ### Efectivo esperado
 
 ```text
 efectivo inicial declarado
 + cobros en efectivo
-+ ingresos de efectivo
++ ingresos manuales
 - retiros
 - egresos/pagos
-± otros movimientos explícitos
 = efectivo esperado
 ```
 
-Los medios no efectivos pertenecen a los totales comerciales de la sesión pero no forman parte del efectivo físico del cajón.
+Sólo los medios de pago que representen efectivo físico deben sumarse al efectivo esperado. Transferencias, QR, tarjetas y otros medios no efectivos pertenecen a la información de la sesión, pero no forman parte del efectivo físico del cajón.
+
+La clasificación exacta de medios de pago como efectivo o no efectivo puede resolverse en el sprint correspondiente si todavía no existe en el modelo. Sprint 9.4 no anticipa una solución técnica no definida.
+
+### Selección de sesión para movimientos
+
+Para movimientos rápidos de caja se mantiene la simplicidad operativa:
+
+- Si el cajero tiene una sola `SesionCaja` `ABIERTA`, la interfaz futura puede utilizar esa sesión directamente para `INGRESO`, `RETIRO` o `EGRESO/PAGO`.
+- Si el cajero tiene dos o más sesiones abiertas, la interfaz debe pedir explícitamente sobre cuál sesión/caja se realiza el movimiento.
+
+La simplificación de única sesión pertenece sólo a la experiencia de usuario. Aunque la UI no muestre selector cuando existe una sola sesión, el movimiento persistido debe quedar asociado a un `sesion_caja_id` concreto.
+
+Esta regla no modifica la decisión de Sprint 9.3 para cobro: una venta capturada utiliza una sesión de caja explícita. La simplificación de única sesión no puede convertirse en un mecanismo para saltarse la selección de sesión del flujo de cobro.
+
+### Auditoría de movimientos
+
+Los movimientos no se borran silenciosamente. Debe conservarse trazabilidad de tipo, importe, motivo, cajero, caja, sesión y fecha/hora.
+
+Si en el futuro se diseña anulación o corrección de movimientos, deberá realizarse de forma auditable. Sprint 9.4 no diseña todavía ese mecanismo.
 
 ## Cierre y arqueo
 
@@ -454,6 +518,7 @@ Incluye capacidades de vendedor y puede agregar:
 - `caja.modificar_venta_capturada`
 - `caja.cobrar`
 - `caja.verificar_mercaderia`
+- `caja.ingreso`
 - `caja.retirar`
 - `caja.egreso`
 - `caja.cerrar`
@@ -534,8 +599,6 @@ No se documentan como implementados en Sprint 9.3:
 - Frontend definitivo completo.
 - Cierre de caja.
 - Arqueo.
-- Retiros.
-- Egresos/pagos.
 - Correcciones de arqueo.
 - Posibles errores de medios de pago.
 - Supervisión.
@@ -543,6 +606,15 @@ No se documentan como implementados en Sprint 9.3:
 - Contabilidad general.
 - Conciliación bancaria automática.
 - Integraciones fiscales no definidas.
+
+No se documentan como implementados en Sprint 9.4:
+
+- Implementación backend de `INGRESO`, `RETIRO` y `EGRESO/PAGO`.
+- Frontend para movimientos operativos de caja.
+- Contabilidad.
+- Cuenta corriente de proveedores.
+- Aprobación de supervisor para movimientos.
+- Anulación o corrección de movimientos.
 
 ## Estado de implementación
 
@@ -552,6 +624,7 @@ Implementación backend Sprint 9.3: TERMINADA
 Migración nueva Sprint 9.3: NO REQUERIDA
 Alembic head: 20261006_0009
 QA automático: 122 tests passed
+Decisiones Sprint 9.4 movimientos operativos: DOCUMENTADAS / PENDIENTES DE IMPLEMENTACIÓN
 Frontend: PENDIENTE
 ```
 

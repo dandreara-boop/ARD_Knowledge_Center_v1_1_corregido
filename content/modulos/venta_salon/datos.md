@@ -10,6 +10,8 @@ Sprint 8 tiene implementada la resolución comercial y cobro del POS, con solver
 
 Sprint 9.3 implementó las reglas backend de sesiones de caja, captura explícita para cobro y confirmación por cajero responsable. No requirió nueva migración; Alembic continúa en `20261006_0009` (head).
 
+Sprint 9.4 documenta decisiones previas a implementación para movimientos operativos de caja. No está implementado todavía.
+
 ## CondicionComercialPrecio
 
 - Identificador.
@@ -180,7 +182,15 @@ Concepto funcional aprobado para Sprint 9:
 - Fecha/hora.
 - Motivo, cuando corresponda.
 
-`RETIRO` mueve dinero fuera del cajón, no requiere motivo obligatorio ni autorización previa y no representa un gasto. `EGRESO` o `PAGO` utiliza efectivo para pagar algo, requiere motivo obligatorio y representa una salida económica.
+Tipos definidos por Sprint 9.4:
+
+- `INGRESO`: entra efectivo al cajón por causa distinta de una venta; aumenta el efectivo esperado, no genera `Venta`, no genera `PagoVenta` y no representa ingreso comercial por venta. Motivo opcional.
+- `RETIRO`: mueve dinero fuera del cajón hacia otro lugar de resguardo; disminuye el efectivo esperado, no requiere motivo obligatorio ni autorización previa y no representa gasto, pago a proveedor ni pérdida.
+- `EGRESO` o `PAGO`: utiliza efectivo de caja para pagar algo; disminuye el efectivo esperado, requiere motivo obligatorio y representa una salida económica.
+
+Todo movimiento requiere importe mayor a `0`, sesión abierta, caja derivada de la sesión, cajero responsable y fecha/hora. No se permite registrar movimientos sobre una sesión cerrada ni asociarlos solamente al cajero.
+
+Si el cajero tiene una sola sesión abierta, la UI futura puede usarla directamente para movimientos rápidos. Si tiene varias, debe pedir selección explícita de sesión/caja. En ambos casos el movimiento persistido debe conservar un `sesion_caja_id` concreto.
 
 ## ArqueoCaja
 

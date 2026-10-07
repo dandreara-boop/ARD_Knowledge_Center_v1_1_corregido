@@ -207,6 +207,11 @@ Este registro reúne las decisiones aprobadas y vigentes. Los detalles de aplica
 | DEC-189 | Si el cajero tiene varias sesiones abiertas, el sistema no elige automáticamente: la sesión activa de cobro debe seleccionarse y mostrarse explícitamente. |
 | DEC-190 | Una venta `EN_COBRO` queda ligada a `caja_captura_id` y `sesion_caja_id`; la caja se obtiene de la sesión y no se captura sólo con `caja_id`. |
 | DEC-191 | Confirmar `EN_COBRO -> CERRADA` exige `usuario_id`, sesión abierta correspondiente y cajero responsable de esa sesión; el legacy `ABIERTA -> CERRADA` conserva compatibilidad temporal sin habilitar bypass del POS nuevo. |
+| DEC-192 | Sprint 9.4 distingue `INGRESO`, `RETIRO` y `EGRESO/PAGO` como movimientos manuales de efectivo separados, con impacto propio sobre el efectivo esperado. |
+| DEC-193 | `INGRESO` y `RETIRO` tienen motivo opcional para no frenar la operación; `EGRESO/PAGO` exige motivo obligatorio por representar una salida económica. |
+| DEC-194 | Los movimientos operativos de caja sólo pueden registrarse sobre una `SesionCaja` abierta y por el cajero responsable de esa sesión. |
+| DEC-195 | Para movimientos rápidos de caja, la UI puede usar la única sesión abierta del cajero; si existen varias, debe pedir selección explícita. La persistencia siempre conserva `sesion_caja_id`. |
+| DEC-196 | Los movimientos de caja conservan trazabilidad de tipo, importe, motivo, cajero, caja, sesión y fecha/hora; cualquier futura anulación o corrección deberá ser auditable. |
 
 ## Administración, informes, permisos y promociones
 

@@ -1,5 +1,21 @@
 # Historial de versiones
 
+## Versión 2.4 — Sprint 9.4 Movimientos Operativos de Caja
+
+- Se documentaron decisiones previas a implementación para movimientos operativos de caja durante una `SesionCaja`.
+- Se separaron `INGRESO`, `RETIRO` y `EGRESO/PAGO` como movimientos manuales de efectivo distintos.
+- Se definió que `INGRESO` aumenta el efectivo esperado, no es venta, no genera `Venta`, no genera `PagoVenta` y no representa ingreso comercial por venta.
+- Se refinó que `RETIRO` disminuye el efectivo esperado, no representa gasto, pago a proveedor ni pérdida, y no requiere autorización normal de supervisor.
+- Se definió que `EGRESO/PAGO` disminuye el efectivo esperado, representa una salida económica y exige motivo obligatorio.
+- Se documentó la fórmula conceptual de efectivo esperado para futuro arqueo.
+- Se dejó explícito que sólo los medios de pago que representan efectivo físico suman al efectivo esperado.
+- Se definió que los movimientos sólo pueden registrarse sobre `SesionCaja` `ABIERTA` y por el cajero responsable.
+- Se acotó la selección automática de única sesión abierta como simplificación de UI sólo para `INGRESO`, `RETIRO` y `EGRESO/PAGO`; la persistencia conserva siempre `sesion_caja_id`.
+- Se ratificó que la regla de sesión explícita para cobro de Sprint 9.3 no se debilita.
+- Se documentó la trazabilidad mínima de movimientos y se dejó cualquier anulación/corrección futura como mecanismo auditable no diseñado todavía.
+- Se incorporaron las decisiones `DEC-192` a `DEC-196`.
+- Se dejó explícito que Sprint 9.4 no está implementado todavía y que cierre de caja, arqueo, corrección de arqueo, aprobación de supervisor, posibles errores de medios de pago, frontend, contabilidad, cuenta corriente de proveedores y sincronización cloud siguen fuera de alcance implementado.
+
 ## Versión 2.3 — Sprint 9.3 Sesiones de Caja
 
 - Se registró Sprint 9.3 como implementado con 122 tests aprobados.

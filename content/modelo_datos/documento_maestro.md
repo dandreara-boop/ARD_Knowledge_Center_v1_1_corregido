@@ -4,7 +4,7 @@
 
 Documentar entidades funcionales sin programar tablas físicas. Cada entidad se relaciona con el módulo correspondiente.
 
-Estado actual: **Sprint 9.3 — Sesiones de Caja implementadas dentro de Operación de Caja y Flujo de Venta en Salón**.
+Estado actual: **Sprint 9.4 — Movimientos Operativos de Caja documentados como decisiones previas a implementación**.
 
 {{include:general/modelo_conceptual}}
 
@@ -43,7 +43,7 @@ Estado actual: **Sprint 9.3 — Sesiones de Caja implementadas dentro de Operaci
 | EventoPendiente | Venta / Inventario | Outbox local persistente para procesar efectos derivados de la venta fuera del camino crítico del POS. |
 | Caja | Caja | Punto lógico/físico de cobro de un local; no equivale a una PC o tablet. |
 | SesionCaja | Caja | Período personal de responsabilidad de un cajero sobre una caja concreta, independiente del dispositivo, con efectivo inicial declarado manualmente. |
-| MovimientoCaja | Caja | Ingresos, retiros y egresos/pagos asociados a una sesión, manteniendo RETIRO separado de EGRESO/PAGO. |
+| MovimientoCaja | Caja | Ingresos, retiros y egresos/pagos asociados a una sesión abierta y al cajero responsable, manteniendo separados INGRESO, RETIRO y EGRESO/PAGO. |
 | ArqueoCaja | Caja | Control de efectivo contado contra esperado, con primer conteo ciego y conservación del conteo original. |
 | SolicitudCorreccionArqueo | Caja | Solicitud iniciada por el cajero durante el cierre inmediato y resuelta posteriormente por supervisor. |
 | PosibleErrorPago | Caja | Marcado de una operación para supervisión por posible error de medio de pago, sin modificar la venta cerrada. |
@@ -76,7 +76,7 @@ Detalle implementado del Sprint 7: [Motor Comercial de Precios](/doc/modulos/ven
 
 Diseño comercial definido del Sprint 8: [Resolución Comercial y Cobro del POS](/doc/modulos/venta_salon/sprint_8_resolucion_comercial_cobro_pos).
 
-Sprint 9.3 implementado: [Operación de Caja y Flujo de Venta en Salón](/doc/modulos/venta_salon/sprint_9_operacion_caja_flujo_venta_salon).
+Sprint 9.3 implementado y Sprint 9.4 documentado como decisiones previas: [Operación de Caja y Flujo de Venta en Salón](/doc/modulos/venta_salon/sprint_9_operacion_caja_flujo_venta_salon).
 
 ### Cambios y Crédito Comercial
 

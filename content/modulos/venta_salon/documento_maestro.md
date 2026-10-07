@@ -48,6 +48,8 @@ Sprint 9 define la operación cotidiana del salón y de las cajas: separa dispos
 
 Sprint 9.3 implementa la sesión de caja independiente del dispositivo, responsable único, una sesión abierta por caja, varias sesiones abiertas por cajero en cajas distintas, advertencia no bloqueante, selección explícita de sesión, captura `EN_COBRO` ligada a `caja_captura_id` y `sesion_caja_id`, y confirmación por cajero responsable.
 
+Sprint 9.4 documenta decisiones previas a implementación para movimientos operativos de caja: `INGRESO`, `RETIRO` y `EGRESO/PAGO`, asociados a sesión abierta, cajero responsable, trazabilidad e impacto conceptual sobre efectivo esperado.
+
 Detalle completo: [Sprint 9 — Operación de Caja y Flujo de Venta en Salón](/doc/modulos/venta_salon/sprint_9_operacion_caja_flujo_venta_salon).
 
 ## Búsqueda de artículos
@@ -117,7 +119,7 @@ Sprint 7 concreta el backend de precios por artículo y condiciones comerciales 
 
 Sprint 8 define la resolución comercial y cobro, pero no implementa todavía frontend POS definitivo ni sincronización cloud nueva.
 
-Sprint 9 agrega el contexto operativo de salón y caja. Sprint 9.3 deja implementadas las reglas backend de sesión, captura y confirmación; cierre de caja, arqueo, retiros, egresos/pagos, supervisión, frontend y sincronización cloud siguen pendientes.
+Sprint 9 agrega el contexto operativo de salón y caja. Sprint 9.3 deja implementadas las reglas backend de sesión, captura y confirmación. Sprint 9.4 documenta movimientos operativos de caja como decisiones previas a implementación; cierre de caja, arqueo, correcciones, supervisión, frontend y sincronización cloud siguen pendientes.
 
 ## Wireframes
 
@@ -138,6 +140,8 @@ Sprint 9 agrega el contexto operativo de salón y caja. Sprint 9.3 deja implemen
 - Una sesión pertenece a una caja concreta, a un único cajero responsable y no se traslada entre cajas ni entre dispositivos.
 - Una caja puede tener una sola sesión abierta; un cajero puede tener varias sesiones abiertas en cajas distintas.
 - Una venta `EN_COBRO` conserva `caja_captura_id` y `sesion_caja_id`, y sólo puede confirmarla el cajero responsable de esa sesión.
+- `INGRESO`, `RETIRO` y `EGRESO/PAGO` sólo pueden registrarse sobre una sesión abierta y por el cajero responsable.
+- La selección automática de la única sesión abierta es una simplificación de UI sólo para movimientos de caja; no modifica la regla de sesión explícita del cobro.
 - El efectivo inicial de cada sesión se declara manualmente y no se hereda automáticamente del cierre anterior.
 - Venta `CERRADA` permanece inmutable; los errores posteriores se resuelven con registros separados auditables o anulación y nueva venta cuando corresponda.
 - La venta se guarda primero localmente.

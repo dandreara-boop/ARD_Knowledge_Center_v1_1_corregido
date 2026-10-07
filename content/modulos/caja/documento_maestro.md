@@ -30,23 +30,56 @@ En el flujo nuevo de salón, una venta `EN_COBRO` queda ligada a `caja_captura_i
 
 ## Movimientos de caja
 
-Todo ingreso o egreso ajeno a una venta se registra como movimiento explícito de caja.
+Sprint 9.4 documenta decisiones previas a implementación para movimientos operativos de efectivo durante una `SesionCaja`.
+
+Todo ingreso, retiro o egreso/pago ajeno a una venta se registra como movimiento explícito de caja. Son conceptos diferentes y se conservan separados.
+
+Los movimientos sólo pueden registrarse sobre una sesión `ABIERTA`. La Caja se deriva de la `SesionCaja`, y el cajero que registra el movimiento debe ser el responsable de esa sesión.
 
 ## Ingresos
 
 - Fondo inicial.
 - Refuerzo de efectivo para cambio.
 
+Un ingreso agrega efectivo al cajón por una causa distinta de una venta. Requiere importe mayor a `0`, cajero, sesión y fecha/hora. El motivo es opcional. Aumenta el efectivo esperado, no genera `Venta`, no genera `PagoVenta` y no representa ingreso comercial por venta.
+
 ## Retiros
 
 - Retiro de efectivo.
 - Entrega o depósito de recaudación.
 
-Un retiro mueve dinero fuera del cajón, requiere importe, usuario, sesión y fecha/hora. El motivo no es obligatorio, no necesita autorización previa del supervisor, reduce el efectivo esperado y no representa un gasto.
+Un retiro mueve dinero fuera del cajón hacia otro lugar de resguardo. Requiere importe mayor a `0`, cajero, sesión y fecha/hora. El motivo no es obligatorio, no necesita autorización previa del supervisor, reduce el efectivo esperado y no representa gasto, pago a proveedor ni pérdida.
 
 ## Egresos / pagos
 
-Los egresos o pagos se registran como salidas económicas explícitas, con importe, motivo obligatorio, usuario, sesión y fecha/hora. Reducen el efectivo esperado y se mantienen separados de los retiros.
+Los egresos o pagos se registran como salidas económicas explícitas, con importe mayor a `0`, motivo obligatorio, cajero, sesión y fecha/hora. Reducen el efectivo esperado y se mantienen separados de los retiros.
+
+Sprint 9.4 no desarrolla todavía contabilidad ni cuenta corriente de proveedores. El movimiento registra la salida operativa de efectivo.
+
+## Selección de sesión para movimientos
+
+Si el cajero tiene una sola sesión abierta, la interfaz futura puede usar esa sesión directamente para `INGRESO`, `RETIRO` o `EGRESO/PAGO`.
+
+Si el cajero tiene dos o más sesiones abiertas, la interfaz debe pedir explícitamente sobre cuál sesión/caja se registra el movimiento.
+
+Esta simplificación pertenece sólo a la experiencia de usuario. El movimiento persistido siempre queda asociado a un `sesion_caja_id` concreto y no sólo al cajero.
+
+No modifica la regla de cobro de Sprint 9.3: una venta capturada utiliza sesión explícita y no puede saltarse esa selección.
+
+## Efectivo esperado
+
+Fórmula conceptual para futuro arqueo:
+
+```text
+efectivo inicial
++ ventas cobradas en efectivo
++ ingresos manuales
+- retiros
+- egresos/pagos
+= efectivo esperado
+```
+
+Sólo los medios que representen efectivo físico suman al efectivo esperado. Transferencias, QR, tarjetas y otros medios no efectivos pertenecen a la información de la sesión, pero no al efectivo físico del cajón.
 
 ## Ajustes
 
@@ -100,3 +133,4 @@ Principio: la operación del local no debe detenerse por controles administrativ
 - DEC-078 a DEC-087 registran la decisión histórica de arqueo independiente del cierre, conteo ciego, tolerancia, revisión guiada, corrección auditable, cierre con diferencia, herencia del efectivo real y movimientos explícitos de caja.
 - Sprint 9 reemplaza la herencia automática de efectivo por apertura manual obligatoria y reemplaza la corrección directa de medio de pago durante arqueo por pendientes de supervisión auditables.
 - Sprint 9.3 refina sesiones de caja: sesión independiente del dispositivo, responsable único, una sesión abierta por caja, varias sesiones abiertas por cajero en cajas distintas, advertencia no bloqueante, selección explícita de sesión y confirmación por cajero responsable.
+- Sprint 9.4 documenta decisiones previas a implementación para movimientos operativos de caja: `INGRESO`, `RETIRO`, `EGRESO/PAGO`, impacto en efectivo esperado, sesión abierta, responsable y trazabilidad.

@@ -2,7 +2,7 @@
 
 ## Estado
 
-**Actualizado por Sprint 9.3: sesiones de caja implementadas; cierre y arqueo pendientes.**
+**Actualizado por Sprint 9.4: movimientos operativos documentados; cierre y arqueo pendientes.**
 
 ![WF-008 Arqueo y Cierre de Caja](/static/images/wf008_arqueo_caja_v1_2.png)
 
@@ -47,34 +47,36 @@ Si existen varias sesiones abiertas para el cajero, la sesión activa de cobro s
 
 Solo se consideran movimientos manuales aquellos que no provienen directamente de una venta.
 
-### Ingresos
+### INGRESO
 
-- Fondo inicial.
 - Refuerzo de efectivo para cambio.
 
-### Egresos
+Entra efectivo al cajón por una causa distinta de una venta. Aumenta el efectivo esperado, no genera `Venta`, no genera `PagoVenta` y no representa ingreso comercial por venta. El motivo es opcional.
 
-- Retiro de efectivo.
-- Entrega o depósito de recaudación.
-- Egresos o pagos.
+### RETIRO
 
-### Ajustes
+Sale efectivo del cajón para trasladarlo a otro lugar de resguardo, como caja fuerte. Disminuye el efectivo esperado, no representa gasto, pago a proveedor ni pérdida. El motivo es opcional y no requiere autorización de supervisor para un retiro normal.
 
-Correcciones excepcionales autorizadas.
+### EGRESO/PAGO
+
+Sale efectivo del cajón para realizar un pago o afrontar un gasto, por ejemplo flete, compra de insumos o mensajería. Disminuye el efectivo esperado y representa una salida económica. El motivo es obligatorio.
 
 El efectivo esperado se calcula así:
 
 ```text
-Fondo inicial
-+ Ventas en efectivo
-+ Refuerzos
-- Retiros
-- Egresos/pagos
-± Ajustes autorizados
-= Efectivo esperado
+efectivo inicial
++ ventas cobradas en efectivo
++ ingresos manuales
+- retiros
+- egresos/pagos
+= efectivo esperado
 ```
 
-Cada movimiento conserva tipo, importe, usuario, fecha y hora. El motivo es obligatorio para egresos/pagos, pero no para retiros.
+Sólo los medios que representen efectivo físico suman al efectivo esperado. Transferencias, QR, tarjetas y otros medios no efectivos pertenecen a la información de la sesión, pero no al efectivo físico del cajón.
+
+Cada movimiento conserva tipo, importe, cajero, caja, sesión, fecha y hora. El motivo es obligatorio para egresos/pagos, pero no para ingresos ni retiros.
+
+Los movimientos sólo pueden registrarse sobre una sesión `ABIERTA` y por el cajero responsable. Si el cajero tiene una sola sesión abierta, la interfaz puede usarla directamente para estos movimientos; si tiene varias, debe pedir selección explícita de sesión/caja. En todos los casos el movimiento persistido conserva `sesion_caja_id`.
 
 ## Conteo ciego
 
@@ -215,3 +217,4 @@ CERRADA_CON_DIFERENCIA
 - **DEC-086:** decisión histórica reemplazada por Sprint 9; ya no hay corrección de fondo heredado.
 - **DEC-087:** todo ingreso o egreso no proveniente de una venta es un movimiento explícito de caja.
 - **DEC-174 a DEC-191:** decisiones Sprint 9 de operación de caja, venta preparada, sesión, captura ligada a sesión, arqueo, pendientes, permisos y confirmación por responsable.
+- **DEC-192 a DEC-196:** decisiones Sprint 9.4 de movimientos operativos de caja, efectivo esperado, sesión abierta, responsable, selección de sesión y auditoría.

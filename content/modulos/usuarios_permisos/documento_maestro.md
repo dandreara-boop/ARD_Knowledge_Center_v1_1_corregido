@@ -89,6 +89,8 @@ Los permisos deben poder configurarse por rol y, cuando corresponda, por usuario
 
 Tener permiso para cobrar no significa tener una caja abierta. Para cobrar también debe existir una sesión de caja válida. Un supervisor o administrador que cobre también necesita sesión de caja.
 
+Tener permiso para registrar ingresos, retiros o egresos tampoco alcanza por sí solo: el movimiento debe registrarse sobre una `SesionCaja` abierta y propia del cajero responsable.
+
 ### Productos y stock
 
 - Crear producto.
